@@ -154,6 +154,8 @@ CMenuSettings::CMenuSettings( CGUI_Impl * pGUI )
 	m_pVideo = m_pTabs->CreateTab ( "Video" );
 	m_pAudio = m_pTabs->CreateTab ( "Audio" );
 	m_pAuth = m_pTabs->CreateTab( "Authentication" );
+	m_pAuth->SetVisible ( false );
+
 
 	// Create the nickname edit label
 	m_pNicknameLabel = pGUI->CreateLabel( "Nickname:", NULL, m_pMultiplayer.get() );
@@ -178,6 +180,7 @@ CMenuSettings::CMenuSettings( CGUI_Impl * pGUI )
 	m_pConnectionsValue->SetPosition( Vector2( 90, 50 ) );
 	m_pConnectionsValue->SetOnScrollHandler ( GUI_CALLBACK ( &CMenuSettings::Event_OnConnectionsScroll, this ) );
 	m_pConnectionsValue->SetProperty ( "StepSize", "0.1" );
+	m_pConnectionsValue->SetVisible ( false );
 
 	// Create the resolution label
 	m_pResolutionLabel = pGUI->CreateLabel( "Resolution:", NULL, m_pVideo.get() );

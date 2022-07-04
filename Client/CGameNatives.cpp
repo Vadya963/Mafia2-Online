@@ -16,6 +16,7 @@
 
 #include "CMafia.h"
 #include "CM2Hud.h"
+#include "CLua.h"
 
 #include "CGameNatives.h"
 
@@ -37,7 +38,19 @@ void CGameNatives::Register( CScriptingManager * pScriptingManager )
 	pScriptingManager->RegisterFunction( "isMapOpen", IsMapOpen, 0, NULL );
 	pScriptingManager->RegisterFunction( "setGPSTarget", SetGPSTarget, 2, "ff" );
 	pScriptingManager->RegisterFunction( "removeGPSTarget", RemoveGPSTarget, 0, NULL );
-	pScriptingManager->RegisterFunction( "disableTranslocator", DisableTranslocator, 1, "b");
+	pScriptingManager->RegisterFunction( "disableTranslocator", DisableTranslocator, 1, "b" );
+	pScriptingManager->RegisterFunction( "executeLuaHandler", ExecuteLuaHandler, 1, "s" );
+}
+
+SQInteger CGameNatives::ExecuteLuaHandler(SQVM * pVM)
+{
+	const SQChar * sParams;
+	sq_getstring(pVM, -1, &sParams);
+
+	const bool success = CLua::Execute(sParams);
+
+	sq_pushbool(pVM, true);
+	return 1;
 }
 
 // setWeather( string weather );

@@ -287,6 +287,9 @@ void CLocalPlayer::SendOnFootSync( void )
 	// Write the handModel
 	onFootSync.m_iHandModel = CCore::Instance()->GetPlayerManager()->GetLocalPlayer()->GetHandModelHand();
 
+	// Get the player money
+	onFootSync.m_iMoney = GetMoney();
+
 	// Write the sync structure into the bitstream
 	bitStream.Write( (char *)&onFootSync, sizeof(OnFootSync) );
 
@@ -374,7 +377,7 @@ void CLocalPlayer::SendInVehicleSync( void )
 
 	// Get the vehicle wheel models (DISABLED FOR TESTING)
 	for ( int i = 0; i < 3; i++ )
-		inVehicleSync.m_bWheelModels[ i ] = 0xFF; //Game::GetIdFromVehicleWheelModel ( pVehicle->GetVehicle()->GetWheelTexture ( i ) );
+		inVehicleSync.m_bWheelModels[ i ] = Game::GetIdFromVehicleWheelModel ( pVehicle->GetVehicle()->GetWheelTexture ( i ) );
 
 	// Get the handbrake state
 	inVehicleSync.m_bHandbrake = pVehicle->GetVehicle()->IsHandbrakeOn ();

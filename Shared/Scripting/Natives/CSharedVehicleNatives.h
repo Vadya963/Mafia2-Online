@@ -54,10 +54,11 @@ private:
 	static	SQInteger		GetLightState ( SQVM * pVM );
 	static	SQInteger		SetIndicatorLightState( SQVM * pVM );
 	static	SQInteger		GetIndicatorLightState( SQVM * pVM );
-	static	SQInteger		SetTaxiLightState(SQVM * pVM);
-	static	SQInteger		GetTaxiLightState(SQVM * pVM);
-	static	SQInteger		SetVehicleHandbrake(SQVM * pVM);
-	static	SQInteger		GetVehicleHandbrake(SQVM * pVM);
+	static	SQInteger		SetTaxiLightState( SQVM * pVM );
+	static	SQInteger		GetTaxiLightState( SQVM * pVM );
+	static	SQInteger		SetVehicleHandbrake( SQVM * pVM );
+	static	SQInteger		GetVehicleHandbrake( SQVM * pVM );
+	static	SQInteger		SetVehicleLocked( SQVM * pVM );
 
 public:
 

@@ -279,8 +279,8 @@ void CNetworkVehicle::StoreVehicleSync( const InVehicleSync &vehicleSync, bool b
 			m_pVehicle->SetSirenOn( m_lastSyncData.m_bSirenState );
 		if (m_pVehicle->IsBeaconLightOn() != m_lastSyncData.m_bBeaconLightState)
 			m_pVehicle->SetBeaconLightOn(m_lastSyncData.m_bBeaconLightState);
-		/*if ( m_pVehicle->GetFuel () != vehicleSync.m_fFuel )
-			m_pVehicle->SetFuel ( vehicleSync.m_fFuel );*/
+		if ( m_pVehicle->GetFuel () != vehicleSync.m_fFuel )
+			m_pVehicle->SetFuel ( vehicleSync.m_fFuel );
 		if( Math::IsValidVector ( m_lastSyncData.m_vecVelocity ) && vecVelocity != m_lastSyncData.m_vecVelocity )
 			SetTargetSpeed ( m_lastSyncData.m_vecVelocity ); //SetSpeedVec( vehicleSync.m_vecVelocity );
 		if( GetSteer() != m_lastSyncData.m_fTurnSpeed )
@@ -295,12 +295,12 @@ void CNetworkVehicle::StoreVehicleSync( const InVehicleSync &vehicleSync, bool b
 			m_pVehicle->SetPower( m_lastSyncData.m_bPower );
 		if( m_pVehicle->GetBrake() != m_lastSyncData.m_bBrake )
 			m_pVehicle->SetBrake( m_lastSyncData.m_bBrake );
-		/*if ( vehicleSync.m_bWheelModels[ 0 ] != 0xFF && Game::GetIdFromVehicleWheelModel ( m_pVehicle->GetWheelTexture ( 0 ) ) != vehicleSync.m_bWheelModels[ 0 ] )
+		if ( vehicleSync.m_bWheelModels[ 0 ] != 0xFF && Game::GetIdFromVehicleWheelModel ( m_pVehicle->GetWheelTexture ( 0 ) ) != vehicleSync.m_bWheelModels[ 0 ] )
 			m_pVehicle->SetWheelTexture ( 0, Game::GetVehicleWheelModelFromId ( vehicleSync.m_bWheelModels[ 0 ] ).Get () );
 		if ( vehicleSync.m_bWheelModels[ 1 ] != 0xFF && Game::GetIdFromVehicleWheelModel ( m_pVehicle->GetWheelTexture ( 1 ) ) != vehicleSync.m_bWheelModels[ 1 ] )
 			m_pVehicle->SetWheelTexture ( 1, Game::GetVehicleWheelModelFromId ( vehicleSync.m_bWheelModels[ 1 ] ).Get () );
 		if ( vehicleSync.m_bWheelModels[ 2 ] != 0xFF && Game::GetIdFromVehicleWheelModel ( m_pVehicle->GetWheelTexture ( 2 ) ) != vehicleSync.m_bWheelModels[ 2 ] )
-			m_pVehicle->SetWheelTexture ( 2, Game::GetVehicleWheelModelFromId ( vehicleSync.m_bWheelModels[ 2 ] ).Get () );*/
+			m_pVehicle->SetWheelTexture ( 2, Game::GetVehicleWheelModelFromId ( vehicleSync.m_bWheelModels[ 2 ] ).Get () );
 		if ( m_pVehicle->IsHandbrakeOn () != m_lastSyncData.m_bHandbrake )
 			m_pVehicle->SetHandbrake ( m_lastSyncData.m_bHandbrake );
 		if ( m_pVehicle->GetLightState () != m_lastSyncData.m_bLightState )
@@ -504,10 +504,10 @@ void CNetworkVehicle::SetEngineState( bool bState )
 
 bool CNetworkVehicle::GetEngineState( void )
 {
-	if( m_pVehicle )
-		return m_pVehicle->IsEngineOn();
+	/*if( m_pVehicle ) not working vadya963
+		return m_pVehicle->IsEngineOn();*/
 
-	return false;
+	return m_lastSyncData.m_bEngineState;
 }
 
 void CNetworkVehicle::SetPartOpen( int iPart, bool bOpen )
@@ -1080,4 +1080,16 @@ void CNetworkVehicle::DetachBlip ( void )
 		m_bBlipAttached = false;
 		DEBUG_LOG ( "CNetworkVehicle::DetachBlip ()" );
 	}
+}
+
+void CNetworkVehicle::Lock(void)
+{
+	if (m_pVehicle)
+		m_pVehicle->LockDoor();
+}
+
+void CNetworkVehicle::Unlock(void)
+{
+	if (m_pVehicle)
+		m_pVehicle->UnlockDoor();
 }

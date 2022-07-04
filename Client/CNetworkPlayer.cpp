@@ -687,22 +687,22 @@ void CNetworkPlayer::UpdateShot( bool bShooting )
 void CNetworkPlayer::GiveMoney( int iAmount )
 {
 	// Is the player ped valid?
-	//if( m_pPlayerPed )
-	//	m_pPlayerPed->GiveMoney ( iAmount );
+	if( m_pPlayerPed )
+		m_pPlayerPed->AddMoney( iAmount );
 }
 
 void CNetworkPlayer::RemoveMoney( int iAmount )
 {
 	// Is the player ped valid?
-	//if( m_pPlayerPed )
-	//	m_pPlayerPed->RemoveMoney ( iAmount );
+	if( m_pPlayerPed )
+		m_pPlayerPed->RemoveMoney ( iAmount );
 }
 
 int CNetworkPlayer::GetMoney( void )
 {
 	// Is the player ped valid?
-	//if( m_pPlayerPed )
-	//	return m_pPlayerPed->GetMoney ();
+	if( m_pPlayerPed )
+		return m_pPlayerPed->GetMoney ();
 
 	return 0;
 }

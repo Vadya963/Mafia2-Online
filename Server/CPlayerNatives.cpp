@@ -34,6 +34,7 @@ void CPlayerNatives::Register( CScriptingManager * pScriptingManager )
 	pScriptingManager->RegisterFunction( "setPlayerMoney", SetMoney, 2, "ii" );
 	pScriptingManager->RegisterFunction( "givePlayerMoney", GiveMoney, 2, "ii" );
 	pScriptingManager->RegisterFunction( "takePlayerMoney", TakeMoney, 2, "ii" );
+	pScriptingManager->RegisterFunction( "getPlayerMoney", GetMoney, 1, "i" );
 	pScriptingManager->RegisterFunction( "togglePlayerControls", ToggleControls, 2, "ib" );
 	pScriptingManager->RegisterFunction( "kickPlayer", Kick, 1, "i" );
 	pScriptingManager->RegisterFunction( "playSoundForPlayer", PlaySound, 2, "is" );
@@ -688,6 +689,23 @@ SQInteger CPlayerNatives::TakeMoney( SQVM * pVM )
 	}
 
 	sq_pushbool( pVM, false );
+	return 1;
+}
+
+// getPlayerMoney( playerId );
+SQInteger CPlayerNatives::GetMoney(SQVM * pVM)
+{
+	SQInteger playerId;
+	sq_getinteger(pVM, -1, &playerId);
+
+	// Is the player active?
+	if (CCore::Instance()->GetPlayerManager()->IsActive(playerId))
+	{
+		sq_pushinteger(pVM, CCore::Instance()->GetPlayerManager()->Get(playerId)->GetMoney());
+		return 1;
+	}
+
+	sq_pushbool(pVM, false);
 	return 1;
 }
 

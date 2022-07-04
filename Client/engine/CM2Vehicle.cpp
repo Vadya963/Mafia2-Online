@@ -46,9 +46,41 @@ void _declspec(naked) M2Vehicle::SetTransparency(float transparency)
 	_asm jmp COffsets::FUNC_CCar__SetTransparency;
 }
 
-int _declspec(naked) M2Vehicle::ResetRigidBody()
+int _declspec(naked) M2Vehicle::ResetRigidBody(void)
 {
 	_asm jmp COffsets::FUNC_CCar__ResetRigidBody;
+}
+
+void _declspec(naked) M2Vehicle::LockPlayerEntryPoints(void)
+{
+	__asm {
+		mov eax, 0x9BC0F0;
+		jmp eax;
+	}
+}
+
+void _declspec(naked) M2Vehicle::UnlockPlayerEntryPoints(void)
+{
+	__asm {
+		mov eax, 0x9BC150;
+		jmp eax;
+	}
+}
+
+void _declspec(naked) M2Vehicle::LockEntryPoints(void)
+{
+	__asm {
+		mov eax, 0x9BC080;
+		jmp eax;
+	}
+}
+
+void _declspec(naked) M2Vehicle::UnlockEntryPoints(void)
+{
+	__asm {
+		mov eax, 0x9905B0;
+		jmp eax;
+	}
 }
 
 CM2Vehicle::CM2Vehicle( M2Vehicle * pVehicle ) : CM2Entity( pVehicle )
@@ -302,7 +334,14 @@ void CM2Vehicle::SetTuningTable( int iTuningTable )
 int CM2Vehicle::GetTuningTable( void )
 {
 	if( m_pVehicle )
-		return (m_pVehicle->m_iTuningTable - 2);
+		if  (m_pVehicle->m_iTuningTable == 0)
+		{
+			return (m_pVehicle->m_iTuningTable);
+		}
+		else
+		{
+			return (m_pVehicle->m_iTuningTable - 2);
+		}
 
 	return 0;
 }
@@ -745,7 +784,7 @@ bool CM2Vehicle::GetLightState ( void )
 	return (false);
 }
 
-bool CM2Vehicle::IsMarkedForSale()
+bool CM2Vehicle::IsMarkedForSale(void)
 {
 	if (m_pVehicle)
 	{
@@ -894,7 +933,7 @@ bool _declspec(naked) C_Vehicle::SetDynamic(const bool enable, const int unk = -
 	_asm jmp COffsets::FUNC_CVehicle__SetDynamic;
 }
 
-void _declspec(naked) C_Vehicle::StopAllSounds()
+void _declspec(naked) C_Vehicle::StopAllSounds(void)
 {
 	_asm jmp COffsets::FUNC_CVehicle__StopAllSounds;
 }
@@ -914,12 +953,12 @@ void _declspec(naked) M2Vehicle::LockThrowFromCar(int a2, bool lock)
 	_asm jmp COffsets::FUNC_CCar__LockThrowFromCar;
 }
 
-void _declspec(naked) M2Vehicle::LockTrunks()
+void _declspec(naked) M2Vehicle::LockTrunks(void)
 {
 	_asm jmp COffsets::FUNC_CCar__LockTrunks;
 }
 
-void _declspec(naked) M2Vehicle::UnlockTrunks()
+void _declspec(naked) M2Vehicle::UnlockTrunks(void)
 {
 	_asm jmp COffsets::FUNC_CCar__UnlockTrunks;
 }
@@ -1112,7 +1151,7 @@ void CM2Vehicle::LockThrowFromCar(int unk, bool lock)
 	m_pVehicle->LockThrowFromCar(unk, lock);
 }
 
-void CM2Vehicle::LockTrunks()
+void CM2Vehicle::LockTrunks(void)
 {
 	if (!m_pVehicle)
 		return;
@@ -1120,7 +1159,7 @@ void CM2Vehicle::LockTrunks()
 	m_pVehicle->LockTrunks();
 }
 
-void CM2Vehicle::UnlockTrunks()
+void CM2Vehicle::UnlockTrunks(void)
 {
 	if (!m_pVehicle)
 		return;
@@ -1144,18 +1183,18 @@ void CM2Vehicle::SetGearBoxAutomat(eGearBoxstate state)
 	m_pVehicle->m_vehicleData.SetGearBoxAutomat(state);
 }
 
-void CM2Vehicle::Lock()
+void CM2Vehicle::Lock(void)
 {
 	if (!m_pVehicle)
 		return;
 
 	SetSpeed(0.0f);
 	m_pVehicle->m_vehicleData.SetDynamic(false);
-	m_pVehicle->m_vehicleData.AddVehicleFlags(VEHICLEFLAGS_DOORS_LOCKED);
-	m_pVehicle->m_vehicleData.StopAllSounds();
+	m_pVehicle->m_vehicleData.AddVehicleFlags(VEHICLEFLAGS_DOORS_LOCKED);//freezing car
+	//m_pVehicle->m_vehicleData.StopAllSounds();//game crash
 }
 
-void CM2Vehicle::Unlock()
+void CM2Vehicle::Unlock(void)
 {
 	if (!m_pVehicle)
 		return;
@@ -1164,4 +1203,20 @@ void CM2Vehicle::Unlock()
 	m_pVehicle->m_vehicleData.SetDynamic(true);
 	m_pVehicle->m_vehicleData.ClearVehicleFlags(VEHICLEFLAGS_DOORS_LOCKED);
 	m_pVehicle->ResetRigidBody();
+}
+
+void CM2Vehicle::LockDoor(void)
+{
+	if (!m_pVehicle)
+		return;
+
+	m_pVehicle->LockEntryPoints();
+}
+
+void CM2Vehicle::UnlockDoor(void)
+{
+	if (!m_pVehicle)
+	return;
+
+	m_pVehicle->UnlockEntryPoints();
 }

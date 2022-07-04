@@ -199,6 +199,9 @@ public:
 	bool							GetHandbrake						(void);
 	void							SetHandbrake						(bool bHandbrake);
 
+	void							Lock								(void);
+	void							Unlock								(void);
+
 	void							HandlePlayerEnter					( CNetworkPlayer * pNetworkPlayer, EntityId seatId );
 	void							HandlePlayerExit					( CNetworkPlayer * pNetworkPlayer, EntityId seatId, bool bResetInterpolation = true );
 

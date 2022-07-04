@@ -174,11 +174,10 @@ void CMafia::Spawn( bool bFade )
 	CLua::Execute( "game.garage:CheatAbandonCars()" );
 	CLua::Execute( "game.garage:SetMaxGaragePlaces( 0 )" );
 
-	//CLua::Execute( "game.shop:SetAllShopExplored()" );
+	CLua::Execute( "game.shop:SetAllShopExplored(true)" );
 
 	pHud->Show( true );
 	CCore::Instance()->GetHud()->ShowLowHealthFX( false );
-	ActionButtonsShow( false );
 
 	bool bIsSummer = CCore::Instance()->IsSummer();
 
@@ -357,5 +356,5 @@ void CMafia::OnGameStart( void )
 
 void CMafia::DisableTranslocator(bool disable)
 {
-	CLua::Executef("game.game:DisableTranslocator(%b)", disable);
+	CLua::Executef("game.game:DisableTranslocator( %s )", disable ? "true" : "false");
 }

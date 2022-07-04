@@ -33,6 +33,9 @@ void CPedNatives::Register( CScriptingManager * pScriptingManager )
 	pScriptingManager->RegisterFunction( "setPedModel", SetPedModel, 2, "ii" );
 	pScriptingManager->RegisterFunction( "getPedModel", GetPedModel, 1, "i" );
 	pScriptingManager->RegisterFunction( "getPedPosition", GetPedPosition, 1, "i" );
+	pScriptingManager->RegisterFunction( "setPedPosition", SetPedPosition, 4, "ifff" );
+	pScriptingManager->RegisterFunction( "getPedRotation", GetPedRotation, 1, "i" );
+	pScriptingManager->RegisterFunction( "setPedRotation", SetPedRotation, 4, "ifff" );
 }
 
 SQInteger CPedNatives::CreatePed( SQVM * pVM )
@@ -189,6 +192,91 @@ SQInteger CPedNatives::GetPedPosition(SQVM *pVM)
 
 		// Return
 		sq_push(pVM, -1);
+		return 1;
+	}
+	sq_pushbool(pVM, false);
+	return 1;
+}
+
+SQInteger CPedNatives::SetPedPosition( SQVM * pVM )
+{
+	SQInteger	pedId;
+
+	sq_getinteger(pVM, -4, &pedId);
+
+	if (CCore::Instance()->GetPedManager()->IsActive(pedId) && CCore::Instance()->GetPedManager()->Get(pedId) != NULL)
+	{
+		CVector3 vecPosition;
+		sq_getfloat( pVM, -3, &vecPosition.fX );
+		sq_getfloat( pVM, -2, &vecPosition.fY );
+		sq_getfloat( pVM, -1, &vecPosition.fZ );
+
+		CCore::Instance()->GetPedManager()->Get(pedId)->GetPed()->SetPosition(vecPosition);
+
+		sq_pushbool(pVM, true);
+		return 1;
+	}
+	sq_pushbool(pVM, false);
+	return 1;
+}
+
+SQInteger CPedNatives::GetPedRotation(SQVM *pVM)
+{
+	SQInteger	pedId;
+
+	sq_getinteger(pVM, -1, &pedId);
+
+	if (CCore::Instance()->GetPedManager()->IsActive(pedId) && CCore::Instance()->GetPedManager()->Get(pedId) != NULL)
+	{
+		Quaternion rot;
+		CVector3 vecRotation;
+
+		// Get the position
+		CCore::Instance()->GetPedManager()->Get(pedId)->GetPed()->GetRotation(&rot);
+
+		vecRotation = rot.toEularAngles();
+
+		vecRotation.FromRadians();
+
+		// Create array
+		sq_newarray(pVM, 0);
+
+		sq_pushfloat(pVM, vecRotation.fX);
+		sq_arrayappend(pVM, -2);
+
+		sq_pushfloat(pVM, vecRotation.fY);
+		sq_arrayappend(pVM, -2);
+
+		sq_pushfloat(pVM, vecRotation.fZ);
+		sq_arrayappend(pVM, -2);
+
+		// Return
+		sq_push(pVM, -1);
+		return 1;
+	}
+	sq_pushbool(pVM, false);
+	return 1;
+}
+
+SQInteger CPedNatives::SetPedRotation( SQVM * pVM )
+{
+	SQInteger	pedId;
+
+	sq_getinteger(pVM, -4, &pedId);
+
+	if (CCore::Instance()->GetPedManager()->IsActive(pedId) && CCore::Instance()->GetPedManager()->Get(pedId) != NULL)
+	{
+		CVector3 vecRotation;
+
+		sq_getfloat( pVM, -3, &vecRotation.fX );
+		sq_getfloat( pVM, -2, &vecRotation.fY );
+		sq_getfloat( pVM, -1, &vecRotation.fZ );
+
+		vecRotation.ToRadians();
+
+		CCore::Instance()->GetPedManager()->Get(pedId)->GetPed()->SetRotation(Quaternion(vecRotation));
+
+		sq_pushbool(pVM, true);
 		return 1;
 	}
 	sq_pushbool(pVM, false);

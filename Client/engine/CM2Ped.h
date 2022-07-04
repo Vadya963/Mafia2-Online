@@ -44,7 +44,7 @@ public:
 	void	AddWeapon(DWORD weapon, DWORD ammo);
 
 	void	AddMoney(int money, int unk);
-	float	GetMoney();
+	int		GetMoney();
 	void	RemoveMoney(int money, int unk);
 
 	bool	HasItem(DWORD item);
@@ -258,9 +258,9 @@ public:
 	C_SyncObject			* GetInOutVehicle(M2Vehicle * pVehicle, int iSeat, bool bEnter = true, bool bForced = false);
 	M2Vehicle				* GetCurrentVehicle(void);
 
-	void					AddMoney(int iDollars, int iCents);
-	void					RemoveMoney(int iDollars, int iCents);
-	float					GetMoney(void);
+	void					AddMoney(int iDollars);
+	void					RemoveMoney(int iDollars);
+	int						GetMoney(void);
 
 	// These should only be used on peds that are not localplayer
 	C_SyncObject			* MoveVec(const CVector3 &vecPosition, M2Enums::eMoveType moveType, CVector3 vecEndDirection);

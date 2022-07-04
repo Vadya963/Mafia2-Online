@@ -29,7 +29,7 @@ T sq_getinstance( SQVM * pVM, SQInteger idx = 1 )
 {
 	SQUserPointer pInstance = NULL;
 
-	if( SQ_FAILED( sq_getinstanceup( pVM, idx, &pInstance, NULL ) ) )
+	if( SQ_FAILED( sq_getinstanceup( pVM, idx, &pInstance, NULL, false ) ) )
 		pInstance = NULL;
 
 	return (T)pInstance;

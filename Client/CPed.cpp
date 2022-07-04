@@ -61,8 +61,10 @@ void CPed::Create(CVector3 vecPosition, CVector3 vecRotation)
 
 	m_pPed->Activate();
 
+	vecRotation.ToRadians();
+
 	m_pPed->SetPosition(vecPosition);
-	m_pPed->SetRotation(vecRotation);
+	m_pPed->SetRotation(Quaternion(vecRotation));
 }
 
 void CPed::Destroy(bool del = true)
@@ -87,9 +89,9 @@ void CPed::SetModel( unsigned int uiModelIndex )
 	m_pPed->GetPosition(&pos);
 	m_pPed->GetRotation(&rot);
 
-	tempRot.fX = rot.fX;
-	tempRot.fY = rot.fY;
-	tempRot.fZ = rot.fZ;
+	tempRot = rot.toEularAngles();
+
+	tempRot.FromRadians();
 
 	Destroy(false);
 

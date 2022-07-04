@@ -940,8 +940,7 @@ void CNetworkPlayer::TakeMoney ( int iMoney )
 
 int CNetworkPlayer::GetMoney ( void )
 {
-	// todo
-	return 0;
+	return m_onFootSync.m_iMoney;
 }
 
 void CNetworkPlayer::SetAnimStyle(const char *directory, const char *style)

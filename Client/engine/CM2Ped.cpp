@@ -133,7 +133,7 @@ void _declspec(naked) M2WeaponData::AddMoney(int money, int unk)
 	}
 }
 
-float _declspec(naked) M2WeaponData::GetMoney()
+int _declspec(naked) M2WeaponData::GetMoney()
 {
 	_asm {
 		mov eax, 0x931B80;
@@ -424,34 +424,34 @@ M2Vehicle * CM2Ped::GetCurrentVehicle(void)
 	return NULL;
 }
 
-void CM2Ped::AddMoney(int iDollars, int iCents)
+void CM2Ped::AddMoney(int iDollars)
 {
 	if (m_pPed)
 	{
 		// If we want to disable hud OR sound
 		//CPatcher::InstallNopPatch( 0x949CFA , 0x9 ); // stop hud showing
 		//CPatcher::InstallNopPatch( 0x949CB6 , 0x15 ); // stop sound playing
-		m_pPed->m_pWeaponData->AddMoney(SharedUtility::int_concat(iDollars, iCents), 0);
+		m_pPed->m_pWeaponData->AddMoney(iDollars, 0);
 	}
 }
 
-void CM2Ped::RemoveMoney(int iDollars, int iCents)
+void CM2Ped::RemoveMoney(int iDollars)
 {
 	if (m_pPed)
 	{
-		m_pPed->m_pWeaponData->RemoveMoney(SharedUtility::int_concat(iDollars, iCents), 0);
+		m_pPed->m_pWeaponData->RemoveMoney(iDollars, 0);
 	}
 }
 
-float CM2Ped::GetMoney(void)
+int CM2Ped::GetMoney(void)
 {
-	float fMoney = 0.0f;
+	int iMoney = 0;
 
 	if (m_pPed)
 	{
-		fMoney = m_pPed->m_pWeaponData->GetMoney();
+		iMoney = m_pPed->m_pWeaponData->GetMoney();
 	}
-	return fMoney;
+	return iMoney;
 }
 
 C_SyncObject * CM2Ped::MoveVec(const CVector3 &vecPosition, M2Enums::eMoveType moveType, CVector3 vecEndDir)

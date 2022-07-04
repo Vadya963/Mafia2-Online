@@ -58,6 +58,10 @@ void CPlayerNatives::Register( CScriptingManager * pScriptingManager )
 	pScriptingManager->RegisterFunction( "setPlayerWantedLevel", SetWantedLevel, 2, "ii");
 	pScriptingManager->RegisterFunction( "getPlayerWantedLevel", GetWantedLevel, 0, NULL);
 	pScriptingManager->RegisterFunction( "getPlayerMoveState", GetMoveState, 1, "i" );
+	pScriptingManager->RegisterFunction( "setPlayerMoney", SetMoney, 2, "ii" );
+	pScriptingManager->RegisterFunction( "givePlayerMoney", GiveMoney, 2, "ii" );
+	pScriptingManager->RegisterFunction( "takePlayerMoney", TakeMoney, 2, "ii" );
+	pScriptingManager->RegisterFunction( "getPlayerMoney", GetMoney, 1, "i" );
 
 	// rendering settings
 	pScriptingManager->RegisterFunction("setRenderNametags", SetRenderNametags, 1, "b");
@@ -601,5 +605,143 @@ SQInteger CPlayerNatives::SetRenderHealthbar(SQVM * pVM)
 	CCore::Instance()->GetPlayerManager()->GetLocalPlayer()->SetRenderHealthbar(bToggle);
 
 	sq_pushbool(pVM, true);
+	return 1;
+}
+
+// setPlayerMoney( playerId, amount );
+SQInteger CPlayerNatives::SetMoney(SQVM * pVM)
+{
+	SQInteger playerId;
+	sq_getinteger(pVM, -2, &playerId);
+
+	SQInteger iMoney;
+	sq_getinteger(pVM, -1, &iMoney);
+
+	// Is this the localplayer?
+	if (playerId == CCore::Instance()->GetPlayerManager()->GetLocalPlayer()->GetId())
+	{
+		// Get the player money
+		int iCurrentMoney = CCore::Instance()->GetPlayerManager()->GetLocalPlayer()->GetMoney();
+
+		// Remove the current money
+		CCore::Instance()->GetPlayerManager()->GetLocalPlayer()->RemoveMoney(iCurrentMoney);
+
+		// Give the player money
+		CCore::Instance()->GetPlayerManager()->GetLocalPlayer()->GiveMoney(iMoney);
+
+		sq_pushbool(pVM, true);
+		return 1;
+	}
+	else
+	{
+		// Is the player active?
+		if (CCore::Instance()->GetPlayerManager()->IsActive(playerId))
+		{
+			// Get the player money
+			int iCurrentMoney = CCore::Instance()->GetPlayerManager()->Get(playerId)->GetMoney();
+
+			// Remove the current money
+			CCore::Instance()->GetPlayerManager()->Get(playerId)->RemoveMoney(iCurrentMoney);
+
+			// Give the player money
+			CCore::Instance()->GetPlayerManager()->Get(playerId)->GiveMoney(iMoney);
+
+			sq_pushbool(pVM, true);
+			return 1;
+		}
+	}
+
+	sq_pushbool(pVM, false);
+	return 1;
+}
+
+// givePlayerMoney( playerId, amount );
+SQInteger CPlayerNatives::GiveMoney(SQVM * pVM)
+{
+	SQInteger playerId;
+	sq_getinteger(pVM, -2, &playerId);
+
+	SQInteger iMoney;
+	sq_getinteger(pVM, -1, &iMoney);
+
+	// Is this the localplayer?
+	if (playerId == CCore::Instance()->GetPlayerManager()->GetLocalPlayer()->GetId())
+	{
+		CCore::Instance()->GetPlayerManager()->GetLocalPlayer()->GiveMoney(iMoney);
+
+		sq_pushbool(pVM, true);
+		return 1;
+	}
+	else
+	{
+		// Is the player active?
+		if (CCore::Instance()->GetPlayerManager()->IsActive(playerId))
+		{
+			CCore::Instance()->GetPlayerManager()->Get(playerId)->GiveMoney(iMoney);
+
+			sq_pushbool(pVM, true);
+			return 1;
+		}
+	}
+
+	sq_pushbool(pVM, false);
+	return 1;
+}
+
+// takePlayerMoney( playerId, amount );
+SQInteger CPlayerNatives::TakeMoney(SQVM * pVM)
+{
+	SQInteger playerId;
+	sq_getinteger(pVM, -2, &playerId);
+
+	SQInteger iMoney;
+	sq_getinteger(pVM, -1, &iMoney);
+
+	// Is this the localplayer?
+	if (playerId == CCore::Instance()->GetPlayerManager()->GetLocalPlayer()->GetId())
+	{
+		CCore::Instance()->GetPlayerManager()->GetLocalPlayer()->RemoveMoney(iMoney);
+
+		sq_pushbool(pVM, true);
+		return 1;
+	}
+	else
+	{
+		// Is the player active?
+		if (CCore::Instance()->GetPlayerManager()->IsActive(playerId))
+		{
+			CCore::Instance()->GetPlayerManager()->Get(playerId)->RemoveMoney(iMoney);
+
+			sq_pushbool(pVM, true);
+			return 1;
+		}
+	}
+
+	sq_pushbool(pVM, false);
+	return 1;
+}
+
+// getPlayerMoney( playerid );
+SQInteger CPlayerNatives::GetMoney(SQVM * pVM)
+{
+	SQInteger playerId;
+	sq_getinteger(pVM, -1, &playerId);
+
+	// Is this the localplayer?
+	if (playerId == CCore::Instance()->GetPlayerManager()->GetLocalPlayer()->GetId())
+	{
+		sq_pushinteger(pVM, CCore::Instance()->GetPlayerManager()->GetLocalPlayer()->GetMoney());
+		return 1;
+	}
+	else
+	{
+		if (CCore::Instance()->GetPlayerManager()->IsActive(playerId))
+		{
+			sq_pushinteger(pVM, CCore::Instance()->GetPlayerManager()->Get(playerId)->GetMoney());
+			return 1;
+		}
+	}
+
+	sq_pushbool(pVM, false);
 	return 1;
 }

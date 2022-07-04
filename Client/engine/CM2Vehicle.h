@@ -125,7 +125,7 @@ public:
 
 	bool		SetDynamic			(const bool enable, const int unk);
 
-	void		StopAllSounds		();
+	void		StopAllSounds		(void);
 
 	void		AddVehicleFlags		(const uint64_t flags);
 	void		ClearVehicleFlags	(const uint64_t flags);
@@ -290,10 +290,16 @@ public:
 
 	void		LockThrowFromCar(int a2, bool lock);
 
-	void		LockTrunks();
-	void		UnlockTrunks();
+	void		LockTrunks(void);
+	void		UnlockTrunks(void);
 
-	int			ResetRigidBody();
+	int			ResetRigidBody(void);
+
+	void		LockPlayerEntryPoints(void);
+	void		UnlockPlayerEntryPoints(void);
+
+	void		LockEntryPoints(void);
+	void		UnlockEntryPoints(void);
 };
 
 class CM2Vehicle : public CM2Entity
@@ -406,7 +412,7 @@ public:
 	bool					IsWindowOpen					(int iSeat);
 
 	void					MarkForSale						(bool bSale);
-	bool					IsMarkedForSale					();
+	bool					IsMarkedForSale					(void);
 
 	void					SetPainting						(const char *paint);
 
@@ -429,12 +435,14 @@ public:
 
 	void					LockThrowFromCar				(int unk, bool lock);
 
-	void					LockTrunks						();
-	void					UnlockTrunks					();
+	void					LockTrunks						(void);
+	void					UnlockTrunks					(void);
 
 	void					SetGearBoxAutomat				(eGearBoxstate state);
 	void					SetGear							(int gear);
 
-	void					Lock							();
-	void					Unlock							();
+	void					Lock							(void);
+	void					Unlock							(void);
+	void					LockDoor						(void);
+	void					UnlockDoor						(void);
 };

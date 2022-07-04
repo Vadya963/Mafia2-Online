@@ -78,14 +78,14 @@ CMainMenu::CMainMenu( CGUI_Impl * pGUI )
 	float fX = pGUI->GetResolution().fX;
 	float fY = pGUI->GetResolution().fY;
 
-	m_pLogo = pGUI->CreateStaticImage();
+	/*m_pLogo = pGUI->CreateStaticImage();
 	m_pLogo->LoadFromFile( "logo.png", SharedUtility::GetAbsolutePath( "data\\gui\\images" ) );
 	m_pLogo->SetProperty( "InheritsAlpha", "False" );
 	m_pLogo->SendToBack();
 	m_pLogo->SetPosition( Vector2( 40.0f, 40.0f ) );
 	m_pLogo->SetSize( Vector2( 249, 83 ) );
 	m_pLogo->SetVisible( false );
-	m_pLogo->SetAlwaysOnTop( true );
+	m_pLogo->SetAlwaysOnTop( true );*/
 
 	D3DXCreateSprite(CCore::Instance()->GetGraphics()->GetDevice(), &pSprite);
 
@@ -255,8 +255,8 @@ void CMainMenu::SetVisible( bool bVisible )
 
 	m_ulLastFadeTime = SharedUtility::GetTime ();
 
-	if( m_pLogo )
-		m_pLogo->SetVisible( bVisible );
+	/*if( m_pLogo )
+		m_pLogo->SetVisible( bVisible );*/
 
 	for (std::shared_ptr<CGUIStaticImage_Impl> img : m_items)
 		img->SetVisible( bVisible );

@@ -469,11 +469,14 @@ void CCore::DoRender( void )
 		}
 #endif
 
-		if ( GetAsyncKeyState ( VK_F10 ) & 0x1 && m_pHud && m_chatBox && m_pPlayerManager )
+		if ( GetAsyncKeyState ( VK_F10 ) & 0x1 && m_pHud && m_pPlayerManager )
 		{
 			m_pHud->Show ( !m_pHud->IsShowing () );
-			m_chatBox->SetVisible ( !m_chatBox->IsVisible () );
 			m_pPlayerManager->GetLocalPlayer()->GetPlayerPed()->ShowModel ( !m_pPlayerManager->GetLocalPlayer()->GetPlayerPed()->IsModelShowing () );
+		}
+		if (m_pHud->IsShowing())
+		{
+			m_pGraphics->DrawText(7, 5, 0xFFFFFFFF, 1.0f, "tahoma-bold", false, "FPS: %d Ping: %d", CCore::Instance()->GetFPSCounter()->GetFPS(), CCore::Instance()->GetPlayerManager()->GetLocalPlayer()->GetPing());
 		}
 		if( GetAsyncKeyState( VK_F11 ) & 0x1 )
 		{
@@ -482,6 +485,20 @@ void CCore::DoRender( void )
 		if( GetAsyncKeyState( VK_F12 ) & 0x1 )
 		{
 			TakeScreenshot ();
+		}
+		if ( GetAsyncKeyState( 0x4D ) & 0x1 )
+		{
+			if (!ChatBox::Instance()->IsInputActive())
+			{
+				if (CCore::Instance()->GetGame()->IsMapOpen())
+				{
+					CCore::Instance()->GetGame()->OpenMap(false);
+				}
+				else
+				{
+					CCore::Instance()->GetGame()->OpenMap(true);
+				}
+			}
 		}
 		if (m_bCaptureScreenshot && !m_pScreenshotManager->IsSaving())
 		{
@@ -503,7 +520,10 @@ void CCore::DoRender( void )
 		{
 			m_pGraphics->DrawText( (m_pGUI->GetCEGUI()->GetResolution().fX - 275), 30, 0xFFFFFFFF, 1.0f, "tahoma-bold", false, DT_NOCLIP, CNetworkStats::GetStats().Get() );
 		}
-
+		if ( GetAsyncKeyState ( VK_F9 ) & 0x1 && m_chatBox )
+		{
+			m_chatBox->SetVisible ( !m_chatBox->IsVisible () );
+		}		
 		if( m_pClientScriptingManager && !m_pGUI->GetMainMenu()->IsVisible () )
 		{
 			pArguments.push( true );

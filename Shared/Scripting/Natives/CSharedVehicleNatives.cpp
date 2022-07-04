@@ -54,8 +54,8 @@ void CSharedVehicleNatives::Register( CScriptingManager * pScriptingManager )
 	pScriptingManager->RegisterFunction( "isVehicleWindowOpen", IsWindowOpen, 2, "ii" );
 	pScriptingManager->RegisterFunction( "setVehicleTuningTable", SetTuningTable, 2, "ii" );
 	pScriptingManager->RegisterFunction( "getVehicleTuningTable", GetTuningTable, 1, "i" );
-	pScriptingManager->RegisterFunction( "setVehicleWheelTexture", SetWheelTexture, 3, "iii" );
-	pScriptingManager->RegisterFunction( "getVehicleWheelTexture", GetWheelTexture, 2, "ii" );
+	pScriptingManager->RegisterFunction( "setVehicleWheelModel", SetWheelTexture, 3, "iii" );
+	pScriptingManager->RegisterFunction( "getVehicleWheelModel", GetWheelTexture, 2, "ii" );
 	pScriptingManager->RegisterFunction( "getVehicleModel", GetModel, 1, "i" );
 	//pScriptingManager->RegisterFunction( "setVehicleModel", SetM, 2, "ii" );
 	pScriptingManager->RegisterFunction( "getVehicles", GetVehicles, 0, NULL );
@@ -65,12 +65,13 @@ void CSharedVehicleNatives::Register( CScriptingManager * pScriptingManager )
 	pScriptingManager->RegisterFunction( "getVehicleFuel", GetFuel, 1, "i" );
 	pScriptingManager->RegisterFunction( "setVehicleLightState", SetLightState, 2, "ib" );
 	pScriptingManager->RegisterFunction( "getVehicleLightState", GetLightState, 1, "i" );
-	pScriptingManager->RegisterFunction( "setIndicatorLightState", SetIndicatorLightState, 3, "iib");
-	pScriptingManager->RegisterFunction( "getIndicatorLightState", GetIndicatorLightState, 2, "ii");
-	pScriptingManager->RegisterFunction( "setTaxiLightState", SetTaxiLightState, 2, "ib");
-	pScriptingManager->RegisterFunction( "getTaxiLightState", GetTaxiLightState, 1, "i");
-	pScriptingManager->RegisterFunction( "getVehicleHandbrake", GetVehicleHandbrake, 1, "i");
-	pScriptingManager->RegisterFunction( "setVehicleHandbrake", SetVehicleHandbrake, 2, "ib");
+	pScriptingManager->RegisterFunction( "setIndicatorLightState", SetIndicatorLightState, 3, "iib" );
+	pScriptingManager->RegisterFunction( "getIndicatorLightState", GetIndicatorLightState, 2, "ii" );
+	pScriptingManager->RegisterFunction( "setTaxiLightState", SetTaxiLightState, 2, "ib" );
+	pScriptingManager->RegisterFunction( "getTaxiLightState", GetTaxiLightState, 1, "i" );
+	pScriptingManager->RegisterFunction( "getVehicleHandbrake", GetVehicleHandbrake, 1, "i" );
+	pScriptingManager->RegisterFunction( "setVehicleHandbrake", SetVehicleHandbrake, 2, "ib" );
+	pScriptingManager->RegisterFunction( "setVehicleLocked", SetVehicleLocked, 2, "ib" );
 
 	pScriptingManager->RegisterConstant( "INDICATOR_LEFT", 1);
 	pScriptingManager->RegisterConstant( "INDICATOR_RIGHT", 0);
@@ -1039,6 +1040,37 @@ SQInteger CSharedVehicleNatives::GetVehicleHandbrake(SQVM *pVM)
 	if (CCore::Instance()->GetVehicleManager()->IsActive(vehicleId))
 	{
 		sq_pushbool(pVM, CCore::Instance()->GetVehicleManager()->Get(vehicleId)->GetHandbrake());
+		return 1;
+	}
+
+	sq_pushbool(pVM, false);
+	return 1;
+}
+
+SQInteger CSharedVehicleNatives::SetVehicleLocked(SQVM * pVM)
+{
+	// Get the vehicle id
+	SQInteger vehicleId;
+	sq_getinteger(pVM, -2, &vehicleId);
+
+	// Get the state
+	SQBool bState;
+	sq_getbool(pVM, -1, &bState);
+
+	// Is the vehicle active?
+	if (CCore::Instance()->GetVehicleManager()->IsActive(vehicleId))
+	{
+		// Set the door state
+		if (bState)
+		{
+			CCore::Instance()->GetVehicleManager()->Get(vehicleId)->Lock();
+		}
+		else
+		{
+			CCore::Instance()->GetVehicleManager()->Get(vehicleId)->Unlock();
+		}
+
+		sq_pushbool(pVM, true);
 		return 1;
 	}
 

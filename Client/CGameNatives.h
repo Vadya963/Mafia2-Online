@@ -31,6 +31,7 @@ private:
 	static	SQInteger		SetGPSTarget( SQVM * pVM );
 	static	SQInteger		RemoveGPSTarget( SQVM * pVM );
 	static	SQInteger		DisableTranslocator(SQVM * pVM);
+	static	SQInteger		ExecuteLuaHandler(SQVM * pVM);
 
 public:
 

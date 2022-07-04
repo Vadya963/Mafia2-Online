@@ -34,6 +34,7 @@ struct OnFootSync
 	CVector3		m_vecLookAt;
 	int				m_iHandModel;
 	int				m_iHand;
+	int				m_iMoney;
 
 	OnFootSync()
 		: m_vecPosition()
@@ -50,6 +51,7 @@ struct OnFootSync
 		, m_vecLookAt()
 		, m_iHandModel(0)
 		, m_iHand(0)
+		, m_iMoney(50000)
 	{
 	}
 
@@ -69,6 +71,7 @@ struct OnFootSync
 		m_vecLookAt = rhs.m_vecLookAt;
 		m_iHandModel = rhs.m_iHandModel;
 		m_iHand = rhs.m_iHand;
+		m_iMoney = rhs.m_iMoney;
 		return *this;
 	}
 };
@@ -116,9 +119,4 @@ struct UnoccupiedVehicleSync
 {
 	CVector3		m_vecPosition;
 	CVector3		m_vecRotation;
-};
-
-struct MiscellaneousPlayerSync
-{
-	int				m_iMoney;
 };

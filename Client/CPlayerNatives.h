@@ -31,6 +31,10 @@ private:
 	static	SQInteger		IsToggleControls( SQVM * pVM );
 	static	SQInteger		IsInVehicle( SQVM * pVM );
 	static	SQInteger		GetVehicle( SQVM * pVM );
+	static	SQInteger		SetMoney( SQVM * pVM );
+	static	SQInteger		GiveMoney( SQVM * pVM );
+	static	SQInteger		TakeMoney( SQVM * pVM );
+	static	SQInteger		GetMoney( SQVM * pVM );
 
 	static SQInteger		SetDrunkLevel( SQVM *pVM );
 	static SQInteger		GetDrunkLevel(SQVM *pVM);

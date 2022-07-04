@@ -18,14 +18,16 @@ class CPedNatives
 private:
 
 	static	SQInteger		CreatePed					( SQVM * pVM );
+	static	SQInteger		DestroyPed					( SQVM * pVM );
 	static	SQInteger		SetPedName					( SQVM * pVM);
 	static	SQInteger		GetPedName					( SQVM * pVM);
-	static	SQInteger		DestroyPed					( SQVM * pVM );
 	static	SQInteger		ShowPedName					( SQVM * pVM );
-	static	SQInteger		SetPedPosition				( SQVM * pVM );
-	static	SQInteger		GetPedPosition				( SQVM * pVM );
 	static	SQInteger		SetPedModel					( SQVM * pVM );
 	static	SQInteger		GetPedModel					( SQVM * pVM);
+	static	SQInteger		SetPedPosition				( SQVM * pVM );
+	static	SQInteger		GetPedPosition				( SQVM * pVM );
+	static	SQInteger		SetPedRotation				( SQVM * pVM );
+	static	SQInteger		GetPedRotation				( SQVM * pVM);
 
 public:
 

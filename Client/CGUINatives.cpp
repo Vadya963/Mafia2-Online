@@ -593,7 +593,7 @@ SQInteger CGUINatives::GuiSetSize( SQVM * pVM )
 	int iTop = (sq_gettop( pVM ) - 1);
 
 	if( iTop < 3 || iTop > 4 )
-		CHECK_PARAMS( "guiSetPosition", 3 );
+		CHECK_PARAMS_MIN( "guiSetSize", 3 );
 
 	CGUIElement_Impl * pElement = NULL;
 	Vector2 vecSize;
@@ -601,26 +601,26 @@ SQInteger CGUINatives::GuiSetSize( SQVM * pVM )
 
 	if( iTop == 3 )
 	{
-		CHECK_TYPE( "guiSetPosition", 1, -1, OT_FLOAT );
-		CHECK_TYPE( "guiSetPosition", 2, -2, OT_FLOAT );
-		CHECK_TYPE( "guiSetPosition", 3, -3, OT_USERPOINTER );
+		CHECK_TYPE( "guiSetSize", 1, -1, OT_FLOAT );
+		CHECK_TYPE( "guiSetSize", 2, -2, OT_FLOAT );
+		CHECK_TYPE( "guiSetSize", 3, -3, OT_USERPOINTER );
 
-		pElement = sq_getpointer< CGUIElement_Impl* >( pVM );
-		sq_getfloat( pVM, 2, &vecSize.fX );
-		sq_getfloat( pVM, 3, &vecSize.fY );
+		pElement = sq_getpointer< CGUIElement_Impl* >( pVM, -3 );
+		sq_getfloat( pVM, -2, &vecSize.fX );
+		sq_getfloat( pVM, -1, &vecSize.fY );
 
 	}
 	else if( iTop == 4 )
 	{
-		CHECK_TYPE( "guiSetPosition", 1, -1, OT_BOOL );
-		CHECK_TYPE( "guiSetPosition", 2, -2, OT_FLOAT );
-		CHECK_TYPE( "guiSetPosition", 3, -3, OT_FLOAT );
-		CHECK_TYPE( "guiSetPosition", 4, -4, OT_USERPOINTER );
+		CHECK_TYPE( "guiSetSize", 1, -1, OT_BOOL );
+		CHECK_TYPE( "guiSetSize", 2, -2, OT_FLOAT );
+		CHECK_TYPE( "guiSetSize", 3, -3, OT_FLOAT );
+		CHECK_TYPE( "guiSetSize", 4, -4, OT_USERPOINTER );
 
-		pElement = sq_getpointer< CGUIElement_Impl* >( pVM );
-		sq_getfloat( pVM, 2, &vecSize.fX );
-		sq_getfloat( pVM, 3, &vecSize.fY );
-		sq_getbool( pVM, 4, &bRelative );
+		pElement = sq_getpointer< CGUIElement_Impl* >( pVM, -4 );
+		sq_getfloat( pVM, -3, &vecSize.fX );
+		sq_getfloat( pVM, -2, &vecSize.fY );
+		sq_getbool( pVM, -1, &bRelative );
 	}
 
 	// Is the element valid?

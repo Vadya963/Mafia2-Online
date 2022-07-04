@@ -33,7 +33,26 @@ static CColor predefinedColours[] =
 	CColor ( 83, 104, 80 ),
 	CColor ( 73, 75, 33 ),
 	CColor ( 1, 17, 13 ),
-	CColor ( 47, 95, 106 )
+	CColor ( 47, 95, 106 ),
+	CColor ( 71, 91, 91 ),
+	CColor ( 20, 33, 39 ),
+	CColor ( 4, 15, 20 ),
+	CColor ( 132, 90, 103 ),
+	CColor ( 90, 28, 38 ),
+	CColor ( 97, 35, 58 ),
+	CColor ( 4, 4, 4 ),
+	CColor ( 102, 70, 18 ),
+	CColor ( 74, 43, 8 ),
+	CColor ( 57, 49, 29 ),
+	CColor ( 35, 22, 8 ),
+	CColor ( 132, 112, 78 ),
+	CColor ( 125, 0, 0 ),
+	CColor ( 74, 43, 34 ),
+	CColor ( 51, 22, 8 ),
+	CColor ( 78, 132, 129 ),
+	CColor ( 17, 1, 14 ),
+	CColor ( 2, 5, 19 ),
+	CColor ( 18, 44, 69 )
 };
 
 CNetworkVehicle::CNetworkVehicle( void )
@@ -648,11 +667,14 @@ void CNetworkVehicle::SetWheelTexture( int iWheelIndex, int iTexture )
 	// Write the wheel index
 	pBitStream.WriteCompressed ( iWheelIndex );
 
-	// Write the tuning table
+	// Write the wheel texture
 	pBitStream.WriteCompressed( iTexture );
 
 	// Send it to all clients
 	CCore::Instance()->GetNetworkModule()->Call( RPC_SETVEHICLEWHEELTEXTURE, &pBitStream, HIGH_PRIORITY, RELIABLE_ORDERED, INVALID_ENTITY_ID, true );
+
+	// Store the last WheelTexture
+	m_lastSyncData.m_bWheelModels[iWheelIndex] = iTexture;
 }
 
 int CNetworkVehicle::GetWheelTexture( int iWheelIndex )
@@ -694,6 +716,9 @@ void CNetworkVehicle::SetFuel ( float fFuel )
 
 	// Send it to all clients
 	CCore::Instance()->GetNetworkModule()->Call ( RPC_SETVEHICLEFUEL, &pBitStream, HIGH_PRIORITY, RELIABLE_ORDERED, INVALID_ENTITY_ID, true );
+
+	// Store the last Fuel
+	m_lastSyncData.m_fFuel = fFuel;
 }
 
 float CNetworkVehicle::GetFuel ( void )
@@ -714,6 +739,9 @@ void CNetworkVehicle::SetLightState ( bool bLightState )
 
 	// Send it to all clients
 	CCore::Instance()->GetNetworkModule()->Call ( RPC_SETVEHICLELIGHTSTATE, &pBitStream, HIGH_PRIORITY, RELIABLE_ORDERED, INVALID_ENTITY_ID, true );
+
+	// Store the last LightState
+	m_lastSyncData.m_bLightState = bLightState;
 }
 
 bool CNetworkVehicle::GetLightState ()
@@ -731,6 +759,12 @@ void CNetworkVehicle::SetIndicatorLightState(int indicator, bool bLightState)
 	bLightState ? pBitStream.Write1() : pBitStream.Write0();
 
 	CCore::Instance()->GetNetworkModule()->Call(RPC_SETVEHICLEINDICATORLIGHTSTATE, &pBitStream, HIGH_PRIORITY, RELIABLE_ORDERED, INVALID_ENTITY_ID, true);
+
+	// Store the last IndicatorLightState
+	if (indicator == 0)
+		m_lastSyncData.m_bLeftIndicator = bLightState;
+	else if (indicator == 1)
+		m_lastSyncData.m_bRightIndicator = bLightState;
 }
 
 bool CNetworkVehicle::GetIndicatorLightState(int indicator)
@@ -751,6 +785,9 @@ void CNetworkVehicle::SetTaxiLightState(bool bLightState)
 	bLightState ? pBitStream.Write1() : pBitStream.Write0();
 
 	CCore::Instance()->GetNetworkModule()->Call(RPC_SETVEHICLETAXILIGHTSTATE, &pBitStream, HIGH_PRIORITY, RELIABLE_ORDERED, INVALID_ENTITY_ID, true);
+
+	// Store the last TaxiLightState
+	m_lastSyncData.m_bTaxiLight = bLightState;
 }
 
 bool CNetworkVehicle::GetTaxiLightState(void)
@@ -767,11 +804,24 @@ void CNetworkVehicle::SetHandbrake(bool bHandbrake)
 	bHandbrake ? pBitStream.Write1() : pBitStream.Write0();
 
 	CCore::Instance()->GetNetworkModule()->Call(RPC_SETVEHICLEHANDBRAKE, &pBitStream, HIGH_PRIORITY, RELIABLE_ORDERED, INVALID_ENTITY_ID, true);
+
+	// Store the last Handbrake
+	m_lastSyncData.m_bHandbrake = bHandbrake;
 }
 
 bool CNetworkVehicle::GetHandbrake(void)
 {
 	return m_lastSyncData.m_bHandbrake;
+}
+
+void CNetworkVehicle::Lock(void)
+{
+	
+}
+
+void CNetworkVehicle::Unlock(void)
+{
+	
 }
 
 void CNetworkVehicle::SetModel(int iModel)

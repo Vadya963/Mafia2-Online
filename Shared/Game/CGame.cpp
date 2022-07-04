@@ -108,21 +108,21 @@ static char * VehicleWheelModels[] =
 	"wheel_civ04",		"wheel_civ05",		"wheel_civ07",		"wheel_civ08",		"wheel_civ09",
 	"wheel_civ01",		"wheel_civ02",		"wheel_civ03",		"wheel_civ06",		"wheel_civ10",
 	"wheel_civ11",		"wheel_sport",		"wheel_jeep",		"wheel_hank_f",		"wheel_truckciv01",
-	"wheel_truckciv02",
+	"wheel_truckciv02",	"wheel_civ09_hot"
 };
 
 static char * WeaponName[] =
 {
-	"Model 12 Revolver", "Mauser C96", "Colt M1911A1", "Colt M1911 Special", "Model 19 Revolver", "MK2 Frag Grenade",
+	"Model 12 Revolver", "Mauser C96", "Colt M1911A1", "Colt M1911 Special", "Model 19 Revolver",
 	"Remington Model 870 Field gun", "M3 Grease Gun", "MP40", "	Thompson 1928", "M1A1 Thompson", "Beretta Model 38A",
-	"MG42", "M1 Garand", "Kar98k", "Molotov Cocktail"
+	"MG42", "M1 Garand", "Kar98k", "MK2 Frag Grenade", "Molotov Cocktail"
 };
 
 static int WeaponNameID[] =
 {
-	2, 3, 4, 5, 6, 7, 8, 9,
+	2, 3, 4, 5, 6, 8, 9,
 	10, 11, 12, 13, 14, 15,
-	17, 21
+	17, 20, 21
 };
 
 static char * Doors[] =
@@ -227,7 +227,7 @@ String Game::GetWeaponNameFromId(unsigned int uiModel)
 unsigned int Game::GetIdFromPlayerModel( String strModel )
 {
 	// Loop over each model
-	for( unsigned int i = 0; i < ((sizeof(PlayerModels) / sizeof(PlayerModels[0])) - 1); i++ )
+	for( unsigned int i = 0; i < (sizeof(PlayerModels) / sizeof(PlayerModels[0])); i++ )
 	{
 		// Is the model the one we're looking for?
 		if( !strModel.Compare( PlayerModels[ i ][ 1 ] ) )
@@ -252,7 +252,7 @@ void Game::GetPlayerModelFromId( unsigned int uiModel, String * strModel, String
 unsigned int Game::GetIdFromVehicleModel( String strModel )
 {
 	// Loop over each model
-	for( unsigned int i = 0; i < ((sizeof(VehicleModels) / sizeof(VehicleModels[0])) - 1); i++ )
+	for( unsigned int i = 0; i < (sizeof(VehicleModels) / sizeof(VehicleModels[0])); i++ )
 	{
 		// Is the model the one we're looking for?
 		if( !strModel.Compare( VehicleModels[ i ] ) )
@@ -274,7 +274,7 @@ void Game::GetVehicleModelFromId( unsigned int uiModel, String * strModel )
 unsigned int Game::GetIdFromVehicleWheelModel( String strModel )
 {
 	// Loop over each model
-	for( unsigned int i = 0; i < ((sizeof(VehicleWheelModels) / sizeof(VehicleWheelModels[0])) - 1); i++ )
+	for( unsigned int i = 0; i < (sizeof(VehicleWheelModels) / sizeof(VehicleWheelModels[0])); i++ )
 	{
 		// Is the model the one we're looking for?
 		if( !strModel.Compare( VehicleWheelModels[ i ] ) )

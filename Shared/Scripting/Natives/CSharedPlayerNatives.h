@@ -16,9 +16,7 @@ class CSharedPlayerNatives
 
 private:
 
-	static	SQInteger		GetMoney( SQVM * pVM );
 	static	SQInteger		GetPlayers( SQVM * pVM );
-	static	SQInteger		GetVehicles( SQVM * pVM );
 
 public:
 

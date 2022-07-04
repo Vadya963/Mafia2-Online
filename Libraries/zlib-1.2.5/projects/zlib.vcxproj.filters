@@ -47,6 +47,9 @@
     <ClCompile Include="..\inftrees.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\minigzip.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="..\trees.c">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -62,6 +65,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\deflate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\gzguts.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\inffast.h">

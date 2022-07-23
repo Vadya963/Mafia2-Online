@@ -126,8 +126,7 @@ public:
 
 	bool							GetHandbrake						( void );
 	void							SetHandbrake						( bool handbrake );
-	void							Lock								( void );
-	void							Unlock								( void );
+	void							SetLocked							( bool bState);
 
 	void							SetLastSyncer						( CNetworkPlayer * pLastSyncer ) { m_pLastSyncer = pLastSyncer; }
 	CNetworkPlayer					* GetLastSyncer						( void ) { return m_pLastSyncer; }

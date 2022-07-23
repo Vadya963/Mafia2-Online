@@ -814,14 +814,15 @@ bool CNetworkVehicle::GetHandbrake(void)
 	return m_lastSyncData.m_bHandbrake;
 }
 
-void CNetworkVehicle::Lock(void)
+void CNetworkVehicle::SetLocked(bool bState)
 {
-	
-}
+	RakNet::BitStream pBitStream;
 
-void CNetworkVehicle::Unlock(void)
-{
-	
+	pBitStream.WriteCompressed(m_vehicleId);
+
+	bState ? pBitStream.Write1() : pBitStream.Write0();
+
+	CCore::Instance()->GetNetworkModule()->Call(RPC_SETVEHICLELOCKED, &pBitStream, HIGH_PRIORITY, RELIABLE_ORDERED, INVALID_ENTITY_ID, true);
 }
 
 void CNetworkVehicle::SetModel(int iModel)

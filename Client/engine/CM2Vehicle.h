@@ -443,6 +443,5 @@ public:
 
 	void					Lock							(void);
 	void					Unlock							(void);
-	void					LockDoor						(void);
-	void					UnlockDoor						(void);
+	void					SetLocked						(bool bState);
 };

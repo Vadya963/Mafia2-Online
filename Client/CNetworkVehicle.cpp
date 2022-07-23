@@ -1082,14 +1082,8 @@ void CNetworkVehicle::DetachBlip ( void )
 	}
 }
 
-void CNetworkVehicle::Lock(void)
+void CNetworkVehicle::SetLocked(bool bState)
 {
 	if (m_pVehicle)
-		m_pVehicle->LockDoor();
-}
-
-void CNetworkVehicle::Unlock(void)
-{
-	if (m_pVehicle)
-		m_pVehicle->UnlockDoor();
+		m_pVehicle->SetLocked(bState);
 }

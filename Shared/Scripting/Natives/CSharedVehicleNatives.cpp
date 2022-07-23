@@ -1061,14 +1061,7 @@ SQInteger CSharedVehicleNatives::SetVehicleLocked(SQVM * pVM)
 	if (CCore::Instance()->GetVehicleManager()->IsActive(vehicleId))
 	{
 		// Set the door state
-		if (bState)
-		{
-			CCore::Instance()->GetVehicleManager()->Get(vehicleId)->Lock();
-		}
-		else
-		{
-			CCore::Instance()->GetVehicleManager()->Get(vehicleId)->Unlock();
-		}
+		CCore::Instance()->GetVehicleManager()->Get(vehicleId)->SetLocked(bState);
 
 		sq_pushbool(pVM, true);
 		return 1;

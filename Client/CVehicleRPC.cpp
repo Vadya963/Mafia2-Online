@@ -429,6 +429,19 @@ void SetVehicleHandbrake(RakNet::BitStream * pBitStream, RakNet::Packet * pPacke
 	}
 }
 
+void SetVehicleLocked(RakNet::BitStream * pBitStream, RakNet::Packet * pPacket)
+{
+	EntityId vehicleId;
+	pBitStream->ReadCompressed(vehicleId);
+
+	bool bState = pBitStream->ReadBit();
+
+	if (CCore::Instance()->GetVehicleManager()->IsActive(vehicleId))
+	{
+		CCore::Instance()->GetVehicleManager()->Get(vehicleId)->SetLocked(bState);
+	}
+}
+
 void CVehicleRPC::Register( RakNet::RPC4 * pRPC )
 {
 	// Are we already registered?
@@ -458,6 +471,7 @@ void CVehicleRPC::Register( RakNet::RPC4 * pRPC )
 	pRPC->RegisterFunction( RPC_SETVEHICLEINDICATORLIGHTSTATE, SetVehicleIndicatorLightState);
 	pRPC->RegisterFunction( RPC_SETVEHICLETAXILIGHTSTATE, SetVehicleTaxiLightState);
 	pRPC->RegisterFunction( RPC_SETVEHICLEHANDBRAKE, SetVehicleHandbrake);
+	pRPC->RegisterFunction( RPC_SETVEHICLELOCKED, SetVehicleLocked);
 }
 
 void CVehicleRPC::Unregister( RakNet::RPC4 * pRPC )
@@ -486,6 +500,7 @@ void CVehicleRPC::Unregister( RakNet::RPC4 * pRPC )
 	pRPC->UnregisterFunction( RPC_SETVEHICLESPEED );
 	pRPC->UnregisterFunction( RPC_SETVEHICLEFUEL );
 	pRPC->UnregisterFunction( RPC_SETVEHICLELIGHTSTATE );
-	pRPC->UnregisterFunction( RPC_SETVEHICLEINDICATORLIGHTSTATE);
-	pRPC->UnregisterFunction( RPC_SETVEHICLETAXILIGHTSTATE);
+	pRPC->UnregisterFunction( RPC_SETVEHICLEINDICATORLIGHTSTATE );
+	pRPC->UnregisterFunction( RPC_SETVEHICLETAXILIGHTSTATE );
+	pRPC->UnregisterFunction( RPC_SETVEHICLELOCKED );
 }

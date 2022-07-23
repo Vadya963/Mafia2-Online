@@ -1205,18 +1205,17 @@ void CM2Vehicle::Unlock(void)
 	m_pVehicle->ResetRigidBody();
 }
 
-void CM2Vehicle::LockDoor(void)
+void CM2Vehicle::SetLocked(bool bState)
 {
 	if (!m_pVehicle)
 		return;
 
-	m_pVehicle->LockEntryPoints();
-}
-
-void CM2Vehicle::UnlockDoor(void)
-{
-	if (!m_pVehicle)
-	return;
-
-	m_pVehicle->UnlockEntryPoints();
+	if (bState)
+	{
+		m_pVehicle->LockEntryPoints();
+	}
+	else
+	{
+		m_pVehicle->UnlockEntryPoints();
+	}
 }

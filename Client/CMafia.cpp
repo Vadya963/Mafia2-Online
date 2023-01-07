@@ -40,6 +40,8 @@
 
 #include "CEvents.h"
 
+#include "CPatcher.h"
+
 bool						bOldChatWindowState;
 
 CMafia::CMafia( void )
@@ -174,7 +176,14 @@ void CMafia::Spawn( bool bFade )
 	CLua::Execute( "game.garage:CheatAbandonCars()" );
 	CLua::Execute( "game.garage:SetMaxGaragePlaces( 0 )" );
 
-	CLua::Execute( "game.shop:SetAllShopExplored(true)" );
+	if (CCore::Instance()->IsCityShops())
+	{
+		CPatcher::PatchAddress(0x46EE90, 0x0004C2);
+	}
+	else
+	{
+		CLua::Execute("game.shop:SetAllShopExplored(true)");
+	}
 
 	pHud->Show( true );
 	CCore::Instance()->GetHud()->ShowLowHealthFX( false );

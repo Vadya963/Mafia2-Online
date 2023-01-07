@@ -86,6 +86,8 @@ void InitialData( RakNet::BitStream * pBitStream, RakNet::Packet * pPacket )
 
 	DEBUG_LOG ( "Season: %s", (CCore::Instance()->IsSummer () ? "Summer" : "Winter") );
 
+	CCore::Instance()->SetCityShops ( pBitStream->ReadBit() );
+
 	// Read the weather
 	RakNet::RakString strWeather;
 	pBitStream->Read ( strWeather );

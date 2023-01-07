@@ -102,6 +102,7 @@ private:
 	unsigned						m_uServerMaxPlayers;
 	bool							m_bGlobalSpeedLimited;
 	bool							m_bSummer;
+	bool							m_bCityShops;
 
 	String							m_strGameDirectory;
 	String							m_strModDirectory;
@@ -206,4 +207,7 @@ public:
 	void							OnFocusChange				( bool bFocus );
 
 	bool							HandleMessage				( UINT uMsg, DWORD wParam, DWORD lParam );
+
+	void							SetCityShops				( bool bCityShops ) { m_bCityShops = bCityShops; }
+	bool							IsCityShops					(void) { return m_bCityShops; }
 };

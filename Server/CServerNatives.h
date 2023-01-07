@@ -30,6 +30,7 @@ private:
 	static	SQInteger		StartResource( SQVM * pVM );
 	static	SQInteger		StopResource( SQVM * pVM );
 	static	SQInteger		RestartResource( SQVM * pVM );
+	static	SQInteger		DisableCityShops(SQVM * pVM);
 
 public:
 

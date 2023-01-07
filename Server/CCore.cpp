@@ -40,6 +40,7 @@ CCore::CCore( void )
 	SetMapName( "Empire Bay" );
 	SetWeather( "DT_RTRclear_day_noon" );
 	SetSummer( true );
+	SetCityShops( true );
 
 	// Generate a random master code string
 	SetMasterCode ( SharedUtility::str_rand ( 24 ) );

@@ -25,6 +25,7 @@ void CServerNatives::Register( CScriptingManager * pScriptingManager )
 	pScriptingManager->RegisterFunction( "startResource", StartResource, 1, "s" );
 	pScriptingManager->RegisterFunction( "stopResource", StopResource, 1, "s" );
 	pScriptingManager->RegisterFunction( "restartResource", RestartResource, 1, "s" );
+	pScriptingManager->RegisterFunction( "disableCityShops", DisableCityShops, 1, "b" );
 }
 
 SQInteger CServerNatives::SetGameModeText( SQVM * pVM )
@@ -232,3 +233,15 @@ SQInteger CServerNatives::RestartResource( SQVM * pVM )
 	return 1;
 }
 
+SQInteger CServerNatives::DisableCityShops(SQVM * pVM)
+{
+	// Get the toggle
+	SQBool bCityShops;
+	sq_getbool(pVM, -1, &bCityShops);
+
+	// Set the server season
+	CCore::Instance()->SetCityShops(bCityShops);
+
+	sq_pushbool(pVM, true);
+	return 1;
+}

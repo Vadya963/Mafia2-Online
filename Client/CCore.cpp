@@ -150,6 +150,7 @@ CCore::CCore( void )
 	, m_uServerMaxPlayers(0)
 	, m_bGlobalSpeedLimited(false)
 	, m_bSummer(true)
+	, m_bCityShops(true)
 
 	, m_strGameDirectory()
 	, m_strModDirectory()

@@ -81,6 +81,7 @@ private:
 	String														m_strMapName;
 	String														m_strWeather;
 	bool														m_bSummer;
+	bool														m_bCityShops;
 
 	String														m_strMasterCode;
 
@@ -134,4 +135,6 @@ public:
 	void							SetMasterCode				( String strCode ) { m_strMasterCode = strCode; }
 	String							GetMasterCode				( void ) { return m_strMasterCode; }
 
+	void							SetCityShops				( bool bCityShops ) { m_bCityShops = bCityShops; }
+	bool							IsCityShops					(void) { return m_bCityShops; }
 };

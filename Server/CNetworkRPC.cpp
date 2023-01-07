@@ -151,6 +151,8 @@ void InitialData( RakNet::BitStream * pBitStream, RakNet::Packet * pPacket )
 	// Write a bit to represent the server season
 	CCore::Instance()->IsSummer() ? bitStream.Write1() : bitStream.Write0();
 
+	CCore::Instance()->IsCityShops() ? bitStream.Write1() : bitStream.Write0();
+
 	// Write the weather name
 	bitStream.Write( RakNet::RakString ( CCore::Instance()->GetWeather () ) );
 

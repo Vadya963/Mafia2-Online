@@ -494,6 +494,22 @@ float CNetworkVehicle::GetDirtLevel( void )
 	return 0.0f;
 }
 
+void CNetworkVehicle::SetEngineDamage(float fEngineDamage)
+{
+	if (m_pVehicle)
+		m_pVehicle->SetEngineDamage(fEngineDamage);
+
+	m_lastSyncData.m_fEngineDamage = fEngineDamage;
+}
+
+float CNetworkVehicle::GetEngineDamage(void)
+{
+	if (m_pVehicle)
+		return m_pVehicle->GetEngineDamage();
+
+	return 0.0f;
+}
+
 void CNetworkVehicle::SetEngineState( bool bState )
 {
 	if( m_pVehicle )

@@ -84,6 +84,25 @@ static char * PlayerModels[][2] =
 	//{ "/sds/police_char", "m11police" },{ "/sds/police_char", "m14china_pol" },{ "/sds/police_char", "police_char" }
 };
 
+static int VehicleFuelTankCapacity[] =
+{
+	60,								90,									0,
+	200,							200,								200,								70,
+	70,								70,									70,									70,							58,
+	58,								90,									70,
+	90,								90,									90,									90,
+	80,								150,								150,								70,							60,
+	60,								65,									65,									100,
+	80,								70,									65,									65,							65,
+	65,								100,								100,
+	100,							100,								100,
+	100,							80,									80,									80,							50,
+	65,								70,									80,
+	65,								50,
+	0,								70,									70,
+	80,								40
+};
+
 static char * VehicleModels[] =
 {
 	"ascot_baileys200_pha",			"berkley_kingfisher_pha",			"fuel_tank",
@@ -222,6 +241,13 @@ String Game::GetWeaponNameFromId(unsigned int uiModel)
 		retn.Set(WeaponName[found]);
 		return (retn);
 	}
+}
+
+unsigned int Game::GetFuelTankCapacityFromModel(unsigned int uiModel)
+{
+	uiModel = Math::Clamp< unsigned int >(0, uiModel, ((sizeof(VehicleFuelTankCapacity) / sizeof(VehicleFuelTankCapacity[0])) - 1));
+
+	return VehicleFuelTankCapacity[uiModel];
 }
 
 unsigned int Game::GetIdFromPlayerModel( String strModel )

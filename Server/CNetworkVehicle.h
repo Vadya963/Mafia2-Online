@@ -85,6 +85,9 @@ public:
 	void							SetDirtLevel						( float fDirtLevel );
 	float							GetDirtLevel						( void );
 
+	void							SetEngineDamage						( float fEngineDamage );
+	float							GetEngineDamage						( void );
+
 	void							SetEngineState						( bool bState );
 	bool							GetEngineState						( void );
 

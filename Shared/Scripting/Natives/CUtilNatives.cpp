@@ -35,6 +35,7 @@ void CUtilNatives::Register( CScriptingManager * pScriptingManager )
 	pScriptingManager->RegisterFunction( "getPlayerIdFromName", PlayerIdFromName, 1, "s" );
 	pScriptingManager->RegisterFunction( "getWeaponNameFromId", WeaponNameFromId, 1, "i" );
 	pScriptingManager->RegisterFunction( "getWeaponIdFromName", WeaponIdFromName, 1, "s" );
+	pScriptingManager->RegisterFunction( "getVehicleFuelTankCapacityFromModel", GetFuelTankCapacityFromModel, 1, "i" );
 	pScriptingManager->RegisterFunction( "toRGBA", ToRGBA, 1, "i" );
 	pScriptingManager->RegisterFunction( "fromRGB", FromRGB, -1, NULL );
 	pScriptingManager->RegisterFunction( "clamp", Clamp, 3, "fff" );
@@ -52,6 +53,21 @@ SQInteger CUtilNatives::WeaponNameFromId(SQVM * pVM)
 
 	// Return name
 	sq_pushstring(pVM, name.Get(), name.GetLength());
+	return (true);
+}
+
+SQInteger CUtilNatives::GetFuelTankCapacityFromModel(SQVM * pVM)
+{
+	// Get and store ID
+	SQInteger id;
+	sq_getinteger(pVM, -1, &id);
+
+	// Get tank
+	int tank;
+	tank = Game::GetFuelTankCapacityFromModel(id);
+
+	// Return tank
+	sq_pushinteger(pVM, tank);
 	return (true);
 }
 

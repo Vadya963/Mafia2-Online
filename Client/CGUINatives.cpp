@@ -88,6 +88,7 @@ void CGUINatives::Register( CScriptingManager * pScriptingManager )
 	// Register GUI constants
 	pScriptingManager->RegisterConstant ( "ELEMENT_TYPE_WINDOW", GUI_WINDOW );
 	pScriptingManager->RegisterConstant ( "ELEMENT_TYPE_EDIT", GUI_EDIT );
+	pScriptingManager->RegisterConstant ( "ELEMENT_TYPE_BUTTON", GUI_BUTTON );
 	pScriptingManager->RegisterConstant ( "ELEMENT_TYPE_CHECKBOX", GUI_CHECKBOX );
 	pScriptingManager->RegisterConstant ( "ELEMENT_TYPE_COMBOBOX", GUI_COMBOBOX );
 	pScriptingManager->RegisterConstant ( "ELEMENT_TYPE_GRIDLIST", GUI_GRIDLIST );

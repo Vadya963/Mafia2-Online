@@ -29,4 +29,6 @@ namespace Game
 	unsigned int		GetIdFromDoorName				(String doorName);
 	String				GetDoorNameFromId				(unsigned int doorId);
 
+	unsigned int		GetFuelTankCapacityFromModel	(unsigned int uiModel);
+
 };

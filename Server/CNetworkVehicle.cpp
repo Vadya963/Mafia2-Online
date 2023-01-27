@@ -462,6 +462,29 @@ float CNetworkVehicle::GetDirtLevel( void )
 	return m_lastSyncData.m_fDirtLevel;
 }
 
+void CNetworkVehicle::SetEngineDamage(float fEngineDamage)
+{
+	// Construct a new bitstream
+	RakNet::BitStream pBitStream;
+
+	// Write the vehicle id
+	pBitStream.WriteCompressed(m_vehicleId);
+
+	// Write the dirt level
+	pBitStream.Write(fEngineDamage);
+
+	// Send it to all clients
+	CCore::Instance()->GetNetworkModule()->Call(RPC_SETVEHICLEENGINEDAMAGE, &pBitStream, HIGH_PRIORITY, RELIABLE_ORDERED, INVALID_ENTITY_ID, true);
+
+	// Store the last engine damage
+	m_lastSyncData.m_fEngineDamage = fEngineDamage;
+}
+
+float CNetworkVehicle::GetEngineDamage(void)
+{
+	return m_lastSyncData.m_fEngineDamage;
+}
+
 void CNetworkVehicle::SetEngineState( bool bState )
 {
 	// Construct a new bitstream

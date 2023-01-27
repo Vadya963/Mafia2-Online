@@ -97,6 +97,7 @@
 #define		RPC_SETVEHICLETAXILIGHTSTATE		"RPC_Script_SetVehicleTaxiLightState"
 #define		RPC_SETVEHICLEHANDBRAKE				"RPC_Script_SetVehicleHandbrake"
 #define		RPC_SETVEHICLELOCKED				"RPC_Script_SetVehicleLocked"
+#define		RPC_SETVEHICLEENGINEDAMAGE				"RPC_Script_SetVehicleEngineDamage"
 
 // Blip scripting RPC's
 #define		RPC_ATTACHBLIPTOPLAYER		"RPC_Script_AttachBlipToPlayer"

@@ -72,6 +72,8 @@ void CSharedVehicleNatives::Register( CScriptingManager * pScriptingManager )
 	pScriptingManager->RegisterFunction( "getVehicleHandbrake", GetVehicleHandbrake, 1, "i" );
 	pScriptingManager->RegisterFunction( "setVehicleHandbrake", SetVehicleHandbrake, 2, "ib" );
 	pScriptingManager->RegisterFunction( "setVehicleLocked", SetVehicleLocked, 2, "ib" );
+	pScriptingManager->RegisterFunction( "setVehicleEngineDamage", SetVehicleEngineDamage, 2, "if" );
+	pScriptingManager->RegisterFunction( "getVehicleEngineDamage", GetVehicleEngineDamage, 1, "i" );
 
 	pScriptingManager->RegisterConstant( "INDICATOR_LEFT", 1);
 	pScriptingManager->RegisterConstant( "INDICATOR_RIGHT", 0);
@@ -377,6 +379,48 @@ SQInteger CSharedVehicleNatives::GetDirtLevel( SQVM * pVM )
 	}
 
 	sq_pushbool( pVM, false );
+	return 1;
+}
+
+SQInteger CSharedVehicleNatives::SetVehicleEngineDamage(SQVM * pVM)
+{
+	// Get the vehicle id
+	SQInteger vehicleId;
+	sq_getinteger(pVM, -2, &vehicleId);
+
+	// Get the dirt level
+	float fEngineDamage;
+	sq_getfloat(pVM, -1, &fEngineDamage);
+
+	// Is the vehicle active?
+	if (CCore::Instance()->GetVehicleManager()->IsActive(vehicleId))
+	{
+		// Set the vehicle engine damage
+		CCore::Instance()->GetVehicleManager()->Get(vehicleId)->SetEngineDamage(fEngineDamage);
+
+		sq_pushbool(pVM, true);
+		return 1;
+	}
+
+	sq_pushbool(pVM, false);
+	return 1;
+}
+
+SQInteger CSharedVehicleNatives::GetVehicleEngineDamage(SQVM * pVM)
+{
+	// Get the vehicle id
+	SQInteger vehicleId;
+	sq_getinteger(pVM, -1, &vehicleId);
+
+	// Is the vehicle active?
+	if (CCore::Instance()->GetVehicleManager()->IsActive(vehicleId))
+	{
+		// Get the vehicle engine damage
+		sq_pushfloat(pVM, CCore::Instance()->GetVehicleManager()->Get(vehicleId)->GetEngineDamage());
+		return 1;
+	}
+
+	sq_pushbool(pVM, false);
 	return 1;
 }
 

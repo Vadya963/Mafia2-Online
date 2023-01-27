@@ -18,6 +18,7 @@ private:
 	static	SQInteger		PlayerIdFromName( SQVM * pVM );
 	static	SQInteger		WeaponNameFromId( SQVM * pVM );
 	static	SQInteger		WeaponIdFromName( SQVM * pVM );
+	static	SQInteger		GetFuelTankCapacityFromModel( SQVM * pVM );
 	static	SQInteger		ToRGBA( SQVM * pVM );
 	static	SQInteger		FromRGB( SQVM * pVM );
 

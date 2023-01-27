@@ -59,6 +59,8 @@ private:
 	static	SQInteger		SetVehicleHandbrake( SQVM * pVM );
 	static	SQInteger		GetVehicleHandbrake( SQVM * pVM );
 	static	SQInteger		SetVehicleLocked( SQVM * pVM );
+	static	SQInteger		SetVehicleEngineDamage( SQVM * pVM );
+	static	SQInteger		GetVehicleEngineDamage( SQVM * pVM );
 
 public:
 

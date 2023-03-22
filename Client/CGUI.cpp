@@ -87,8 +87,8 @@ void CGUI::SetCursorVisible(bool bVisible)
 			pGameCamera->LockControl(true);
 			CMafia *pGame = pCore->GetGame();
 
-			if (pGame->IsMapOpen())
-				pGame->OpenMap(false);
+			/*if (pGame->IsMapOpen())
+				pGame->OpenMap(false);*/
 		}
 		else
 		{

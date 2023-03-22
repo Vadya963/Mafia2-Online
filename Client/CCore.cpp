@@ -485,7 +485,7 @@ void CCore::DoRender( void )
 		}
 		if ( GetAsyncKeyState( 0x4D ) & 0x1 )
 		{
-			if (!ChatBox::Instance()->IsInputActive())
+			if (!ChatBox::Instance()->IsInputActive() && !CCore::Instance()->GetGUI()->GetMainMenu()->IsVisible())
 			{
 				if (CCore::Instance()->GetGame()->IsMapOpen())
 				{

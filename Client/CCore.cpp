@@ -475,10 +475,6 @@ void CCore::DoRender( void )
 			m_pHud->Show ( !m_pHud->IsShowing () );
 			m_pPlayerManager->GetLocalPlayer()->GetPlayerPed()->ShowModel ( !m_pPlayerManager->GetLocalPlayer()->GetPlayerPed()->IsModelShowing () );
 		}
-		if (m_pHud->IsShowing())
-		{
-			m_pGraphics->DrawText(7, 5, 0xFFFFFFFF, 1.0f, "tahoma-bold", false, "FPS: %d Ping: %d", CCore::Instance()->GetFPSCounter()->GetFPS(), CCore::Instance()->GetPlayerManager()->GetLocalPlayer()->GetPing());
-		}
 		if( GetAsyncKeyState( VK_F11 ) & 0x1 )
 		{
 			m_bRenderNetworkStats = !m_bRenderNetworkStats;

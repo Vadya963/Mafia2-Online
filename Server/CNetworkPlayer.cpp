@@ -198,6 +198,19 @@ void CNetworkPlayer::ChangeNick( const char * szNick )
 	SetNick( szNick );
 }
 
+void CNetworkPlayer::ChangeNickPlayer(const char * szNick)
+{
+	// Construct bitstream
+	RakNet::BitStream pBitStream;
+
+	pBitStream.Write(RakNet::RakString(szNick));
+
+	// Send bitstream
+	CCore::Instance()->GetNetworkModule()->Call(RPC_SETPLAYERNAME, &pBitStream, HIGH_PRIORITY, RELIABLE, m_playerId, false);
+
+	ChangeNick(szNick);
+}
+
 void CNetworkPlayer::SetColour( unsigned int uiColour )
 {
 	// Is this not the same colour?

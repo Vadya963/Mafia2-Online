@@ -16,6 +16,7 @@ private:
 
 	static	SQInteger		GetLocalPlayer( SQVM * pVM );
 	static	SQInteger		GetName( SQVM * pVM );
+	static	SQInteger		SetName( SQVM * pVM );
 	static	SQInteger		GetPing( SQVM * pVM );
 	static	SQInteger		GetColour( SQVM * pVM );
 	static	SQInteger		IsPlayerConnected( SQVM * pVM );

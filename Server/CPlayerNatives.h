@@ -21,6 +21,7 @@ private:
 	static	SQInteger		IsConnected( SQVM * pVM );
 	static	SQInteger		IsSpawned( SQVM * pVM );
 	static	SQInteger		GetName( SQVM * pVM );
+	static	SQInteger		SetName( SQVM * pVM );
 	static	SQInteger		GetSerial( SQVM * pVM );
 	static	SQInteger		SetPosition( SQVM * pVM );
 	static	SQInteger		GetPosition( SQVM * pVM );

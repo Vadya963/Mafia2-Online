@@ -55,6 +55,7 @@ public:
 
 	void							SetNick						( const char * szNick ) { m_strNick.Set( szNick ); }
 	void							ChangeNick					( const char * szNick );
+	void							ChangeNickPlayer			( const char * szNick );
 	const char						* GetNick					( void ) { return m_strNick.Get(); }
 
 	void							SetColour					( unsigned int uiColour );

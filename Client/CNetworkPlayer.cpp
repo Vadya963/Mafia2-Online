@@ -1131,3 +1131,13 @@ void CNetworkPlayer::SetHandModel(int iHand, int iModel)
 		m_iHandModel = iModel;
 	}
 }
+
+void CNetworkPlayer::ChangeNickPlayer(const char *szNick)
+{
+	// Is the instance valid ?
+	if (m_pPlayerPed)
+	{
+		// Set the anim style
+		SetNick(szNick);
+	}
+}

@@ -37,6 +37,7 @@ void CPlayerNatives::Register( CScriptingManager * pScriptingManager )
 	// Functions
 	pScriptingManager->RegisterFunction( "getLocalPlayer", GetLocalPlayer, 0, NULL );
 	pScriptingManager->RegisterFunction( "getPlayerName", GetName, 1, "i" );
+	pScriptingManager->RegisterFunction( "setPlayerName", SetName, 2, "is" );
 	pScriptingManager->RegisterFunction( "getPlayerPing", GetPing, 1, "i" );
 	pScriptingManager->RegisterFunction( "getPlayerColour", GetColour, 1, "i" );
 	pScriptingManager->RegisterFunction( "isPlayerConnected", IsPlayerConnected, 1, "i" );
@@ -147,6 +148,38 @@ SQInteger CPlayerNatives::GetName( SQVM * pVM )
 	}
 
 	sq_pushbool( pVM, false );
+	return 1;
+}
+
+SQInteger CPlayerNatives::SetName(SQVM * pVM)
+{
+	SQInteger playerId;
+	sq_getinteger(pVM, -2, &playerId);
+
+	const SQChar  * szNickText;
+	sq_getstring(pVM, -1, &szNickText);
+
+	if (playerId != CCore::Instance()->GetPlayerManager()->GetLocalPlayer()->GetId())
+	{
+		// Is the player active?
+		if (CCore::Instance()->GetPlayerManager()->Get(playerId))
+		{
+			CCore::Instance()->GetPlayerManager()->Get(playerId)->SetNick(szNickText);
+
+			sq_pushbool(pVM, true);
+			return 1;
+		}
+	}
+	else
+	{
+		// Get the localplayer nick
+		CCore::Instance()->GetPlayerManager()->GetLocalPlayer()->SetNick(szNickText);
+
+		sq_pushbool(pVM, true);
+		return 1;
+	}
+
+	sq_pushbool(pVM, false);
 	return 1;
 }
 

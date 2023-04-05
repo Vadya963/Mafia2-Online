@@ -107,6 +107,7 @@ public:
 
 	void							SetNick( String strNick ) { m_strNick = strNick; }
 	String							GetNick( void ) { return m_strNick; }
+	void							ChangeNickPlayer( const char *szNick );
 
 	void							SetColour( unsigned int uiColour ) { m_uiColour = uiColour; }
 	unsigned int					GetColour( void ) { return m_uiColour; }

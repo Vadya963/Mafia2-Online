@@ -362,6 +362,20 @@ void SetAnimStyle(RakNet::BitStream * pBitStream, RakNet::Packet * pPacket)
 	}
 }
 
+void SetPlayerName(RakNet::BitStream * pBitStream, RakNet::Packet * pPacket)
+{
+	// Read the directory
+	RakNet::RakString szNick;
+	pBitStream->Read(szNick);
+
+	// Is the player instance valid?
+	if (pCore->GetPlayerManager()->GetLocalPlayer())
+	{
+		// Set the anim style
+		pCore->GetPlayerManager()->GetLocalPlayer()->ChangeNickPlayer(szNick);
+	}
+}
+
 void SetHandModel(RakNet::BitStream * pBitStream, RakNet::Packet * pPacket)
 {
 	// Read the hand
@@ -406,8 +420,9 @@ void CPlayerRPC::Register( RakNet::RPC4 * pRPC )
 	pRPC->RegisterFunction( RPC_PLAYERPING, PlayerPing );
 	pRPC->RegisterFunction( RPC_PUTINVEHICLE, PutPlayerInVehicle );
 	pRPC->RegisterFunction( RPC_REMOVEFROMVEHICLE, RemovePlayerFromVehicle );
-	pRPC->RegisterFunction( RPC_SETANIMSTYLE, SetAnimStyle);
-	pRPC->RegisterFunction( RPC_SETHANDMODEL, SetHandModel);
+	pRPC->RegisterFunction( RPC_SETANIMSTYLE, SetAnimStyle );
+	pRPC->RegisterFunction( RPC_SETHANDMODEL, SetHandModel );
+	pRPC->RegisterFunction( RPC_SETPLAYERNAME, SetPlayerName );
 }
 
 void CPlayerRPC::Unregister( RakNet::RPC4 * pRPC )
@@ -436,4 +451,7 @@ void CPlayerRPC::Unregister( RakNet::RPC4 * pRPC )
 	pRPC->UnregisterFunction( RPC_PLAYERPING );
 	pRPC->UnregisterFunction( RPC_PUTINVEHICLE );
 	pRPC->UnregisterFunction( RPC_REMOVEFROMVEHICLE );
+	pRPC->UnregisterFunction( RPC_SETANIMSTYLE );
+	pRPC->UnregisterFunction( RPC_SETHANDMODEL );
+	pRPC->UnregisterFunction( RPC_SETPLAYERNAME );
 }

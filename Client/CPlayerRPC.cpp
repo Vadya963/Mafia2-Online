@@ -364,15 +364,30 @@ void SetAnimStyle(RakNet::BitStream * pBitStream, RakNet::Packet * pPacket)
 
 void SetPlayerName(RakNet::BitStream * pBitStream, RakNet::Packet * pPacket)
 {
-	// Read the directory
+	// Read the playerid
+	EntityId playerId;
+	pBitStream->ReadCompressed(playerId);
+
 	RakNet::RakString szNick;
 	pBitStream->Read(szNick);
 
-	// Is the player instance valid?
-	if (pCore->GetPlayerManager()->GetLocalPlayer())
+	// Is this the localplayer id?
+	if (pCore->GetPlayerManager()->GetLocalPlayer()->GetId() == playerId)
 	{
-		// Set the anim style
-		pCore->GetPlayerManager()->GetLocalPlayer()->ChangeNickPlayer(szNick);
+		// Set the localplayer colour
+		pCore->GetPlayerManager()->GetLocalPlayer()->SetNickPlayer(szNick);
+	}
+	else
+	{
+		// Get a pointer to the player
+		CRemotePlayer * pRemotePlayer = pCore->GetPlayerManager()->Get(playerId);
+
+		// Is the player pointer valid?
+		if (pRemotePlayer)
+		{
+			// Set the player colour
+			pRemotePlayer->SetNickPlayer(szNick);
+		}
 	}
 }
 

@@ -203,10 +203,13 @@ void CNetworkPlayer::ChangeNickPlayer(const char * szNick)
 	// Construct bitstream
 	RakNet::BitStream pBitStream;
 
+	// Write the playerid
+	pBitStream.WriteCompressed(m_playerId);
+
 	pBitStream.Write(RakNet::RakString(szNick));
 
 	// Send bitstream
-	CCore::Instance()->GetNetworkModule()->Call(RPC_SETPLAYERNAME, &pBitStream, HIGH_PRIORITY, RELIABLE, m_playerId, false);
+	CCore::Instance()->GetNetworkModule()->Call(RPC_SETPLAYERNAME, &pBitStream, HIGH_PRIORITY, RELIABLE_ORDERED, INVALID_ENTITY_ID, true);
 
 	ChangeNick(szNick);
 }

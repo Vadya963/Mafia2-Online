@@ -374,11 +374,6 @@ void ChatBox::HandleCharacterInput(const unsigned character)
 		return;
 	}
 
-	if ((character == 'T' || character == 't') && !m_isInputActive) {
-		ActivateInput();
-		return;
-	}
-
 	if (!m_isInputActive) {
 		return;
 	}

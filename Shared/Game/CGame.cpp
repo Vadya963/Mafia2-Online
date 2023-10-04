@@ -127,7 +127,7 @@ static char * VehicleWheelModels[] =
 	"wheel_civ04",		"wheel_civ05",		"wheel_civ07",		"wheel_civ08",		"wheel_civ09",
 	"wheel_civ01",		"wheel_civ02",		"wheel_civ03",		"wheel_civ06",		"wheel_civ10",
 	"wheel_civ11",		"wheel_sport",		"wheel_jeep",		"wheel_hank_f",		"wheel_truckciv01",
-	"wheel_truckciv02",	"wheel_civ09_hot"
+	"wheel_truckciv02",	"wheel_civ09_hot",  "wheel_hank_r"
 };
 
 static char * WeaponName[] =

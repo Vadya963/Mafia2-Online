@@ -119,7 +119,7 @@ static char * VehicleModels[] =
 	"smith_mainline_pha",			"smith_stingray_pha",				"smith_truck",
 	"smith_v8",						"smith_wagon_pha",
 	"trailer_sg",					"ulver_newyorker",					"ulver_newyorker_p",
-	"walker_rocket",				"walter_coupe"
+	"walker_rocket",				"walter_coupe", /*эти тачки должны быть в папке cars --> */ "delizia_grandeamerica", "chaffeque", "waybar", "roller", "elysium", "desta", "smith_coupe_wreck"
 };
 
 static char * VehicleWheelModels[] =
@@ -127,7 +127,7 @@ static char * VehicleWheelModels[] =
 	"wheel_civ04",		"wheel_civ05",		"wheel_civ07",		"wheel_civ08",		"wheel_civ09",
 	"wheel_civ01",		"wheel_civ02",		"wheel_civ03",		"wheel_civ06",		"wheel_civ10",
 	"wheel_civ11",		"wheel_sport",		"wheel_jeep",		"wheel_hank_f",		"wheel_truckciv01",
-	"wheel_truckciv02",	"wheel_civ09_hot",  "wheel_hank_r"
+	"wheel_truckciv02",	"wheel_civ09_hot",  "wheel_hank_r",		"wheel_civ11_hot"
 };
 
 static char * WeaponName[] =

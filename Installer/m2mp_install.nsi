@@ -172,6 +172,22 @@ Section "Install"
 	SetOutPath "$GAMEDIR\edit\tables"
 	File ..\Binary\gamefiles\StreamM2MP.bin
 	File ..\Binary\gamefiles\tables.sds
+	
+	SetOutPath "$GAMEDIR\pc\sds\cars"
+	File ..\Binary\gamefiles\cars\chaffeque.sds
+	File ..\Binary\gamefiles\cars\chaffeque_z.sds
+	File ..\Binary\gamefiles\cars\delizia_grandeamerica.sds
+	File ..\Binary\gamefiles\cars\delizia_grandeamerica_z.sds
+	File ..\Binary\gamefiles\cars\desta.sds
+	File ..\Binary\gamefiles\cars\elysium.sds
+	File ..\Binary\gamefiles\cars\elysium_z.sds
+	File ..\Binary\gamefiles\cars\roller.sds
+	File ..\Binary\gamefiles\cars\roller_z.sds
+	File ..\Binary\gamefiles\cars\waybar.sds
+	File ..\Binary\gamefiles\cars\waybar_z.sds
+	
+	SetOutPath "$GAMEDIR\edit\materials"
+	File ..\Binary\gamefiles\default.mtl
 
 	SetOutPath "$MODDIR\data\sounds"
 	File ..\Binary\sounds\menu.mp3

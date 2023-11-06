@@ -81,9 +81,10 @@ void CGUINatives::Register( CScriptingManager * pScriptingManager )
 	pScriptingManager->RegisterFunction( "guiIsAlwaysOnTop", GuiIsAlwaysOnTop, 1, "p" );
 	pScriptingManager->RegisterFunction( "guiSetInputMasked", GuiSetInputMasked, 2, "pb" );
 	pScriptingManager->RegisterFunction( "guiIsInputMasked", GuiIsInputMasked, 1, "p" );
-	pScriptingManager->RegisterFunction( "guiChangeImage", GuiChangeImage, 2, "ps");
-	pScriptingManager->RegisterFunction( "guiSetSizable", GuiSetSizable, 2, "pb");
-	pScriptingManager->RegisterFunction( "guiSetMovable", GuiSetMovable, 2, "pb");
+	pScriptingManager->RegisterFunction( "guiChangeImage", GuiChangeImage, 2, "ps" );
+	pScriptingManager->RegisterFunction( "guiSetSizable", GuiSetSizable, 2, "pb" );
+	pScriptingManager->RegisterFunction( "guiSetMovable", GuiSetMovable, 2, "pb" );
+	pScriptingManager->RegisterFunction( "getFilePath", GetFilePath, 1, "s" );
 
 	// Register GUI constants
 	pScriptingManager->RegisterConstant ( "ELEMENT_TYPE_WINDOW", GUI_WINDOW );
@@ -763,6 +764,25 @@ SQInteger CGUINatives::GuiGetText( SQVM * pVM )
 	}
 
 	sq_pushbool( pVM, false );
+	return 1;
+}
+
+//getFilePath( string filename )
+SQInteger CGUINatives::GetFilePath(SQVM * pVM)
+{
+	const SQChar * filename;
+
+	sq_getstring(pVM, -1, &filename);
+
+	String path = SharedUtility::GetFileNameForScriptFile(filename, "", CCore::Instance()->GetHost(), CCore::Instance()->GetPort());
+
+	if (path)
+	{
+		sq_pushstring(pVM, path.Get(), path.GetLength());
+		return 1;
+	}
+
+	sq_pushbool(pVM, false);
 	return 1;
 }
 

@@ -76,6 +76,7 @@ private:
 	static	SQInteger		GuiChangeImage						( SQVM * pVM );
 	static	SQInteger		GuiSetSizable						( SQVM * pVM );
 	static	SQInteger		GuiSetMovable						( SQVM * pVM );
+	static	SQInteger		GetFilePath							( SQVM * pVM );
 
 public:
 

@@ -100,7 +100,7 @@ static int VehicleFuelTankCapacity[] =
 	65,								70,									80,
 	65,								50,
 	0,								70,									70,
-	80,								40
+	80,								40, /*dlc авто -->*/ 80, 50, 70, 100, 80, 90, 50
 };
 
 static char * VehicleModels[] =

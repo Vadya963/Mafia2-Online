@@ -74,6 +74,7 @@ void CSharedVehicleNatives::Register( CScriptingManager * pScriptingManager )
 	pScriptingManager->RegisterFunction( "setVehicleLocked", SetVehicleLocked, 2, "ib" );
 	pScriptingManager->RegisterFunction( "setVehicleEngineDamage", SetVehicleEngineDamage, 2, "if" );
 	pScriptingManager->RegisterFunction( "getVehicleEngineDamage", GetVehicleEngineDamage, 1, "i" );
+	pScriptingManager->RegisterFunction( "getVehicleGUID", GetVehicleGUID, 1, "i" );
 
 	pScriptingManager->RegisterConstant( "INDICATOR_LEFT", 1);
 	pScriptingManager->RegisterConstant( "INDICATOR_RIGHT", 0);
@@ -417,6 +418,25 @@ SQInteger CSharedVehicleNatives::GetVehicleEngineDamage(SQVM * pVM)
 	{
 		// Get the vehicle engine damage
 		sq_pushfloat(pVM, CCore::Instance()->GetVehicleManager()->Get(vehicleId)->GetEngineDamage());
+		return 1;
+	}
+
+	sq_pushbool(pVM, false);
+	return 1;
+}
+
+SQInteger CSharedVehicleNatives::GetVehicleGUID(SQVM * pVM)
+{
+	SQInteger vehicleId;
+	sq_getinteger(pVM, -1, &vehicleId);
+
+	if (CCore::Instance()->GetVehicleManager()->IsActive(vehicleId))
+	{
+	#ifdef _CLIENT
+		sq_pushinteger(pVM, CCore::Instance()->GetVehicleManager()->Get(vehicleId)->GetVehicle()->GetGUID());
+	#else
+		sq_pushinteger(pVM, 1);
+	#endif
 		return 1;
 	}
 

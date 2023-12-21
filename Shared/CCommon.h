@@ -44,7 +44,7 @@
 
 // Network
 #define		NETWORK_TIMEOUT			3000
-#define		NETWORK_VERSION			0x1B6
+#define		NETWORK_VERSION			0x1b7
 #define		NETWORK_TICKRATE		100
 
 /** The default server listen port */

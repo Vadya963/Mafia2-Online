@@ -63,6 +63,7 @@ void CPlayerNatives::Register( CScriptingManager * pScriptingManager )
 	pScriptingManager->RegisterFunction( "givePlayerMoney", GiveMoney, 2, "ii" );
 	pScriptingManager->RegisterFunction( "takePlayerMoney", TakeMoney, 2, "ii" );
 	pScriptingManager->RegisterFunction( "getPlayerMoney", GetMoney, 1, "i" );
+	pScriptingManager->RegisterFunction( "getPlayerGUID", getGUID, 1, "i" );
 
 	// rendering settings
 	pScriptingManager->RegisterFunction("setRenderNametags", SetRenderNametags, 1, "b");
@@ -74,6 +75,31 @@ void CPlayerNatives::Register( CScriptingManager * pScriptingManager )
 	pScriptingManager->RegisterConstant("MOVE_STATE_SPRINT", ePlayerMovementState::E_SPRINT);
 	pScriptingManager->RegisterConstant("MOVE_STATE_IDLE", ePlayerMovementState::E_IDLE);
 	pScriptingManager->RegisterConstant("MOVE_STATE_STOP", ePlayerMovementState::E_STOPPING);
+}
+
+SQInteger CPlayerNatives::getGUID(SQVM *pVM)
+{
+	SQInteger playerId;
+	sq_getinteger(pVM, -1, &playerId);
+
+	SQInteger controls;
+
+	if (playerId != CCore::Instance()->GetPlayerManager()->GetLocalPlayer()->GetId())
+	{
+		if (CCore::Instance()->GetPlayerManager()->Get(playerId))
+		{
+			controls = CCore::Instance()->GetPlayerManager()->Get(playerId)->GetPlayerPed()->GetGUID();
+
+			sq_pushinteger(pVM, controls);
+			return (true);
+		}
+	}
+	else {
+		controls = CCore::Instance()->GetPlayerManager()->GetLocalPlayer()->GetPlayerPed()->GetGUID();
+
+		sq_pushinteger(pVM, controls);
+		return (true);
+	}
 }
 
 // getPlayerMoveState(playerid);

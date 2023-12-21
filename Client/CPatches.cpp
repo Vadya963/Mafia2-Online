@@ -415,13 +415,13 @@ void CPatches::Initialise( void )
 	// Prevent vehicle starting animation and engine starting when entering
 	// CPatcher::InstallNopPatch(0x98A771, 0x8F); // This disable the whole system (you enter in vehicle but no door opening an you can't leave, no auto engine starting and no auto radio triggering)
 
-#ifndef _DEBUG
+//#ifndef _DEBUG
 	// Disable pause when game is minimized or sent to background
 	CPatcher::InstallNopPatch( 0xAB6051, 7 );
 	CPatcher::InstallNopPatch( 0xAB6037, 7 );
 	CPatcher::InstallNopPatch( 0xAB6172, 7 );
 	CPatcher::InstallNopPatch( 0xAB61A2, 7 );
-#endif
+//#endif
 
 	// Disable garages being able to create vehicles
 	CPatcher::PatchAddress ( 0xCD00A0, 0xC300B0 ); // mov al, 0; retn

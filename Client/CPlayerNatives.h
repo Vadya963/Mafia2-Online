@@ -14,6 +14,7 @@ class CPlayerNatives
 
 private:
 
+	static	SQInteger		getGUID( SQVM * pVM );
 	static	SQInteger		GetLocalPlayer( SQVM * pVM );
 	static	SQInteger		GetName( SQVM * pVM );
 	static	SQInteger		SetName( SQVM * pVM );

@@ -188,6 +188,12 @@ Section "Install"
 	
 	SetOutPath "$GAMEDIR\edit\materials"
 	File ..\Binary\gamefiles\default.mtl
+	
+	SetOutPath "$GAMEDIR\pc"
+	File ..\Binary\gamefiles\pc\Mafia2.exe
+	File ..\Binary\gamefiles\pc\steam_api.dll
+	File ..\Binary\gamefiles\pc\steam_appid.txt
+	File ..\Binary\gamefiles\pc\Steamclient.dll
 
 	SetOutPath "$MODDIR\data\sounds"
 	File ..\Binary\sounds\menu.mp3

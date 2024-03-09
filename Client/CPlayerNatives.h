@@ -49,6 +49,7 @@ private:
 	static SQInteger		SetRenderHealthbar(SQVM *pVM);
 
 	static SQInteger		GetMoveState(SQVM *pVM);
+	static SQInteger		ReloadWeapon( SQVM * pVM );
 
 public:
 

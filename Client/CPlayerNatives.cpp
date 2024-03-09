@@ -64,6 +64,7 @@ void CPlayerNatives::Register( CScriptingManager * pScriptingManager )
 	pScriptingManager->RegisterFunction( "takePlayerMoney", TakeMoney, 2, "ii" );
 	pScriptingManager->RegisterFunction( "getPlayerMoney", GetMoney, 1, "i" );
 	pScriptingManager->RegisterFunction( "getPlayerGUID", getGUID, 1, "i" );
+	pScriptingManager->RegisterFunction( "reloadPlayerWeapon", ReloadWeapon, 1, "i" );
 
 	// rendering settings
 	pScriptingManager->RegisterFunction("setRenderNametags", SetRenderNametags, 1, "b");
@@ -75,6 +76,25 @@ void CPlayerNatives::Register( CScriptingManager * pScriptingManager )
 	pScriptingManager->RegisterConstant("MOVE_STATE_SPRINT", ePlayerMovementState::E_SPRINT);
 	pScriptingManager->RegisterConstant("MOVE_STATE_IDLE", ePlayerMovementState::E_IDLE);
 	pScriptingManager->RegisterConstant("MOVE_STATE_STOP", ePlayerMovementState::E_STOPPING);
+}
+
+SQInteger CPlayerNatives::ReloadWeapon( SQVM * pVM )
+{
+	SQInteger playerId;
+	sq_getinteger( pVM, -1, &playerId );
+
+
+	// Is this the localplayer?
+	if( playerId == CCore::Instance()->GetPlayerManager()->GetLocalPlayer()->GetId() )
+		CCore::Instance()->GetPlayerManager()->GetLocalPlayer()->ReloadWeapon();
+	else
+	{
+		if (CCore::Instance()->GetPlayerManager()->IsActive(playerId) )
+		    CCore::Instance()->GetPlayerManager()->Get(playerId)->ReloadWeapon();
+	}
+
+	sq_pushbool( pVM, true );
+	return 1;
 }
 
 SQInteger CPlayerNatives::getGUID(SQVM *pVM)

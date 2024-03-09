@@ -36,10 +36,40 @@ void CGameNatives::Register( CScriptingManager * pScriptingManager )
 	pScriptingManager->RegisterFunction( "destroyHudTimer", DestroyHudTimer, 0, NULL );
 	pScriptingManager->RegisterFunction( "openMap", OpenMap, 0, NULL );
 	pScriptingManager->RegisterFunction( "isMapOpen", IsMapOpen, 0, NULL );
-	pScriptingManager->RegisterFunction( "setGPSTarget", SetGPSTarget, 2, "ff" );
+	pScriptingManager->RegisterFunction( "setGPSTarget", SetGPSTarget, 3, "ffs" );
 	pScriptingManager->RegisterFunction( "removeGPSTarget", RemoveGPSTarget, 0, NULL );
 	pScriptingManager->RegisterFunction( "disableTranslocator", DisableTranslocator, 1, "b" );
 	pScriptingManager->RegisterFunction( "executeLuaHandler", ExecuteLuaHandler, 1, "s" );
+	pScriptingManager->RegisterFunction( "showHint", ShowHint, 4, "iisf" );
+
+	pScriptingManager->RegisterConstant("POS_TOPLEFT", 0);
+	pScriptingManager->RegisterConstant("POS_BOTLEFT", 1);
+	pScriptingManager->RegisterConstant("POS_RADAR", 2);
+	pScriptingManager->RegisterConstant("POS_CENTER", 3);
+
+	pScriptingManager->RegisterConstant("MODE_GREY", 0);
+	pScriptingManager->RegisterConstant("MODE_RED", 1);
+	pScriptingManager->RegisterConstant("MODE_BLUE", 2);
+	pScriptingManager->RegisterConstant("MODE_FLUO", 3);
+}
+
+// showHint(position, mode, text, delay);
+SQInteger CGameNatives::ShowHint(SQVM * pVM)
+{
+	SQInteger		position;
+	SQInteger		mode;
+	const SQChar	*text;
+	SQFloat			delay;
+
+	sq_getinteger(pVM, -4, &position);
+	sq_getinteger(pVM, -3, &mode);
+	sq_getstring(pVM, -2, &text);
+	sq_getfloat(pVM, -1, &delay);
+
+	CCore::Instance()->GetHud()->ShowMessage(position, mode, text, delay);
+	sq_pushbool(pVM, true);
+
+	return 1;
 }
 
 SQInteger CGameNatives::ExecuteLuaHandler(SQVM * pVM)
@@ -260,16 +290,18 @@ SQInteger CGameNatives::IsMapOpen( SQVM * pVM )
 	return 1;
 }
 
-// setGPSTarget(float fX, float fY);
+// setGPSTarget(float fX, float fY, string text);
 SQInteger	CGameNatives::SetGPSTarget(SQVM * pVM)
 {
 	SQFloat fX;
 	SQFloat fY;
+	const SQChar * text;
 
-	sq_getfloat(pVM, -2, &fX);
-	sq_getfloat(pVM, -1, &fY);
+	sq_getfloat(pVM, -3, &fX);
+	sq_getfloat(pVM, -2, &fY);
+	sq_getstring(pVM, -1, &text);
 
-	CCore::Instance()->GetHud()->StartGPS(fX, fY);
+	CCore::Instance()->GetHud()->StartGPS(fX, fY, text);
 	sq_pushbool(pVM, true);
 	return (1);
 }

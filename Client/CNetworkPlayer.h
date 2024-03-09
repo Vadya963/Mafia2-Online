@@ -164,6 +164,7 @@ public:
 	bool							HasWeapon( DWORD dwWeapon );
 	void							GiveWeapon( DWORD dwWeapon, DWORD dwAmmo );
 	void							RemoveWeapon( DWORD dwWeapon, DWORD dwAmmo = 0 );
+	void							ReloadWeapon(void);
 
 	bool							IsMoving( void );
 

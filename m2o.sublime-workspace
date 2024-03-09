@@ -1,0 +1,1650 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"re",
+				"reloadWeapon"
+			],
+			[
+				"Re",
+				"ReloadWeapon"
+			],
+			[
+				"te",
+				"text"
+			],
+			[
+				"to",
+				"tofloat"
+			],
+			[
+				"fun",
+				"function\tSnippet - function"
+			],
+			[
+				"el",
+				"elseif\tSnippet - else if"
+			],
+			[
+				"loc",
+				"localPlayer"
+			],
+			[
+				"ite",
+				"item_value"
+			],
+			[
+				"if",
+				"if\tSnippet - if"
+			],
+			[
+				"che",
+				"check_weapon"
+			],
+			[
+				"ch",
+				"check_ammo"
+			],
+			[
+				"els",
+				"elseif\tSnippet - else if"
+			],
+			[
+				"wa",
+				"weapon"
+			],
+			[
+				"it",
+				"item_value"
+			],
+			[
+				"gu",
+				"gun_table"
+			],
+			[
+				"for",
+				"foreach\tSnippet - foreach"
+			],
+			[
+				"gun",
+				"gun_table"
+			],
+			[
+				"c",
+				"check"
+			],
+			[
+				"toi",
+				"tointeger"
+			],
+			[
+				"_gi",
+				"_givePlayerWeapon"
+			],
+			[
+				"fu",
+				"function\tSnippet - function"
+			],
+			[
+				"get",
+				"getMaxSlot"
+			],
+			[
+				"tri",
+				"triggerClientEvent"
+			],
+			[
+				"co",
+				"colour"
+			],
+			[
+				"se",
+				"sendMessage"
+			],
+			[
+				"вы",
+				"Выбросить"
+			],
+			[
+				"prit",
+				"print"
+			],
+			[
+				"tab",
+				"tab_box"
+			],
+			[
+				"rand",
+				"rand"
+			],
+			[
+				"clo",
+				"colour_mes"
+			],
+			[
+				"ret",
+				"return"
+			],
+			[
+				"prin",
+				"print"
+			],
+			[
+				"fo",
+				"foreach\tSnippet - foreach"
+			],
+			[
+				"he",
+				"hello\t123"
+			],
+			[
+				"He",
+				"hello\t123"
+			],
+			[
+				"inv_slot_",
+				"inv_slot_img"
+			],
+			[
+				"in",
+				"inv_slot"
+			],
+			[
+				"inv",
+				"inv_slot_img"
+			],
+			[
+				"pl",
+				"playername"
+			],
+			[
+				"fr",
+				"fromJSON"
+			],
+			[
+				"lo",
+				"localPlayer"
+			],
+			[
+				"getPl",
+				"getPlayerPosition"
+			],
+			[
+				"getP",
+				"getPlayerName"
+			],
+			[
+				"de",
+				"delete"
+			],
+			[
+				"s",
+				"select_box"
+			],
+			[
+				"tos",
+				"tostring"
+			],
+			[
+				"tr",
+				"triggerClientEvent"
+			],
+			[
+				"loca",
+				"localPlayer"
+			],
+			[
+				"si",
+				"size_y"
+			],
+			[
+				"is",
+				"isInSlot"
+			],
+			[
+				"ca",
+				"cash_eat"
+			],
+			[
+				"ho",
+				"hot_dog_png"
+			],
+			[
+				"whi",
+				"while"
+			],
+			[
+				"siz",
+				"size_y"
+			],
+			[
+				"di",
+				"diner_png"
+			],
+			[
+				"setPLayer",
+				"setPlayerNameInText"
+			],
+			[
+				"getpl",
+				"getPlayerName"
+			],
+			[
+				"gey",
+				"getLocalPlayer"
+			],
+			[
+				"take",
+				"takePlayerMoney"
+			],
+			[
+				"time",
+				"timer\tSnippet - timer"
+			],
+			[
+				"spl",
+				"split"
+			],
+			[
+				"set",
+				"setElementData"
+			],
+			[
+				"sell",
+				"sellcar"
+			],
+			[
+				"getVeh",
+				"getVehiclePlateText"
+			],
+			[
+				"p",
+				"print"
+			],
+			[
+				"аним",
+				"анимацию"
+			],
+			[
+				"anims",
+				"animstop"
+			],
+			[
+				"pri",
+				"print"
+			],
+			[
+				"nu",
+				"number"
+			],
+			[
+				"pla",
+				"playername"
+			],
+			[
+				"getpla",
+				"getPlayerName"
+			],
+			[
+				"ph",
+				"phonebook"
+			],
+			[
+				"setpl",
+				"setplayername"
+			],
+			[
+				"sp",
+				"split"
+			],
+			[
+				"теле",
+				"телепортировалась"
+			],
+			[
+				"fi",
+				"find"
+			],
+			[
+				"авто",
+				"автомобиль"
+			],
+			[
+				"pas",
+				"password_vadya"
+			],
+			[
+				"ti",
+				"timer\tSnippet - timer"
+			],
+			[
+				"tim",
+				"timer\tSnippet - timer"
+			],
+			[
+				"fre",
+				"freeze"
+			],
+			[
+				"car",
+				"car_id"
+			],
+			[
+				"un",
+				"uniform"
+			],
+			[
+				"time_",
+				"time_theft_online_array"
+			],
+			[
+				"jo",
+				"job_cooldown"
+			],
+			[
+				"logi",
+				"login_name"
+			],
+			[
+				"getPla",
+				"getPlayers"
+			],
+			[
+				"ve",
+				"vehicleid"
+			],
+			[
+				"f_",
+				"f_cmd"
+			],
+			[
+				"timer",
+				"time_theft_array"
+			],
+			[
+				"house",
+				"house_db"
+			],
+			[
+				"else",
+				"elseif\tSnippet - else if"
+			],
+			[
+				"ar",
+				"array"
+			],
+			[
+				"автомо",
+				"автомобиль"
+			],
+			[
+				"getVehicleP",
+				"getVehiclePlateText"
+			],
+			[
+				"l",
+				"login_name"
+			],
+			[
+				"hou",
+				"house_db"
+			],
+			[
+				"e",
+				"enter"
+			],
+			[
+				"ene",
+				"enter"
+			],
+			[
+				"ли",
+				"Лицензия"
+			],
+			[
+				"t",
+				"true"
+			],
+			[
+				"_s",
+				"_isPointInCircle3D"
+			],
+			[
+				"pr",
+				"print"
+			],
+			[
+				"cls",
+				"classFunction\tSnippet - Class::Function (outside of class)"
+			],
+			[
+				"le",
+				"len"
+			],
+			[
+				"r",
+				"random_race"
+			],
+			[
+				"ra",
+				"random"
+			],
+			[
+				"taxi_npc_",
+				"taxi_npc_skin"
+			],
+			[
+				"ta",
+				"taxi_npc"
+			],
+			[
+				"rad",
+				"random"
+			],
+			[
+				"tax",
+				"taxi_driver_pay"
+			],
+			[
+				"w",
+				"width_wanted"
+			],
+			[
+				"sea",
+				"seat_npc"
+			],
+			[
+				"ski",
+				"skin_npc"
+			],
+			[
+				"nam",
+				"name_npc"
+			],
+			[
+				"ran",
+				"random"
+			],
+			[
+				"esl",
+				"else\tSnippet - else"
+			],
+			[
+				"leave",
+				"leave_job_taxi_driver"
+			],
+			[
+				"cas",
+				"cash_weapon"
+			],
+			[
+				"id",
+				"id1"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "Shared/Scripting/Natives/CPedNatives.cpp",
+			"settings":
+			{
+				"buffer_size": 10267,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			},
+			"undo_stack":
+			[
+				[
+					14,
+					1,
+					"left_delete",
+					null,
+					"AQAAAKUGAAAAAAAApQYAAAAAAAABAAAACg",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAApgYAAAAAAACmBgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					41,
+					1,
+					"insert",
+					{
+						"characters": "\n"
+					},
+					"AgAAAEAHAAAAAAAAQQcAAAAAAAAAAAAAQQcAAAAAAABCBwAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAQAcAAAAAAABABwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					42,
+					1,
+					"paste",
+					null,
+					"AQAAAEIHAAAAAAAAjAcAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAQgcAAAAAAABCBwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					47,
+					3,
+					"left_delete",
+					null,
+					"AwAAAGoHAAAAAAAAagcAAAAAAAABAAAAdGkHAAAAAAAAaQcAAAAAAAABAAAAZWgHAAAAAAAAaAcAAAAAAAABAAAAcw",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAawcAAAAAAABrBwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					48,
+					1,
+					"insert",
+					{
+						"characters": "reload"
+					},
+					"BgAAAGgHAAAAAAAAaQcAAAAAAAAAAAAAaQcAAAAAAABqBwAAAAAAAAAAAABqBwAAAAAAAGsHAAAAAAAAAAAAAGsHAAAAAAAAbAcAAAAAAAAAAAAAbAcAAAAAAABtBwAAAAAAAAAAAABtBwAAAAAAAG4HAAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAaAcAAAAAAABoBwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					51,
+					1,
+					"insert",
+					{
+						"characters": "Reload"
+					},
+					"BwAAAHoHAAAAAAAAewcAAAAAAAAAAAAAewcAAAAAAAB7BwAAAAAAAAMAAABTZXR7BwAAAAAAAHwHAAAAAAAAAAAAAHwHAAAAAAAAfQcAAAAAAAAAAAAAfQcAAAAAAAB+BwAAAAAAAAAAAAB+BwAAAAAAAH8HAAAAAAAAAAAAAH8HAAAAAAAAgAcAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAfQcAAAAAAAB6BwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					54,
+					1,
+					"left_delete",
+					null,
+					"AQAAAI0HAAAAAAAAjQcAAAAAAAABAAAAaQ",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAjgcAAAAAAACOBwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					57,
+					1,
+					"left_delete",
+					null,
+					"AQAAAIgHAAAAAAAAiAcAAAAAAAABAAAAMg",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAiQcAAAAAAACJBwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					58,
+					1,
+					"insert",
+					{
+						"characters": "1"
+					},
+					"AQAAAIgHAAAAAAAAiQcAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAiAcAAAAAAACIBwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					66,
+					1,
+					"insert",
+					{
+						"characters": "\n\n"
+					},
+					"AgAAAIkIAAAAAAAAiggAAAAAAAAAAAAAiggAAAAAAACLCAAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAiQgAAAAAAACJCAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					67,
+					1,
+					"paste",
+					null,
+					"AQAAAIsIAAAAAAAAWAoAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAiwgAAAAAAACLCAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					77,
+					1,
+					"paste",
+					null,
+					"AgAAAKIIAAAAAAAArggAAAAAAAAAAAAArggAAAAAAACuCAAAAAAAAAoAAABHaXZlV2VhcG9u",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAoggAAAAAAACsCAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					80,
+					2,
+					"left_delete",
+					null,
+					"AgAAAM8IAAAAAAAAzwgAAAAAAAAjAAAACVNRSW50ZWdlciB3ZWFwb247CglTUUludGVnZXIgYW1tbzvOCAAAAAAAAM4IAAAAAAAAAQAAAAo",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAA8ggAAAAAAADPCAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					83,
+					2,
+					"left_delete",
+					null,
+					"AgAAAPEIAAAAAAAA8QgAAAAAAABBAAAACXNxX2dldGludGVnZXIocFZNLCAtMiwgJndlYXBvbik7CglzcV9nZXRpbnRlZ2VyKHBWTSwgLTEsICZhbW1vKTvwCAAAAAAAAPAIAAAAAAAAAQAAAAo",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAMgkAAAAAAADxCAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					86,
+					1,
+					"left_delete",
+					null,
+					"AQAAAOUIAAAAAAAA5QgAAAAAAAABAAAAMw",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAA5ggAAAAAAADmCAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					87,
+					1,
+					"insert",
+					{
+						"characters": "1"
+					},
+					"AQAAAOUIAAAAAAAA5ggAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAA5QgAAAAAAADlCAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					96,
+					1,
+					"insert",
+					{
+						"characters": "Re"
+					},
+					"AwAAAKUJAAAAAAAApgkAAAAAAAAAAAAApgkAAAAAAACmCQAAAAAAAAoAAABHaXZlV2VhcG9upgkAAAAAAACnCQAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAApQkAAAAAAACvCQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					98,
+					1,
+					"insert_completion",
+					{
+						"completion": "ReloadWeapon",
+						"format": "text",
+						"keep_prefix": false,
+						"must_insert": false,
+						"trigger": "ReloadWeapon"
+					},
+					"AgAAAKUJAAAAAAAApQkAAAAAAAACAAAAUmWlCQAAAAAAALEJAAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAApwkAAAAAAACnCQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					103,
+					3,
+					"left_delete",
+					null,
+					"AwAAALoJAAAAAAAAugkAAAAAAAAEAAAAYW1tb7kJAAAAAAAAuQkAAAAAAAABAAAAILgJAAAAAAAAuAkAAAAAAAABAAAALA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAugkAAAAAAAC+CQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					112,
+					1,
+					"left_delete",
+					null,
+					"AQAAALIJAAAAAAAAsgkAAAAAAAAGAAAAd2VhcG9u",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAsgkAAAAAAAC4CQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					93,
+					2,
+					"left_delete",
+					null,
+					"AgAAAEEHAAAAAAAAQQcAAAAAAABQAAAACXBTY3JpcHRpbmdNYW5hZ2VyLT5SZWdpc3RlckZ1bmN0aW9uKCAicmVsb2FkUGVkV2VhcG9uIiwgUmVsb2FkV2VhcG9uLCAxLCAiaSIgKTtABwAAAAAAAEAHAAAAAAAAAQAAAAo",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAACRBwAAAAAAAEEHAAAAAAAAAAAAAAAA8L8"
+				],
+				[
+					96,
+					2,
+					"left_delete",
+					null,
+					"AgAAADkIAAAAAAAAOQgAAAAAAABgAQAAClNRSW50ZWdlciBDUGVkTmF0aXZlczo6UmVsb2FkV2VhcG9uKFNRVk0gKiBwVk0pCnsKCVNRSW50ZWdlciBwZWRJZDsKCglzcV9nZXRpbnRlZ2VyKHBWTSwgLTEsICZwZWRJZCk7CgoJaWYgKENDb3JlOjpJbnN0YW5jZSgpLT5HZXRQZWRNYW5hZ2VyKCktPklzQWN0aXZlKHBlZElkKSAmJiBDQ29yZTo6SW5zdGFuY2UoKS0+R2V0UGVkTWFuYWdlcigpLT5HZXQocGVkSWQpICE9IE5VTEwpCgl7CgkJQ0NvcmU6Okluc3RhbmNlKCktPkdldFBlZE1hbmFnZXIoKS0+R2V0KHBlZElkKS0+R2V0UGVkKCktPlJlbG9hZFdlYXBvbigpOwoJCXJldHVybiAxOwoJfQoJc3FfcHVzaGJvb2wocFZNLCBmYWxzZSk7CglyZXR1cm4gMTsKfTgIAAAAAAAAOAgAAAAAAAABAAAACg",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAACZCQAAAAAAADkIAAAAAAAAAAAAAAAA8L8"
+				]
+			]
+		},
+		{
+			"file": "/C/Users/Vadim/Downloads/eXistenZ_LUA_command.lua",
+			"settings":
+			{
+				"buffer_size": 66089,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Client/CPlayerNatives.cpp",
+			"settings":
+			{
+				"buffer_size": 22381,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			},
+			"undo_stack":
+			[
+				[
+					26,
+					1,
+					"insert",
+					{
+						"characters": "\n\n"
+					},
+					"AgAAAAYPAAAAAAAABw8AAAAAAAAAAAAABw8AAAAAAAAIDwAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAABg8AAAAAAAAGDwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					27,
+					1,
+					"paste",
+					null,
+					"AQAAAAgPAAAAAAAAXBEAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAACA8AAAAAAAAIDwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					40,
+					1,
+					"insert",
+					{
+						"characters": "\n"
+					},
+					"AgAAAHIMAAAAAAAAcwwAAAAAAAAAAAAAcwwAAAAAAAB0DAAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAcgwAAAAAAAByDAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					41,
+					1,
+					"paste",
+					null,
+					"AQAAAHQMAAAAAAAAvAwAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAdAwAAAAAAAB0DAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					44,
+					1,
+					"paste",
+					null,
+					"AgAAAJoMAAAAAAAAqQwAAAAAAAAAAAAAqQwAAAAAAACpDAAAAAAAAA0AAABnZXRQbGF5ZXJHVUlE",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAApwwAAAAAAACaDAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					49,
+					2,
+					"left_delete",
+					null,
+					"AgAAAKIMAAAAAAAAogwAAAAAAAABAAAAZKEMAAAAAAAAoQwAAAAAAAABAAAAZQ",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAowwAAAAAAACjDAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					50,
+					1,
+					"insert",
+					{
+						"characters": "layer"
+					},
+					"BQAAAKEMAAAAAAAAogwAAAAAAAAAAAAAogwAAAAAAACjDAAAAAAAAAAAAACjDAAAAAAAAKQMAAAAAAAAAAAAAKQMAAAAAAAApQwAAAAAAAAAAAAApQwAAAAAAACmDAAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAoQwAAAAAAAChDAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					60,
+					1,
+					"paste",
+					null,
+					"AgAAAK8MAAAAAAAAwQwAAAAAAAAAAAAAwQwAAAAAAADBDAAAAAAAAAcAAABnZXRHVUlE",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAArwwAAAAAAAC2DAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					63,
+					1,
+					"left_delete",
+					null,
+					"AQAAALUMAAAAAAAAtQwAAAAAAAAGAAAAUGxheWVy",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAuwwAAAAAAAC1DAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					75,
+					1,
+					"paste",
+					null,
+					"AgAAAJ4PAAAAAAAAqg8AAAAAAAAAAAAAqg8AAAAAAACqDwAAAAAAAAkAAABTZXRIZWFsdGg",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAng8AAAAAAACnDwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					78,
+					1,
+					"left_delete",
+					null,
+					"AQAAAOYPAAAAAAAA5g8AAAAAAAABAAAAMg",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAA5w8AAAAAAADnDwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					79,
+					1,
+					"insert",
+					{
+						"characters": "1"
+					},
+					"AQAAAOYPAAAAAAAA5w8AAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAA5g8AAAAAAADmDwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					82,
+					2,
+					"left_delete",
+					null,
+					"AgAAAPcPAAAAAAAA9w8AAAAAAAA0AAAACVNRRmxvYXQgZkhlYWx0aDsKCXNxX2dldGZsb2F0KCBwVk0sIC0xLCAmZkhlYWx0aCApO/YPAAAAAAAA9g8AAAAAAAABAAAACg",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAKxAAAAAAAAD3DwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					89,
+					1,
+					"left_delete",
+					null,
+					"AQAAAK4QAAAAAAAArhAAAAAAAAAHAAAAZkhlYWx0aA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAArhAAAAAAAAC1EAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					94,
+					1,
+					"insert",
+					{
+						"characters": "re"
+					},
+					"AwAAAKQQAAAAAAAApRAAAAAAAAAAAAAApRAAAAAAAAClEAAAAAAAAAkAAABTZXRIZWFsdGilEAAAAAAAAKYQAAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAApBAAAAAAAACtEAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					97,
+					1,
+					"insert_completion",
+					{
+						"completion": "reloadWeapon",
+						"format": "text",
+						"keep_prefix": false,
+						"must_insert": false,
+						"trigger": "reloadWeapon"
+					},
+					"AgAAAKQQAAAAAAAApBAAAAAAAAACAAAAcmWkEAAAAAAAALAQAAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAphAAAAAAAACmEAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					104,
+					1,
+					"paste",
+					null,
+					"AgAAAKQQAAAAAAAAsBAAAAAAAAAAAAAAsBAAAAAAAACwEAAAAAAAAAwAAAByZWxvYWRXZWFwb24",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAApBAAAAAAAACwEAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					109,
+					1,
+					"paste",
+					null,
+					"AgAAADsRAAAAAAAARxEAAAAAAAAAAAAARxEAAAAAAABHEQAAAAAAAAkAAABTZXRIZWFsdGg",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAOxEAAAAAAABEEQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					120,
+					2,
+					"left_delete",
+					null,
+					"AgAAAFwPAAAAAAAAXA8AAAAAAAAnAAAALy8gc2V0UGxheWVySGVhbHRoKCBwbGF5ZXJJZCwgaGVhbHRoICk7Ww8AAAAAAABbDwAAAAAAAAEAAAAK",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAgw8AAAAAAABcDwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					129,
+					1,
+					"left_delete",
+					null,
+					"AQAAACARAAAAAAAAIBEAAAAAAAAHAAAAZkhlYWx0aA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAIBEAAAAAAAAnEQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					162,
+					1,
+					"paste",
+					null,
+					"AgAAABMRAAAAAAAAHxEAAAAAAAAAAAAAHxEAAAAAAAAfEQAAAAAAAAwAAABSZWxvYWRXZWFwb24",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAExEAAAAAAAAfEQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					167,
+					1,
+					"paste",
+					null,
+					"AgAAAHwQAAAAAAAAiBAAAAAAAAAAAAAAiBAAAAAAAACIEAAAAAAAAAwAAABSZWxvYWRXZWFwb24",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAfBAAAAAAAACIEAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					172,
+					1,
+					"paste",
+					null,
+					"AgAAAK8MAAAAAAAAuwwAAAAAAAAAAAAAuwwAAAAAAAC7DAAAAAAAAAwAAAByZWxvYWRXZWFwb24",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAArwwAAAAAAAC7DAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					177,
+					1,
+					"paste",
+					null,
+					"AgAAAHYPAAAAAAAAgg8AAAAAAAAAAAAAgg8AAAAAAACCDwAAAAAAAAwAAAByZWxvYWRXZWFwb24",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAdg8AAAAAAACCDwAAAAAAAAAAAAAAAPC/"
+				]
+			]
+		},
+		{
+			"file": "Shared/Scripting/Natives/CPedNatives.h",
+			"settings":
+			{
+				"buffer_size": 1261,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			},
+			"undo_stack":
+			[
+				[
+					5,
+					1,
+					"insert",
+					{
+						"characters": "\n"
+					},
+					"AgAAAI0EAAAAAAAAjgQAAAAAAAAAAAAAjgQAAAAAAACPBAAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAjQQAAAAAAACNBAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					6,
+					1,
+					"paste",
+					null,
+					"AQAAAI8EAAAAAAAAvgQAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAjwQAAAAAAACPBAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					11,
+					1,
+					"paste",
+					null,
+					"AgAAAKEEAAAAAAAArQQAAAAAAAAAAAAArQQAAAAAAACtBAAAAAAAAAkAAABTZXRXZWFwb24",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAoQQAAAAAAACqBAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					14,
+					1,
+					"left_delete",
+					null,
+					"AQAAALEEAAAAAAAAsQQAAAAAAAABAAAACQ",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAsgQAAAAAAACyBAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					19,
+					1,
+					"insert",
+					{
+						"characters": " "
+					},
+					"AQAAAJkDAAAAAAAAmgMAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAmQMAAAAAAACZAwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					22,
+					1,
+					"insert",
+					{
+						"characters": " "
+					},
+					"AQAAAP0BAAAAAAAA/gEAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAA/QEAAAAAAAD9AQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					25,
+					1,
+					"insert",
+					{
+						"characters": " "
+					},
+					"AQAAAC8CAAAAAAAAMAIAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAALwIAAAAAAAAvAgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					28,
+					1,
+					"insert",
+					{
+						"characters": " "
+					},
+					"AQAAAMgCAAAAAAAAyQIAAAAAAAAAAAAA",
+					"BAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8L8AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwvwAAAAABAAAAyAIAAAAAAADIAgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					7,
+					2,
+					"left_delete",
+					null,
+					"AgAAAJIEAAAAAAAAkgQAAAAAAAAyAAAACXN0YXRpYwlTUUludGVnZXIJCVJlbG9hZFdlYXBvbgkJCQkoIFNRVk0gKiBwVk0gKTuRBAAAAAAAAJEEAAAAAAAAAQAAAAo",
+					"AgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPC/AAAAAAEAAADEBAAAAAAAAJIEAAAAAAAAAAAAAAAA8L8"
+				]
+			]
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"Snippet: ",
+				"Snippet: Snippet - function"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/Users/Vadim/Documents/GitHub/M2OMP/Client",
+		"/C/Users/Vadim/Documents/GitHub/M2OMP/Shared",
+		"/C/Users/Vadim/Documents/GitHub/M2OMP/Shared/Scripting",
+		"/C/Users/Vadim/Documents/GitHub/M2OMP/Shared/Scripting/Natives"
+	],
+	"file_history":
+	[
+		"/C/Users/Vadim/Documents/GitHub/M2OMP/Client/CM2Entity.cpp",
+		"/C/Users/Vadim/Documents/GitHub/M2OMP/Client/CNetworkPlayer.cpp",
+		"/C/Users/Vadim/Documents/GitHub/M2OMP/Client/engine/CM2Ped.cpp",
+		"/C/Users/Vadim/Documents/GitHub/M2OMP/Client/engine/CM2Ped.h",
+		"/C/Users/Vadim/YandexDisk/Ящик/zip/мафия 2/Mafia_2_Tools_Pack/Lua_Viewer/__LUA/PoliceStart_roof.lua",
+		"/C/Users/Vadim/Documents/GitHub/M2OMP/Client/CPlayerNatives.h",
+		"/C/Users/Vadim/Documents/GitHub/M2OMP/Client/engine/CM2Entity.cpp",
+		"/C/Users/Vadim/Documents/GitHub/M2OMP/Client/CM2Hud.cpp",
+		"/C/Users/Vadim/Documents/GitHub/M2OMP/Client/CGameNatives.cpp",
+		"/C/Users/Vadim/Documents/GitHub/M2OMP/Client/CMafia.cpp",
+		"/C/Users/Vadim/Documents/GitHub/M2OMP/Client/CM2Enums.h",
+		"/C/Users/Vadim/Documents/GitHub/M2OMP/Client/CCore.h",
+		"/C/Users/Vadim/Documents/GitHub/M2OMP/Shared/Scripting/Natives/CPedNatives.h",
+		"/C/Users/Vadim/Documents/GitHub/m2o-ver2/resources/ebrp/server/script.nut",
+		"/C/Users/Vadim/Documents/GitHub/m2o-ver2/resources/ebrp/server/buy_shop.nut",
+		"/C/Users/Vadim/Documents/GitHub/m2o-ver2/resources/ebrp/client/guiGridList.nut",
+		"/C/Users/Vadim/Documents/GitHub/m2o-ver2/resources/ebrp/server/inventory.nut",
+		"/C/Users/Vadim/Documents/GitHub/m2o-ver2/resources/ebrp/client/mafia_lua.nut",
+		"/C/Users/Vadim/Documents/GitHub/m2o-ver2/resources/ebrp/client/script.nut",
+		"/C/Users/Vadim/Documents/GitHub/m2o-ver2/resources/ebrp/server/job_player.nut",
+		"/C/Program Files (x86)/Steam/steamapps/common/Mafia II/pc/sds_ru/missionscript/extracted/fr_game_director.sds/tables/TextDatabase_RTR.dat",
+		"/C/Program Files (x86)/Steam/steamapps/common/Mafia II/pc/sds_ru/missionscript/extracted/game_director.sds/tables/TextDatabase_M2.dat",
+		"/C/Program Files (x86)/Steam/steamapps/common/Mafia II/pc/sds_ru/text/extracted/text_default.sds/tables/TextDatabase.dat",
+		"/C/Users/Vadim/Documents/GitHub/m2o-ver2/resources/ebrp/client/gui_auth_character.nut",
+		"/C/Users/Vadim/Downloads/eXistenZ_LUA_command.lua",
+		"/C/Users/Vadim/YandexDisk/Ящик/zip/мафия 2/f1.lua",
+		"/C/Users/Vadim/Documents/GitHub/m2o-ver2/resources/ebrp/server/utils.nut",
+		"/C/Users/Vadim/Documents/GitHub/m2o-ver2/resources/ebrp/meta.xml",
+		"/C/Users/Vadim/Documents/GitHub/m2o-ver2/resources/ebrp/server/timers.nut",
+		"/C/Users/Vadim/Documents/GitHub/m2o-ver2/resources/ebrp/server/commands_police.nut",
+		"/C/Users/Vadim/Documents/GitHub/m2o-ver2/resources/ebrp/client/dx_inventory.nut",
+		"/C/Program Files (x86)/MTA San Andreas 1.6/server/mods/deathmatch/mtaserver.conf",
+		"/C/Program Files (x86)/Steam/steamapps/downloading/360430/sds_retail/memory_map.xml",
+		"/C/Users/Vadim/Documents/GitHub/M2OMP/Client/CIE.h",
+		"/C/Users/Vadim/Documents/GitHub/M2OMP/Client/CIE.cpp",
+		"/C/Users/Vadim/Documents/GitHub/M2OMP/Client/COffsets.cpp",
+		"/C/Users/Vadim/Documents/GitHub/m2o-ver2/resources/ebrp/server/car.nut",
+		"/C/Users/Vadim/Documents/GitHub/M2OMP/Client/CPlayerNatives.cpp",
+		"/C/Users/Vadim/YandexDisk/Ящик/zip/мафия 2/Mafia_2_Tools_Pack/Lua_Viewer/__LUA/Chinese_01.lua",
+		"/C/Users/Vadim/Documents/GitHub/M2OMP/Client/engine/CM2Vehicle.cpp",
+		"/C/Users/Vadim/YandexDisk/Ящик/zip/мафия 2/Mafia_2_Tools_Pack/Lua_Viewer/__LUA/arrest.lua",
+		"/C/Users/Vadim/Desktop/m2o-ver2/resources/test/server/roleplay.nut",
+		"/C/Users/Vadim/Desktop/m2o-ver2/config.xml",
+		"/C/Users/Vadim/Documents/GitHub/M2OMP/Client/CM2Entity.h",
+		"/C/Users/Vadim/Documents/GitHub/M2OMP/Client/CPatches.cpp",
+		"/C/Users/Vadim/Documents/GitHub/M2OMP/Client/CGameFiles.cpp",
+		"/C/Program Files (x86)/Steam/steamapps/common/Mafia II/pc/sds/missionscript/extracted/m05main.sds/scripts/missions/M05Main/M05ListOfParts_d.lua",
+		"/C/Users/Vadim/YandexDisk/Ящик/zip/мафия 2/Mafia_2_Tools_Pack/Lua_Viewer/__LUA/M01Main.lua",
+		"/C/Program Files (x86)/Steam/steamapps/common/Mafia II/pc/sds_ru/missionscript/extracted/game_director.sds/scripts/missions/GameDirector/ListOfQuests_d.lua",
+		"/C/Program Files (x86)/Steam/steamapps/common/Mafia II/pc/sds_ru/missionscript/extracted/game_director.sds/scripts/missions/GameDirector/TempQuestStarter_d.lua",
+		"/C/Program Files (x86)/Steam/steamapps/common/Mafia II/pc/sds_ru/missionscript/extracted/game_director.sds/scripts/missions/GameDirector/GameDirector_d.lua",
+		"/C/Program Files (x86)/Steam/steamapps/common/Mafia II/pc/sds_ru/missionscript/extracted/game_director.sds/scripts/missions/GameDirector/GlobalSettings_d.lua",
+		"/C/Users/Vadim/YandexDisk/Ящик/zip/мафия 2/Mafia_2_Tools_Pack/Lua_Viewer/__LUA/DemoMain.lua",
+		"/C/Program Files (x86)/Steam/steamapps/common/Mafia II/pc/sds/missionscript/extracted/m04_main.sds/scripts/missions/M04Main/M04MasterBlaster_d.lua",
+		"/C/Program Files (x86)/Steam/steamapps/common/Mafia II/pc/sds/missionscript/extracted/m04_main.sds/scripts/missions/M04Main/Homici_d.lua",
+		"/C/Program Files (x86)/Steam/steamapps/common/Mafia II/pc/sds_ru/text/extracted/text_credits.sds/tables/TextDatabase.dat",
+		"/C/Program Files (x86)/Steam/steamapps/common/Mafia II/pc/sds_ru/text/extracted/text_default.sds/tables/TextIconsMap.dat",
+		"/C/Program Files (x86)/Steam/steamapps/common/Mafia II/pc/sds_ru/text/extracted/text_credits.sds/tables/TextIconsMap.dat",
+		"/C/Program Files (x86)/Steam/steamapps/common/Mafia II/pc/sds/missionscript/extracted/m05waytoelgreco.sds/scripts/missions/M05WayToElGreco/WayToElGrecoPolice_d.lua",
+		"/C/Program Files (x86)/Steam/steamapps/common/Mafia II/pc/sds/missionscript/extracted/m05waytoelgreco.sds/scripts/missions/M05WayToElGreco/Script/WayTimer_d.lua",
+		"/C/Program Files (x86)/Steam/steamapps/common/Mafia II/pc/sds/missionscript/extracted/m05main.sds/scripts/missions/M05Main/M05Saves_d.lua",
+		"/C/Program Files (x86)/Steam/steamapps/common/Mafia II/pc/sds/missionscript/extracted/m05main.sds/scripts/missions/M05Main/M05MainScript_d.lua",
+		"/C/Program Files (x86)/Steam/steamapps/common/Mafia II/pc/sds_ru/text/extracted/text_default.sds/SDSContent.xml",
+		"/C/Program Files (x86)/Steam/steamapps/common/Mafia II/pc/sds_ru/text/extracted/text_default.sds/config/gui/fonttexture.xml",
+		"/C/Users/Vadim/AppData/Local/Temp/Rar$DIa4584.46362/server.js",
+		"/C/Users/Vadim/AppData/Local/Temp/Rar$DIa9212.47136/server.js",
+		"/C/Users/Vadim/AppData/Local/Temp/Rar$DIa4584.45953/meta.xml",
+		"/C/Users/Vadim/Documents/GitHub/m2o-ver2/resources/ebrp/server/commands_admin.nut",
+		"/C/Users/Vadim/Documents/GitHub/m2o-ver2/resources/ebrp/server/commands_player.nut",
+		"/C/Users/Vadim/Desktop/m2o-ver2/resources/inventory/client/client1.nut",
+		"/C/Users/Vadim/Desktop/item-system/c_inventory.lua",
+		"/C/Users/Vadim/Desktop/item-system/g_items.lua",
+		"/C/Users/Vadim/Desktop/item-system/c_item_system.lua",
+		"/C/Users/Vadim/Documents/GitHub/Wiki-mafia2online/resource/weapons.md",
+		"/C/Users/Vadim/Documents/GitHub/m2o-ver2/resources/ebrp/server/hunger.nut",
+		"/C/Users/Vadim/YandexDisk/Ящик/zip/мафия 2/Mafia_2_Tools_Pack/Model_Viewer/Shaders/ColorEffect.fx",
+		"/C/Program Files (x86)/Steam/steamapps/common/Mafia II/pc/sds/gui/extracted/ingame_gui.sds/config/gui/HudWidgets.xml",
+		"/C/Users/Vadim/Documents/GitHub/Wiki-mafia2online/shared function.md",
+		"/C/Users/Vadim/Documents/GitHub/Wiki-mafia2online/server function.md",
+		"/C/Users/Vadim/Desktop/item-system/g_item_functions.lua",
+		"/C/Users/Vadim/Desktop/item-system/ItemCreator/c_item_creator.lua",
+		"/C/Users/Vadim/YandexDisk/Ящик/zip/мафия 2/Mafia_2_Tools_Pack/Lua_Viewer/__LUA/Akce.lua",
+		"/C/Users/Vadim/Documents/GitHub/m2o-ver2/resources/ebrp/server/key_bind.nut",
+		"/C/Users/Vadim/YandexDisk/Ящик/zip/мафия 2/Mafia_2_Tools_Pack/Lua_Viewer/__LUA/Eric.lua",
+		"/C/Users/Vadim/YandexDisk/Ящик/zip/мафия 2/Mafia_2_Tools_Pack/Lua_Viewer/__LUA/M02DerekMain.lua",
+		"/C/Users/Vadim/YandexDisk/Ящик/zip/мафия 2/Mafia_2_Tools_Pack/Lua_Viewer/__LUA/DeliBarMerchandise.lua",
+		"/C/Users/Vadim/Documents/GitHub/M2OMP/Client/CNetworkVehicle.cpp",
+		"/C/Users/Vadim/Documents/GitHub/M2OMP/Client/CCore.cpp",
+		"/C/Users/Vadim/Documents/GitHub/M2OMP/Shared/CSettings.cpp",
+		"/C/Users/Vadim/Documents/GitHub/M2OMP/Shared/SharedUtility.cpp",
+		"/C/Users/Vadim/Documents/GitHub/M2OMP/Shared/Scripting/CSquirrel.cpp",
+		"/C/Users/Vadim/Documents/GitHub/M2OMP/Client/CMenuSettings.cpp",
+		"/C/Users/Vadim/Documents/GitHub/M2OMP/Server/CMasterList.cpp",
+		"/C/Users/Vadim/Documents/GitHub/m2o-ver2/resources/ebrp/scriptfiles/save_sqlite.sql",
+		"/C/Users/Vadim/Desktop/m2o-ver2/resources/inventory/server/server1.nut",
+		"/C/Users/Vadim/AppData/Roaming/Sublime Text/Packages/User/123.sublime-snippet",
+		"/C/Users/Vadim/Documents/GitHub/m2o-ver2/resources/ebrp/client/3d_text.nut",
+		"/C/Users/Vadim/Desktop/item-system/s_item_system.lua",
+		"/C/Users/Vadim/Documents/GitHub/m2o-ver2/resources/ebrp/server/requests_sqlite.nut",
+		"/C/Users/Vadim/Desktop/item-system/s_world_items.lua",
+		"/C/Users/Vadim/Documents/GitHub/m2o-ver2/resources/ebrp/scriptfiles/backup_accounts/Vito_Scaletta.xml",
+		"/C/Users/Vadim/AppData/Local/Temp/Rar$DIa5900.33620/client.lua",
+		"/C/Users/Vadim/AppData/Local/Temp/Rar$DIa5900.38300/java.js",
+		"/C/Users/Vadim/AppData/Local/Temp/Rar$DIa5900.36790/server.lua",
+		"/C/Users/Vadim/AppData/Local/Temp/Rar$DIa5900.34947/notification_c.lua",
+		"/C/Users/Vadim/YandexDisk/Ящик/логи сервера/07.01.24 - 14.01.24/save_sqlite.sql",
+		"/C/Users/Vadim/Desktop/MafiaC-Server-Win64-1.4.0/resources/freeroam/server.js",
+		"/C/Users/Vadim/Desktop/MafiaC-Server-Win64-1.4.0/resources/freeroam/client.js",
+		"/C/Users/Vadim/Desktop/MafiaC-Server-Win64-1.4.0/server.xml",
+		"/C/Users/Vadim/AppData/Local/Temp/Rar$DIa664.37980/server.nut",
+		"/C/Users/Vadim/Desktop/MafiaC-Server-Win64-1.4.0/resources/freeroam/meta.xml",
+		"/C/Users/Vadim/Desktop/item-system/c_shellcasings.lua",
+		"/C/Users/Vadim/Desktop/item-system/c_safes_system.lua",
+		"/C/Users/Vadim/Desktop/item-system/c_move_items.lua",
+		"/C/Users/Vadim/Desktop/item-system/c_metadata_editor.lua",
+		"/C/Users/Vadim/Desktop/item-system/c_itemchange.lua",
+		"/C/Users/Vadim/Documents/GitHub/M2OMP/Client/CGraphicsNatives.cpp",
+		"/C/Users/Vadim/Documents/GitHub/M2OMP/Client/gui_impl/CGUIElement_Impl.cpp",
+		"/C/Users/Vadim/Documents/GitHub/M2OMP/Libraries/cegui-0.4.0-custom/src/CEGUIWindow.cpp",
+		"/C/Users/Vadim/Documents/GitHub/Wiki-mafia2online/resource/gui element types.md",
+		"/C/Users/Vadim/Desktop/MTA-main/mods/deathmatch/resources/chat-system/s_chatbubbles.lua",
+		"/C/Users/Vadim/Desktop/EBMP-RPG-ver-3.1/resources/test/client/roleplay.nut",
+		"/C/Users/Vadim/Desktop/gtac_roleplay-master/database.sql",
+		"/C/Users/Vadim/AppData/Local/Temp/Rar$DIa6164.12706/Week.js",
+		"/C/Users/Vadim/AppData/Local/Temp/Rar$DIa6164.12189/WeekDay.js",
+		"/C/Users/Vadim/AppData/Local/Temp/Rar$DIa6164.7870/TabPanel.js",
+		"/C/Users/Vadim/AppData/Local/Temp/Rar$DIa6164.4954/Button.js",
+		"/C/Users/Vadim/AppData/Local/Temp/Rar$DIa6164.2832/Map.js"
+	],
+	"find":
+	{
+		"height": 22.0
+	},
+	"find_in_files":
+	{
+		"height": 104.0,
+		"where_history":
+		[
+			"C:\\Users\\Vadim\\Documents\\GitHub\\M2OMP",
+			"C:\\Users\\Vadim\\YandexDisk\\Ящик\\zip\\мафия 2\\Mafia_2_Tools_Pack\\Lua_Viewer\\__LUA",
+			"C:\\Users\\Vadim\\Documents\\GitHub\\M2OMP",
+			"C:\\Users\\Vadim\\Documents\\GitHub\\m2o-ver2\\resources\\ebrp\\client,C:\\Users\\Vadim\\Documents\\GitHub\\m2o-ver2\\resources\\ebrp\\server",
+			"C:\\Users\\Vadim\\YandexDisk\\Ящик\\zip\\мафия 2\\Mafia_2_Tools_Pack\\Lua_Viewer\\__LUA",
+			"C:\\Users\\Vadim\\Documents\\GitHub\\m2o-ver2\\resources\\ebrp\\client,C:\\Users\\Vadim\\Documents\\GitHub\\m2o-ver2\\resources\\ebrp\\server",
+			"C:\\Users\\Vadim\\Documents\\GitHub\\m2o-ver2\\resources\\ebrp\\client",
+			"C:\\Users\\Vadim\\Documents\\GitHub\\m2o-ver2\\resources\\ebrp",
+			"C:\\Users\\Vadim\\Documents\\GitHub\\M2OMP",
+			"C:\\Users\\Vadim\\YandexDisk\\Ящик\\zip\\мафия 2\\Mafia_2_Tools_Pack\\Lua_Viewer\\__LUA",
+			"C:\\Users\\Vadim\\Documents\\GitHub\\M2OMP",
+			"C:\\Users\\Vadim\\Documents\\GitHub\\m2o-ver2\\resources\\ebrp",
+			"C:\\Users\\Vadim\\Documents\\GitHub\\M2OMP",
+			"C:\\Users\\Vadim\\YandexDisk\\Ящик\\zip\\мафия 2\\Mafia_2_Tools_Pack\\Lua_Viewer\\__LUA",
+			"C:\\Users\\Vadim\\Documents\\GitHub\\M2OMP",
+			"C:\\Users\\Vadim\\Documents\\GitHub\\m2o-ver2\\resources\\ebrp",
+			"C:\\Users\\Vadim\\YandexDisk\\Ящик\\zip\\мафия 2\\Mafia_2_Tools_Pack\\Lua_Viewer\\__LUA",
+			"C:\\Users\\Vadim\\Documents\\GitHub\\m2o-ver2\\resources\\ebrp",
+			"C:\\Users\\Vadim\\Documents\\GitHub\\M2OMP",
+			"C:\\Users\\Vadim\\Documents\\GitHub\\m2o-ver2\\resources\\ebrp",
+			"C:\\Users\\Vadim\\Documents\\GitHub\\M2OMP",
+			"C:\\Users\\Vadim\\Documents\\GitHub\\m2o-ver2\\resources\\ebrp",
+			"C:\\Users\\Vadim\\Desktop\\item-system",
+			"C:\\Users\\Vadim\\Documents\\GitHub\\m2o-ver2\\resources\\ebrp",
+			"C:\\Users\\Vadim\\Desktop\\item-system",
+			"C:\\Users\\Vadim\\Documents\\GitHub\\m2o-ver2\\resources\\ebrp",
+			"C:\\Users\\Vadim\\Documents\\GitHub\\M2OMP",
+			"C:\\Users\\Vadim\\Desktop\\MTA-main\\mods\\deathmatch\\resources",
+			"C:\\Users\\Vadim\\Desktop\\item-system",
+			"C:\\Users\\Vadim\\YandexDisk\\Ящик\\zip\\мафия 2\\Mafia_2_Tools_Pack\\Lua_Viewer\\__LUA",
+			"C:\\Users\\Vadim\\Documents\\GitHub\\M2OMP",
+			"C:\\Users\\Vadim\\Documents\\GitHub\\m2o-ver2\\resources\\ebrp",
+			"C:\\Users\\Vadim\\Documents\\GitHub\\M2OMP",
+			"C:\\Users\\Vadim\\Documents\\GitHub\\m2o-ver2\\resources\\ebrp,C:\\Users\\Vadim\\Documents\\GitHub\\M2OMP",
+			"C:\\Users\\Vadim\\Documents\\GitHub\\m2o-ver2\\resources\\ebrp"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"CRASH",
+			"ScrShootAt",
+			"Shoot",
+			"PedShoot",
+			"InventoryReload",
+			"reload",
+			"do",
+			"reload",
+			"reloadWeapon",
+			"weapon",
+			"GetHealth",
+			"SetAllShopExplored",
+			"\"game.shop:SetAllShopExplored(true)\"",
+			"blip_t",
+			"created",
+			"onClientScriptInit",
+			"боль",
+			"госпиталь",
+			"банк",
+			"урц",
+			"совет",
+			"здание",
+			"метро",
+			"совет",
+			"мэри",
+			"городская",
+			"ратуша",
+			"мерия",
+			"участок",
+			"полици",
+			"авто",
+			"автосалон",
+			"diamond3",
+			"diamond",
+			"агазин",
+			"работа",
+			"00_70_00_0212",
+			"ограбление",
+			"снегоуборщик",
+			"такси",
+			"автобу",
+			"автобусник",
+			"сигаре",
+			"продажа",
+			"доставщик",
+			"работа",
+			"navigation",
+			"RegisterIconPos",
+			"createBlip",
+			"RegisterIconPos",
+			"Entity",
+			"GetEntityByName",
+			"GetEntityByGUID",
+			"GetEntityByName",
+			"MakeCarOwnership",
+			"e_setOwnership",
+			"UnregisterIconPos",
+			"RegisterIconPos",
+			"00_72_04_0004",
+			"молоко",
+			"бензин",
+			"топливо",
+			"job_gps",
+			"Маркер",
+			"Продолжить",
+			"задания",
+			"цель",
+			"точка",
+			"маршурт",
+			"разгру",
+			"точка",
+			"маршрут",
+			"маршурт",
+			"езжайте",
+			"маршрут",
+			"точка",
+			"загру",
+			"разгру",
+			"точка",
+			"следуй",
+			"следуйте",
+			"езжайте",
+			"ехжайте",
+			"setGPSTarget",
+			"job_gps",
+			"FUNC_CIE_SetHashName",
+			"SetModelToMouth",
+			"FUNC_CVehicle__GetWheelsMaterial",
+			"InventoryDoReload",
+			"AreControlsLocked",
+			"InventoryTellAmmoInSelectedWeapon",
+			"InventoryReload",
+			"reload",
+			"InventorySelect",
+			"ReloadWeapon",
+			"ScrShootAt",
+			"cmrun",
+			"triggerClientEvent",
+			"eMoveType",
+			"E_WALK",
+			" Stop game from changing vehicle indicator light state",
+			"Prevent engine registering vehicle icon",
+			"RadarShow",
+			"01_52_00_0027",
+			"01_52_00_0032",
+			"01_52_00_0027",
+			"0152000027",
+			"05_51_01_0006",
+			"0551010006",
+			"00_56_00_0005",
+			"0056000005",
+			"0x454110",
+			"SetVariableTemporary",
+			"SetHeight",
+			"NewQuest",
+			"0056000005",
+			"0451010006",
+			"Генри",
+			"генри",
+			"SetHeight",
+			"NewQuest",
+			"0056000005",
+			"NewQuest",
+			"генри",
+			"езжайте",
+			"0056000005",
+			"00_56_00_0005",
+			"0056000005"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"//[\"texture\"]",
+			"Weapon",
+			"//sendMessage",
+			"//[\"texture\"]",
+			"[\"texture\"]",
+			"//[\"texture\"]",
+			"e_useItem",
+			"e_showItem",
+			"e_dropItem",
+			"e_deleteItem",
+			"e_removeItemUse",
+			"e_removeItem",
+			"e_giveItem",
+			"Returns 'true' if successful, 'false' otherwise.",
+			"value_draw",
+			"sendMessage(",
+			"sendMessage( ",
+			"//[\"texture\"]",
+			"//[\"texture\"] = dxLoadTexture(\"donut.png\"),",
+			"//[\"texture\"]",
+			"take_item_from_idx",
+			"take_item_from_slot",
+			"",
+			"select_delete",
+			"select_show",
+			"select_drop",
+			"getElementData(localPlayer,\"item_ped\")",
+			"[\"pos_y\"] = -100.0,",
+			"[\"pos_x\"] = -100.0,",
+			"\"",
+			"size_y",
+			"size_x",
+			"height_2dtext",
+			"box_size"
+		],
+		"reverse": false,
+		"scrollbar_highlights": true,
+		"show_context": true,
+		"use_buffer2": true,
+		"use_gitignore": true,
+		"whole_word": true,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "Shared/Scripting/Natives/CPedNatives.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 10267,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1856,
+								1856
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 245.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/C/Users/Vadim/Downloads/eXistenZ_LUA_command.lua",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 66089,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								27095,
+								27110
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Lua/Lua.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 7076.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "Client/CPlayerNatives.cpp",
+					"selected": true,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 22381,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2496,
+								2496
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 544.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "Shared/Scripting/Natives/CPedNatives.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1261,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1090,
+								1090
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 121.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"stack_multiselect": false,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 22.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "m2o.sublime-project",
+	"replace":
+	{
+		"height": 40.0
+	},
+	"save_all_on_build": false,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"C:\\Users\\Vadim\\Documents\\GitHub\\m2o-ver2\\resources\\ebrp\\server\\123.sublime-workspace"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 211.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

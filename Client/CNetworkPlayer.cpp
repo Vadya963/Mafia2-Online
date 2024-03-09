@@ -461,6 +461,15 @@ void CNetworkPlayer::SetHealth( float fHealth )
 	}
 }
 
+void CNetworkPlayer::ReloadWeapon(void)
+{
+	// Is the player ped valid?
+	if (m_pPlayerPed && IsSpawned())
+	{
+		m_pPlayerPed->ReloadWeapon();
+	}
+}
+
 float CNetworkPlayer::GetHealth( void )
 {
 	// Is the player ped valid?

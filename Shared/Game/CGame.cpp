@@ -144,7 +144,6 @@ static char * PlayerModels[][2] =
 	{ "/sds/skins_m2o/", "cpr4z" },
 	{ "/sds/skins_m2o/", "cpr6" },
 	{ "/sds/skins_m2o/", "cpradl" },
-	{ "/sds/skins_m2o/", "cpros1n" },
 	{ "/sds/skins_m2o/", "cpros1nzad" },
 	{ "/sds/skins_m2o/", "cpros2n" },
 	{ "/sds/skins_m2o/", "cpros3f" },
@@ -231,7 +230,7 @@ static char * PlayerModels[][2] =
 	{ "/sds/skins_m2o/", "vitcow" },
 	{ "/sds/skins_m2o/", "vitm1" },
 	{ "/sds/skins_m2o/", "vitmat" },
-	{ "/sds/skins_m2o/", "vitnaho" },//322
+	{ "/sds/skins_m2o/", "vitnaho" },
 };
 
 static int VehicleFuelTankCapacity[] =

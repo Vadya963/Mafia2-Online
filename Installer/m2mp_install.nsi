@@ -259,7 +259,6 @@ Section "Install"
 	File ..\Binary\gamefiles\skins_m2o\cpr4z.sds
 	File ..\Binary\gamefiles\skins_m2o\cpr6.sds
 	File ..\Binary\gamefiles\skins_m2o\cpradl.sds
-	File ..\Binary\gamefiles\skins_m2o\cpros1n.sds
 	File ..\Binary\gamefiles\skins_m2o\cpros1nzad.sds
 	File ..\Binary\gamefiles\skins_m2o\cpros2n.sds
 	File ..\Binary\gamefiles\skins_m2o\cpros3f.sds

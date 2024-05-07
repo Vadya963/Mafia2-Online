@@ -171,7 +171,6 @@ Section "Install"
 
 	SetOutPath "$GAMEDIR\edit\tables"
 	File ..\Binary\gamefiles\StreamM2MP.bin
-	File ..\Binary\gamefiles\tables.sds
 	
 	SetOutPath "$GAMEDIR\pc\sds\cars"
 	File ..\Binary\gamefiles\cars\chaffeque.sds
@@ -185,9 +184,23 @@ Section "Install"
 	File ..\Binary\gamefiles\cars\roller_z.sds
 	File ..\Binary\gamefiles\cars\waybar.sds
 	File ..\Binary\gamefiles\cars\waybar_z.sds
+	File ..\Binary\gamefiles\cars\payback.sds
+	File ..\Binary\gamefiles\cars\payback_z.sds
+	File ..\Binary\gamefiles\cars\shubert_pickup.sds
+	File ..\Binary\gamefiles\cars\shubert_pickup_z.sds
+	File ..\Binary\gamefiles\cars\shubert_34.sds
+	File ..\Binary\gamefiles\cars\shubert_34_z.sds
+	File ..\Binary\gamefiles\cars\trautenberg_grande.sds
+	File ..\Binary\gamefiles\cars\trautenberg_grande_z.sds
 	
 	SetOutPath "$GAMEDIR\edit\materials"
 	File ..\Binary\gamefiles\default.mtl
+	
+	SetOutPath "$GAMEDIR\pc\sds_ru\text"
+	File ..\Binary\gamefiles\text_default.sds
+	
+	SetOutPath "$GAMEDIR\pc\sds\mp"
+	File ..\Binary\gamefiles\tables.sds
 	
 	SetOutPath "$GAMEDIR\pc"
 	File ..\Binary\gamefiles\pc\Mafia2.exe

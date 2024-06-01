@@ -249,7 +249,10 @@ static int VehicleFuelTankCapacity[] =
 	65,								70,									80,
 	65,								50,
 	0,								70,									70,
-	80,								40, /*dlc авто -->*/ 80, 50, 70, 100, 80, 90, 81, 70, 70, 80, 50
+	80,								40, 
+	/*dlc авто -->*/ 80, 50, 70, 100, 80, 90, 81, 70, 70, 80, 
+	50,
+	/*новое авто -->*/70
 };
 
 static char * VehicleModels[] =
@@ -270,7 +273,8 @@ static char * VehicleModels[] =
 	"trailer_sg",					"ulver_newyorker",					"ulver_newyorker_p",
 	"walker_rocket",				"walter_coupe",
 	/*dlc авто -->*/"delizia_grandeamerica", "chaffeque", "waybar", "roller", "elysium", "desta", "payback", "shubert_pickup", "shubert_34", "trautenberg_grande",
-	"smith_coupe_wreck"
+	"smith_coupe_wreck", 
+	/*новое авто -->*/"cadilla_miller_meteor_1959"
 };
 
 static char * VehicleWheelModels[] =

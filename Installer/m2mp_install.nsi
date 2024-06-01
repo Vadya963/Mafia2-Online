@@ -192,6 +192,7 @@ Section "Install"
 	File ..\Binary\gamefiles\cars\shubert_34_z.sds
 	File ..\Binary\gamefiles\cars\trautenberg_grande.sds
 	File ..\Binary\gamefiles\cars\trautenberg_grande_z.sds
+	File ..\Binary\gamefiles\cars\cadilla_miller_meteor_1959.sds
 	
 	SetOutPath "$GAMEDIR\edit\materials"
 	File ..\Binary\gamefiles\default.mtl

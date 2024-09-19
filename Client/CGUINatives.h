@@ -54,6 +54,7 @@ private:
 	static	SQInteger		ShowCursor							( SQVM * pVM );
 	static	SQInteger		IsCursorShowing						( SQVM * pVM );
 	static	SQInteger		IsMainMenuShowing					( SQVM * pVM );
+	static	SQInteger		GetFilePath							( SQVM * pVM );
 
 	static	SQInteger		CreateElement						( SQVM * pVM );
 	static	SQInteger		DestroyElement						( SQVM * pVM );
@@ -76,7 +77,10 @@ private:
 	static	SQInteger		GuiChangeImage						( SQVM * pVM );
 	static	SQInteger		GuiSetSizable						( SQVM * pVM );
 	static	SQInteger		GuiSetMovable						( SQVM * pVM );
-	static	SQInteger		GetFilePath							( SQVM * pVM );
+	static	SQInteger		GuiComboBoxAddItem					( SQVM * pVM );
+	static	SQInteger		GuiComboBoxSetReadOnly				( SQVM * pVM );
+	static	SQInteger		GuiCheckBoxSetSelected				( SQVM * pVM );
+	static	SQInteger		GuiCheckBoxGetSelected				( SQVM * pVM );
 
 public:
 

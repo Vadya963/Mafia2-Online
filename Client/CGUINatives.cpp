@@ -61,6 +61,7 @@ void CGUINatives::Register( CScriptingManager * pScriptingManager )
 	pScriptingManager->RegisterFunction( "showCursor", ShowCursor, 1, "b" );
 	pScriptingManager->RegisterFunction( "isCursorShowing", IsCursorShowing, 0, NULL );
 	pScriptingManager->RegisterFunction( "isMainMenuShowing", IsMainMenuShowing, 0, NULL );
+	pScriptingManager->RegisterFunction( "getFilePath", GetFilePath, 1, "s" );
 
 	// Register gui functions
 	pScriptingManager->RegisterFunction( "guiCreateElement", CreateElement, -1, NULL );
@@ -79,12 +80,25 @@ void CGUINatives::Register( CScriptingManager * pScriptingManager )
 	pScriptingManager->RegisterFunction( "guiGetAlpha", GuiGetAlpha, 1, "p" );
 	pScriptingManager->RegisterFunction( "guiSetAlwaysOnTop", GuiSetAlwaysOnTop, 2, "pb" );
 	pScriptingManager->RegisterFunction( "guiIsAlwaysOnTop", GuiIsAlwaysOnTop, 1, "p" );
-	pScriptingManager->RegisterFunction( "guiSetInputMasked", GuiSetInputMasked, 2, "pb" );
-	pScriptingManager->RegisterFunction( "guiIsInputMasked", GuiIsInputMasked, 1, "p" );
-	pScriptingManager->RegisterFunction( "guiChangeImage", GuiChangeImage, 2, "ps" );
-	pScriptingManager->RegisterFunction( "guiSetSizable", GuiSetSizable, 2, "pb" );
-	pScriptingManager->RegisterFunction( "guiSetMovable", GuiSetMovable, 2, "pb" );
-	pScriptingManager->RegisterFunction( "getFilePath", GetFilePath, 1, "s" );
+
+	//GUI_EDIT
+	pScriptingManager->RegisterFunction( "guiEditSetMasked", GuiSetInputMasked, 2, "pb" );
+	pScriptingManager->RegisterFunction( "guiEditIsMasked", GuiIsInputMasked, 1, "p" );
+
+	//GUI_IMAGE
+	pScriptingManager->RegisterFunction( "guiStaticImageLoadImage", GuiChangeImage, 2, "ps" );
+
+	//GUI_WINDOW
+	pScriptingManager->RegisterFunction( "guiWindowSetSizable", GuiSetSizable, 2, "pb" );
+	pScriptingManager->RegisterFunction( "guiWindowSetMovable", GuiSetMovable, 2, "pb" );
+
+	//GUI_COMBOBOX
+	pScriptingManager->RegisterFunction( "guiComboBoxAddItem", GuiComboBoxAddItem, 2, "ps" );
+	pScriptingManager->RegisterFunction( "guiComboBoxSetReadOnly", GuiComboBoxSetReadOnly, 2, "pb" );
+
+	//GUI_CHECKBOX
+	pScriptingManager->RegisterFunction( "guiCheckBoxSetSelected", GuiCheckBoxSetSelected, 2, "pb" );
+	pScriptingManager->RegisterFunction( "guiCheckBoxGetSelected", GuiCheckBoxGetSelected, 1, "p" );
 
 	// Register GUI constants
 	pScriptingManager->RegisterConstant ( "ELEMENT_TYPE_WINDOW", GUI_WINDOW );
@@ -987,6 +1001,73 @@ SQInteger CGUINatives::GuiIsInputMasked( SQVM * pVM )
 	{
 		// Push the element masking
 		sq_pushfloat( pVM, ((CGUIEdit_Impl *)pElement)->IsMasked () );
+		return 1;
+	}
+
+	sq_pushbool( pVM, false );
+	return 1;
+}
+
+SQInteger CGUINatives::GuiComboBoxAddItem(SQVM * pVM)
+{
+	CGUIElement_Impl * pElement = sq_getpointer< CGUIElement_Impl* >(pVM, -2);
+	const SQChar * szText;
+	sq_getstring( pVM, -1, &szText );
+
+	if (pElement)
+	{
+		static_cast<CGUIComboBox_Impl *>(pElement)->AddItem(szText);
+		sq_pushbool(pVM, true);
+		return 1;
+	}
+
+	sq_pushbool(pVM, false);
+	return 1;
+}
+
+SQInteger CGUINatives::GuiComboBoxSetReadOnly( SQVM * pVM )
+{
+	CGUIElement_Impl * pElement = sq_getpointer< CGUIElement_Impl* >( pVM, -2 );
+	SQBool bRead;
+	sq_getbool( pVM, -1, &bRead );
+
+	if( pElement )
+	{
+		static_cast<CGUIComboBox_Impl *>(pElement)->SetReadOnly ( bRead );
+
+		sq_pushbool( pVM, true );
+		return 1;
+	}
+
+	sq_pushbool( pVM, false );
+	return 1;
+}
+
+SQInteger CGUINatives::GuiCheckBoxSetSelected( SQVM * pVM )
+{
+	CGUIElement_Impl * pElement = sq_getpointer< CGUIElement_Impl* >( pVM, -2 );
+	SQBool bRead;
+	sq_getbool( pVM, -1, &bRead );
+
+	if( pElement )
+	{
+		static_cast<CGUICheckBox_Impl *>(pElement)->SetChecked ( bRead );
+
+		sq_pushbool( pVM, true );
+		return 1;
+	}
+
+	sq_pushbool( pVM, false );
+	return 1;
+}
+
+SQInteger CGUINatives::GuiCheckBoxGetSelected( SQVM * pVM )
+{
+	CGUIElement_Impl * pElement = sq_getpointer< CGUIElement_Impl* >( pVM, -1 );
+
+	if( pElement )
+	{
+		sq_pushbool( pVM, ((CGUICheckBox_Impl *)pElement)->IsChecked () );
 		return 1;
 	}
 

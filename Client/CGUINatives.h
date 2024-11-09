@@ -81,6 +81,12 @@ private:
 	static	SQInteger		GuiComboBoxSetReadOnly				( SQVM * pVM );
 	static	SQInteger		GuiCheckBoxSetSelected				( SQVM * pVM );
 	static	SQInteger		GuiCheckBoxGetSelected				( SQVM * pVM );
+	static	SQInteger		GuiGridListAddColumn				( SQVM * pVM );
+	static	SQInteger		GuiComboBoxClear					( SQVM * pVM );
+	static	SQInteger		GuiGridListAddRow					( SQVM * pVM );
+	static	SQInteger		GuiGridListClear					( SQVM * pVM );
+	static	SQInteger		GuiGridListSetItemText				( SQVM * pVM );
+	static	SQInteger		GuiGridListGetItemText				( SQVM * pVM );
 
 public:
 

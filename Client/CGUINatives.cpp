@@ -95,10 +95,18 @@ void CGUINatives::Register( CScriptingManager * pScriptingManager )
 	//GUI_COMBOBOX
 	pScriptingManager->RegisterFunction( "guiComboBoxAddItem", GuiComboBoxAddItem, 2, "ps" );
 	pScriptingManager->RegisterFunction( "guiComboBoxSetReadOnly", GuiComboBoxSetReadOnly, 2, "pb" );
+	pScriptingManager->RegisterFunction( "guiComboBoxClear", GuiComboBoxClear, 1, "p" );
 
 	//GUI_CHECKBOX
 	pScriptingManager->RegisterFunction( "guiCheckBoxSetSelected", GuiCheckBoxSetSelected, 2, "pb" );
 	pScriptingManager->RegisterFunction( "guiCheckBoxGetSelected", GuiCheckBoxGetSelected, 1, "p" );
+
+	//GUI_GRIDLIST
+	pScriptingManager->RegisterFunction( "guiGridListAddColumn", GuiGridListAddColumn, 3, "psf" );
+	pScriptingManager->RegisterFunction( "guiGridListAddRow", GuiGridListAddRow, 2, "pb" );
+	pScriptingManager->RegisterFunction( "guiGridListClear", GuiGridListClear, 1, "p" );
+	pScriptingManager->RegisterFunction( "guiGridListSetItemText", GuiGridListSetItemText, 7, "piisbbb" );
+	pScriptingManager->RegisterFunction( "guiGridListGetItemText", GuiGridListGetItemText, 3, "pii" );
 
 	// Register GUI constants
 	pScriptingManager->RegisterConstant ( "ELEMENT_TYPE_WINDOW", GUI_WINDOW );
@@ -1043,6 +1051,22 @@ SQInteger CGUINatives::GuiComboBoxSetReadOnly( SQVM * pVM )
 	return 1;
 }
 
+SQInteger CGUINatives::GuiComboBoxClear( SQVM * pVM )
+{
+	CGUIElement_Impl * pElement = sq_getpointer< CGUIElement_Impl* >( pVM, -1 );
+
+	if( pElement )
+	{
+		static_cast<CGUIComboBox_Impl *>(pElement)->Clear ();
+
+		sq_pushbool( pVM, true );
+		return 1;
+	}
+
+	sq_pushbool( pVM, false );
+	return 1;
+}
+
 SQInteger CGUINatives::GuiCheckBoxSetSelected( SQVM * pVM )
 {
 	CGUIElement_Impl * pElement = sq_getpointer< CGUIElement_Impl* >( pVM, -2 );
@@ -1072,5 +1096,102 @@ SQInteger CGUINatives::GuiCheckBoxGetSelected( SQVM * pVM )
 	}
 
 	sq_pushbool( pVM, false );
+	return 1;
+}
+
+SQInteger CGUINatives::GuiGridListAddColumn(SQVM * pVM)
+{
+	CGUIElement_Impl * pElement = sq_getpointer< CGUIElement_Impl* >(pVM, -3);
+	const SQChar * szText;
+	float width;
+
+	sq_getstring( pVM, -2, &szText );
+	sq_getfloat( pVM, -1, &width );
+
+	if (pElement)
+	{
+		sq_pushinteger(pVM, static_cast<CGUIGridList_Impl *>(pElement)->AddColumn(szText,width));
+		return 1;
+	}
+
+	sq_pushbool(pVM, false);
+	return 1;
+}
+
+SQInteger CGUINatives::GuiGridListAddRow(SQVM * pVM)
+{
+	CGUIElement_Impl * pElement = sq_getpointer< CGUIElement_Impl* >(pVM, -2);
+	SQBool fast;
+	sq_getbool( pVM, -1, &fast );
+
+	if (pElement)
+	{
+		sq_pushinteger(pVM, static_cast<CGUIGridList_Impl *>(pElement)->AddRow(fast));
+		return 1;
+	}
+
+	sq_pushbool(pVM, false);
+	return 1;
+}
+
+SQInteger CGUINatives::GuiGridListClear(SQVM * pVM)
+{
+	CGUIElement_Impl * pElement = sq_getpointer< CGUIElement_Impl* >(pVM, -1);
+
+	if (pElement)
+	{
+		static_cast<CGUIGridList_Impl *>(pElement)->Clear();
+		sq_pushbool(pVM, true);
+		return 1;
+	}
+
+	sq_pushbool(pVM, false);
+	return 1;
+}
+
+SQInteger CGUINatives::GuiGridListSetItemText(SQVM * pVM)
+{
+	CGUIElement_Impl * pElement = sq_getpointer< CGUIElement_Impl* >(pVM, -7);
+	SQInteger row;
+	SQInteger column;
+	const SQChar * szText;
+	SQBool number;
+	SQBool section;
+	SQBool fast;
+
+	sq_getinteger( pVM, -6, &row );
+	sq_getinteger( pVM, -5, &column );
+	sq_getstring( pVM, -4, &szText );
+	sq_getbool( pVM, -3, &number );
+	sq_getbool( pVM, -2, &section );
+	sq_getbool( pVM, -1, &fast );
+
+	if (pElement)
+	{
+		sq_pushinteger(pVM, static_cast<CGUIGridList_Impl *>(pElement)->SetItemText(row,column,szText,number,section,fast));
+		return 1;
+	}
+
+	sq_pushbool(pVM, false);
+	return 1;
+}
+
+SQInteger CGUINatives::GuiGridListGetItemText(SQVM * pVM)
+{
+	CGUIElement_Impl * pElement = sq_getpointer< CGUIElement_Impl* >(pVM, -3);
+	SQInteger row;
+	SQInteger column;
+
+	sq_getinteger( pVM, -2, &row );
+	sq_getinteger( pVM, -1, &column );
+
+	if (pElement)
+	{
+		String itemtext = static_cast<CGUIGridList_Impl *>(pElement)->GetItemText(row,column);
+		sq_pushstring( pVM, itemtext.Get(), itemtext.GetLength() );
+		return 1;
+	}
+
+	sq_pushbool(pVM, false);
 	return 1;
 }

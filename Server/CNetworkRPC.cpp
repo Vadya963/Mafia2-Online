@@ -52,7 +52,7 @@ void InitialData( RakNet::BitStream * pBitStream, RakNet::Packet * pPacket )
 		// Send it back to the client
 		CCore::Instance()->GetNetworkModule()->Call( RPC_CONNECTION_REJECTED, &bsReject, HIGH_PRIORITY, RELIABLE_ORDERED, playerId, false );
 
-		CLogFile::Printf( "[rejected] %s was rejected connection to the server. (Invalid network version - %d, %d)", strName.C_String(), iVersion, NETWORK_VERSION );
+		CLogFile::Printf( "[rejected] %s was rejected connection to the server. (Invalid network version - (client - %d), (server - %d))", strName.C_String(), iVersion, NETWORK_VERSION );
 		return;
 	}
 

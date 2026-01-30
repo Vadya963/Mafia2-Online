@@ -14,7 +14,7 @@
     <ProjectGuid>{A3A3B8B8-9578-4B38-95C9-42A6B4D29A07}</ProjectGuid>
     <RootNamespace>m2mp</RootNamespace>
     <ProjectName>Client.Core</ProjectName>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -22,13 +22,13 @@
     <CharacterSet>NotSet</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <UseOfAtl>false</UseOfAtl>
-    <PlatformToolset>v140_xp</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <WholeProgramOptimization>false</WholeProgramOptimization>
     <CharacterSet>NotSet</CharacterSet>
-    <PlatformToolset>v140_xp</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -68,7 +68,7 @@
       <Optimization>Disabled</Optimization>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>legacy_stdio_definitions.lib;winmm.lib;ws2_32.lib;comctl32.lib;d3d9.lib;dxguid.lib;dinput8.lib;DxErr9.lib;detours.lib;dbghelp.lib;bass.lib;freetype265STd.lib;d3dx9.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>legacy_stdio_definitions.lib;winmm.lib;ws2_32.lib;comctl32.lib;d3d9.lib;dxguid.lib;dinput8.lib;DxErr9.lib;detours.lib;dbghelp.lib;bass.lib;freetype265STd.lib;d3dx9.lib;windowsapp.lib;Version.lib;urlmon.lib;onecore.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>../Libraries/cegui-0.4.0-custom/lib;../Libraries/DXSDK/Lib;../Libraries/Detours;../Libraries/bass;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreAllDefaultLibraries>
       </IgnoreAllDefaultLibraries>
@@ -316,6 +316,7 @@
     <ClInclude Include="gui_impl\CGUITexture_Impl.h" />
     <ClInclude Include="gui_impl\CGUIWindow_Impl.h" />
     <ClInclude Include="gui_impl\CGUI_Impl.h" />
+    <ClInclude Include="WebView.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Libraries\squirrel\sqapi.cpp" />

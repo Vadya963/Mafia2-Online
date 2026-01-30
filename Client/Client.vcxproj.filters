@@ -222,6 +222,9 @@
     <Filter Include="Header Files\Shared\Strings">
       <UniqueIdentifier>{b96d8543-21f5-47ce-bd13-4c70af7dd266}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\WebView2">
+      <UniqueIdentifier>{66990671-bb5b-4c7b-84ca-cc93c5fa368c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Shared\CRC.h">
@@ -808,6 +811,9 @@
     </ClInclude>
     <ClInclude Include="engine\CM2TextDatabase.h">
       <Filter>Header Files\Game\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="WebView.h">
+      <Filter>Header Files\WebView2</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

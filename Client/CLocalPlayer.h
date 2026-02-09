@@ -38,6 +38,8 @@ private:
 	bool							m_bRenderHealthbar;
 
 	unsigned long					m_ulLastPingTime;
+	unsigned long					m_ulLastDamageSyncTime;
+	unsigned long					m_ulLastVehicleCollisionDamageTime;
 
 	int								m_oldMoveState;
 
@@ -64,6 +66,8 @@ public:
 	void							OnReloadWeapon							( void );
 	void							OnEnterWater							( void );
 	bool							OnTakeDamage							( void );
+	void							MarkVehicleCollisionDamage				( void );
+	bool							ShouldIgnoreVehicleCollisionDamage	( void );
 
 	void							HandlePassengerKey						( void );
 	void							GetClosestVehicle						( CNetworkVehicle ** pNetworkVehicle, EntityId * seatId );

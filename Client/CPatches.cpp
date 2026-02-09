@@ -194,36 +194,37 @@ DWORD C_Human__TakeDamage_JMP = 0x97EE6F; // Steam: 0x09907DF
 DWORD C_Human__TakeDamage_End = 0x97F392; // Steam: 0x0990D02
 M2Ped *pVehicleCrashPlayer, *pLocalPedddddd;
 CLocalPlayer * ppLocalPlayer;
+bool bShouldProcessTakeDamage = true;
 void __declspec(naked) C_Human__TakeDamage ( void )
 {
 	_asm mov pVehicleCrashPlayer, ecx;
 	_asm pushad;
 
+	bShouldProcessTakeDamage = true;
+
 	// Get the localplayer ped
 	ppLocalPlayer = CLocalPlayer::Instance();
-	pLocalPedddddd = ppLocalPlayer->GetPlayerPed()->GetPed();
+	pLocalPedddddd = NULL;
 
-	if ( pVehicleCrashPlayer == pLocalPedddddd )
+	if ( ppLocalPlayer && ppLocalPlayer->GetPlayerPed() )
 	{
-		// Is not driver of vehicle don't process health changes
-		if (  ppLocalPlayer && ppLocalPlayer->IsInVehicle () && ppLocalPlayer->GetSeat () != 0 )
-		{
-			// TODO: Check that this is actually a vehicle impact causing the damage
+		pLocalPedddddd = ppLocalPlayer->GetPlayerPed()->GetPed();
+	}
 
-			_asm popad;
-			_asm sub     esp, 34h;
-			_asm push	 ebp;
-			_asm jmp	 C_Human__TakeDamage_End;
+	// Process damage callbacks only if the local player is actually the victim.
+	if ( ppLocalPlayer && pVehicleCrashPlayer == pLocalPedddddd )
+	{
+		if ( ppLocalPlayer->ShouldIgnoreVehicleCollisionDamage() )
+		{
+			bShouldProcessTakeDamage = false;
 		}
 		else
-			goto end;
+		{
+			bShouldProcessTakeDamage = ppLocalPlayer->OnTakeDamage();
+		}
 	}
-	else
-		goto end;
 
-end:
-	// Call the localplayer damage function
-	if ( ppLocalPlayer->OnTakeDamage () )
+	if ( bShouldProcessTakeDamage )
 	{
 		_asm popad;
 		_asm sub     esp, 34h;

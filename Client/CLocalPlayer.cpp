@@ -65,6 +65,8 @@ CLocalPlayer::CLocalPlayer( void ) : CNetworkPlayer( true )
 	m_ulDeathTime = 0;
 	m_ulLastFullSyncTime = 0;
 	m_ulLastPingTime = 0;
+	m_ulLastDamageSyncTime = 0;
+	m_ulLastVehicleCollisionDamageTime = 0;
 	m_oldMoveState = -1;
 	m_bRenderNametags = true;
 	m_bRenderHealthbar = true;
@@ -276,7 +278,8 @@ void CLocalPlayer::SendOnFootSync( void )
 	onFootSync.m_bShooting = CCore::Instance()->GetPlayerManager()->GetLocalPlayer()->IsShooting();
 
 	// Get the crouching state
-	onFootSync.m_bCrouching = CCore::Instance()->GetPlayerManager()->GetLocalPlayer()->IsCrouching();
+	bool bDamageReactionSync = (m_ulLastDamageSyncTime > 0 && (SharedUtility::GetTime() - m_ulLastDamageSyncTime) < 650);
+	onFootSync.m_bCrouching = (CCore::Instance()->GetPlayerManager()->GetLocalPlayer()->IsCrouching() || bDamageReactionSync);
 
 	// Write the model index
 	onFootSync.m_uiModelIndex = GetModel();
@@ -624,7 +627,36 @@ bool CLocalPlayer::OnTakeDamage ( void )
 	// Send RPC to server
 	CCore::Instance()->GetNetworkModule()->Call( RPC_PLAYERDAMAGE, NULL, HIGH_PRIORITY, RELIABLE, true );
 
-	return (CCore::Instance()->GetClientScriptingManager()->GetEvents()->Call( "onTakeDamage" ).GetInteger() == 1);
+	bool bProcessDamage = (CCore::Instance()->GetClientScriptingManager()->GetEvents()->Call( "onTakeDamage" ).GetInteger() == 1);
+
+	if ( bProcessDamage )
+	{
+		m_ulLastDamageSyncTime = SharedUtility::GetTime();
+	}
+
+	return bProcessDamage;
+}
+
+void CLocalPlayer::MarkVehicleCollisionDamage( void )
+{
+	m_ulLastVehicleCollisionDamageTime = SharedUtility::GetTime();
+}
+
+bool CLocalPlayer::ShouldIgnoreVehicleCollisionDamage( void )
+{
+	if ( !IsInVehicle() || GetSeat() == 0 )
+		return false;
+
+	if ( m_ulLastVehicleCollisionDamageTime == 0 )
+		return false;
+
+	bool bShouldIgnore = ((SharedUtility::GetTime() - m_ulLastVehicleCollisionDamageTime) < 250);
+	if ( bShouldIgnore )
+	{
+		m_ulLastVehicleCollisionDamageTime = 0;
+	}
+
+	return bShouldIgnore;
 }
 
 void CLocalPlayer::HandleSpawn( bool bRespawn )
@@ -642,6 +674,7 @@ void CLocalPlayer::HandleSpawn( bool bRespawn )
 
 	// Reset the death time
 	m_ulDeathTime = 0;
+	m_ulLastVehicleCollisionDamageTime = 0;
 
 	// Set the state
 	SetState( ePlayerState::PLAYERSTATE_ONFOOT );

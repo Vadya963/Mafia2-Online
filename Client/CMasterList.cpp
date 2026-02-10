@@ -28,7 +28,6 @@
 
 #include "CLogFile.h"
 
-
 /*static*/ bool DummyReceiveHandler( const char *, unsigned int, void * )
 {
 	return true;
@@ -154,13 +153,13 @@ CMasterList::CMasterList( QueryHandler_t handler )
 	m_pMessageBox = CCore::Instance()->GetGUI()->GetCEGUI()->CreateMessageBox( "", "" );
 	m_pMessageBox->SetVisible( false );
 
-	//m_refreshThread = std::thread(std::bind( &CMasterList::WorkerThread, this ));
+	m_refreshThread = std::thread(std::bind( &CMasterList::WorkerThread, this ));
 }
 
 CMasterList::~CMasterList( void )
 {
 	m_forceWorkerShutdown = true;
-	//m_refreshThread.join();
+	m_refreshThread.join();
 }
 
 bool CMasterList::Refresh( eRefreshType type )

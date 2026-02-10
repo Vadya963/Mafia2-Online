@@ -214,14 +214,7 @@ void __declspec(naked) C_Human__TakeDamage ( void )
 	// Process damage callbacks only if the local player is actually the victim.
 	if ( ppLocalPlayer && pVehicleCrashPlayer == pLocalPedddddd )
 	{
-		if ( ppLocalPlayer->ShouldIgnoreVehicleCollisionDamage() )
-		{
-			bShouldProcessTakeDamage = false;
-		}
-		else
-		{
-			bShouldProcessTakeDamage = ppLocalPlayer->OnTakeDamage();
-		}
+		bShouldProcessTakeDamage = ppLocalPlayer->OnTakeDamage();
 	}
 
 	if ( bShouldProcessTakeDamage )

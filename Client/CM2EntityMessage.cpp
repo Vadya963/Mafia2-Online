@@ -21,7 +21,6 @@
 #include "CRemotePlayer.h"
 #include "CLocalPlayer.h"
 #include "CPlayerManager.h"
-#include "CVehicleManager.h"
 
 #include "SharedUtility.h"
 
@@ -94,29 +93,6 @@ bool CM2EntityMessage::HandleEntityEvent( M2EntityMessage * pMessage )
 			{
 				CNetworkPlayer * pKiller = CCore::Instance()->GetPlayerManager()->GetFromGameGUID( pMessage->M2HumanDeathMessage__dwKillerGUID );
 				pLocalPlayer->OnDeath( pKiller );
-				break;
-			}
-
-		case M2Enums::ON_DAMAGE:
-			{
-				if ( pLocalPlayer->IsInVehicle() && pLocalPlayer->GetSeat() != 0 )
-				{
-					CVehicleManager * pVehicleManager = CCore::Instance()->GetVehicleManager();
-					if ( pVehicleManager )
-					{
-						bool bVehicleDamage = (pVehicleManager->GetFromGameGUID( pMessage->m_dwSenderGUID ) != NULL);
-						if ( !bVehicleDamage && pMessage->M2DamageMessage__dwEnemyGUID != 0 )
-						{
-							bVehicleDamage = (pVehicleManager->GetFromGameGUID( pMessage->M2DamageMessage__dwEnemyGUID ) != NULL);
-						}
-
-						if ( bVehicleDamage )
-						{
-							pLocalPlayer->MarkVehicleCollisionDamage();
-						}
-					}
-				}
-
 				break;
 			}
 		}

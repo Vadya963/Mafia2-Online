@@ -66,7 +66,6 @@ CLocalPlayer::CLocalPlayer( void ) : CNetworkPlayer( true )
 	m_ulLastFullSyncTime = 0;
 	m_ulLastPingTime = 0;
 	m_ulLastDamageSyncTime = 0;
-	m_ulLastVehicleCollisionDamageTime = 0;
 	m_oldMoveState = -1;
 	m_bRenderNametags = true;
 	m_bRenderHealthbar = true;
@@ -637,28 +636,6 @@ bool CLocalPlayer::OnTakeDamage ( void )
 	return bProcessDamage;
 }
 
-void CLocalPlayer::MarkVehicleCollisionDamage( void )
-{
-	m_ulLastVehicleCollisionDamageTime = SharedUtility::GetTime();
-}
-
-bool CLocalPlayer::ShouldIgnoreVehicleCollisionDamage( void )
-{
-	if ( !IsInVehicle() || GetSeat() == 0 )
-		return false;
-
-	if ( m_ulLastVehicleCollisionDamageTime == 0 )
-		return false;
-
-	bool bShouldIgnore = ((SharedUtility::GetTime() - m_ulLastVehicleCollisionDamageTime) < 250);
-	if ( bShouldIgnore )
-	{
-		m_ulLastVehicleCollisionDamageTime = 0;
-	}
-
-	return bShouldIgnore;
-}
-
 void CLocalPlayer::HandleSpawn( bool bRespawn )
 {
 	// Are we respawning and not dead?
@@ -674,7 +651,6 @@ void CLocalPlayer::HandleSpawn( bool bRespawn )
 
 	// Reset the death time
 	m_ulDeathTime = 0;
-	m_ulLastVehicleCollisionDamageTime = 0;
 
 	// Set the state
 	SetState( ePlayerState::PLAYERSTATE_ONFOOT );

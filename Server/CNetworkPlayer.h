@@ -44,6 +44,8 @@ private:
 
 	std::list< CNetworkVehicle* >								m_syncingVehicles;
 	unsigned long												m_ulLastPingTime;
+	String													m_strAnimStyleName;
+	String													m_strAnimStyleDirectory;
 
 public:
 
@@ -111,6 +113,8 @@ public:
 	void							SendOnFootSync				( void );
 	void							SendInVehicleSync			( void );
 	void							SendPassengerSync			( void );
+	static void					DumpSyncInterestMetrics	( void );
+	static void					ResetSyncInterestMetrics	( void );
 
 	void							Pulse						( void );
 
@@ -142,6 +146,9 @@ public:
 	int								GetMoney					( void );
 
 	void							SetAnimStyle				(const char *directory, const char *style);
+	void							SetAnimStyleData			(const char *directory, const char *style);
+	const char						* GetAnimStyleName			( void ) { return m_strAnimStyleName.Get(); }
+	const char						* GetAnimStyleDirectory		( void ) { return m_strAnimStyleDirectory.Get(); }
 	void							SetHandModel				(int iHand, int iModel);
 
 };

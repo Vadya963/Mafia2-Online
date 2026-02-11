@@ -19,6 +19,12 @@ class CRemotePlayer : public CNetworkPlayer
 private:
 
 	OnFootSync						m_onFootSync;
+	OnFootSync						m_pendingOnFootSync;
+	bool							m_bHasPendingOnFootSync;
+	unsigned long					m_ulLastOnFootSyncProcessTime;
+
+	void							ProcessOnFootSync			( const OnFootSync &onFootSync );
+	void							ProcessPendingOnFootSync	( void );
 
 public:
 

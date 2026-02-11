@@ -65,6 +65,7 @@ CLocalPlayer::CLocalPlayer( void ) : CNetworkPlayer( true )
 	m_ulDeathTime = 0;
 	m_ulLastFullSyncTime = 0;
 	m_ulLastPingTime = 0;
+	m_ulLastDamageSyncTime = 0;
 	m_oldMoveState = -1;
 	m_bRenderNametags = true;
 	m_bRenderHealthbar = true;
@@ -276,7 +277,8 @@ void CLocalPlayer::SendOnFootSync( void )
 	onFootSync.m_bShooting = CCore::Instance()->GetPlayerManager()->GetLocalPlayer()->IsShooting();
 
 	// Get the crouching state
-	onFootSync.m_bCrouching = CCore::Instance()->GetPlayerManager()->GetLocalPlayer()->IsCrouching();
+	bool bDamageReactionSync = (m_ulLastDamageSyncTime > 0 && (SharedUtility::GetTime() - m_ulLastDamageSyncTime) < 650);
+	onFootSync.m_bCrouching = (CCore::Instance()->GetPlayerManager()->GetLocalPlayer()->IsCrouching() || bDamageReactionSync);
 
 	// Write the model index
 	onFootSync.m_uiModelIndex = GetModel();
@@ -285,7 +287,7 @@ void CLocalPlayer::SendOnFootSync( void )
 	onFootSync.m_iHand = CCore::Instance()->GetPlayerManager()->GetLocalPlayer()->GetHandModelHand();
 
 	// Write the handModel
-	onFootSync.m_iHandModel = CCore::Instance()->GetPlayerManager()->GetLocalPlayer()->GetHandModelHand();
+	onFootSync.m_iHandModel = CCore::Instance()->GetPlayerManager()->GetLocalPlayer()->GetHandModel();
 
 	// Get the player money
 	onFootSync.m_iMoney = GetMoney();
@@ -327,7 +329,7 @@ void CLocalPlayer::SendInVehicleSync( void )
 	pBitStream.WriteCompressed( pVehicle->GetId() );
 
 	// Construct a new in vehicle sync data structure
-	InVehicleSync inVehicleSync;
+	InVehicleSync inVehicleSync = InVehicleSync();
 
 	// Get the vehicle position
 	pVehicle->GetPosition( &inVehicleSync.m_vecPosition );
@@ -624,7 +626,14 @@ bool CLocalPlayer::OnTakeDamage ( void )
 	// Send RPC to server
 	CCore::Instance()->GetNetworkModule()->Call( RPC_PLAYERDAMAGE, NULL, HIGH_PRIORITY, RELIABLE, true );
 
-	return (CCore::Instance()->GetClientScriptingManager()->GetEvents()->Call( "onTakeDamage" ).GetInteger() == 1);
+	bool bProcessDamage = (CCore::Instance()->GetClientScriptingManager()->GetEvents()->Call( "onTakeDamage" ).GetInteger() == 1);
+
+	if ( bProcessDamage )
+	{
+		m_ulLastDamageSyncTime = SharedUtility::GetTime();
+	}
+
+	return bProcessDamage;
 }
 
 void CLocalPlayer::HandleSpawn( bool bRespawn )

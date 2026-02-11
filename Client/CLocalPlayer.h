@@ -38,6 +38,7 @@ private:
 	bool							m_bRenderHealthbar;
 
 	unsigned long					m_ulLastPingTime;
+	unsigned long					m_ulLastDamageSyncTime;
 
 	int								m_oldMoveState;
 

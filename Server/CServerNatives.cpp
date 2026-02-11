@@ -25,6 +25,8 @@ void CServerNatives::Register( CScriptingManager * pScriptingManager )
 	pScriptingManager->RegisterFunction( "startResource", StartResource, 1, "s" );
 	pScriptingManager->RegisterFunction( "stopResource", StopResource, 1, "s" );
 	pScriptingManager->RegisterFunction( "restartResource", RestartResource, 1, "s" );
+	pScriptingManager->RegisterFunction( "dumpSyncInterestStats", DumpSyncInterestStats, 0, NULL );
+	pScriptingManager->RegisterFunction( "resetSyncInterestStats", ResetSyncInterestStats, 0, NULL );
 	pScriptingManager->RegisterFunction( "disableCityShops", DisableCityShops, 1, "b" );
 }
 
@@ -243,5 +245,21 @@ SQInteger CServerNatives::DisableCityShops(SQVM * pVM)
 	CCore::Instance()->SetCityShops(bCityShops);
 
 	sq_pushbool(pVM, true);
+	return 1;
+}
+
+SQInteger CServerNatives::DumpSyncInterestStats( SQVM * pVM )
+{
+	CNetworkPlayer::DumpSyncInterestMetrics();
+
+	sq_pushbool( pVM, true );
+	return 1;
+}
+
+SQInteger CServerNatives::ResetSyncInterestStats( SQVM * pVM )
+{
+	CNetworkPlayer::ResetSyncInterestMetrics();
+
+	sq_pushbool( pVM, true );
 	return 1;
 }

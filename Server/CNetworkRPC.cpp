@@ -13,6 +13,96 @@
 bool	CNetworkRPC::m_bRegistered = false;
 RakNet::BitStream		bsReject;
 
+static bool IsSyncVectorOutOfRange( const CVector3 &vecPos )
+{
+	return ((vecPos.fX > 7000.0f || vecPos.fX < -7000.0f) ||
+		(vecPos.fY > 7000.0f || vecPos.fY < -7000.0f) ||
+		(vecPos.fZ > 7000.0f || vecPos.fZ < -7000.0f));
+}
+
+enum eSyncPacketType
+{
+	SYNC_PACKET_ONFOOT = 0,
+	SYNC_PACKET_INVEHICLE,
+	SYNC_PACKET_PASSENGER,
+	SYNC_PACKET_COUNT
+};
+
+enum eSyncDropReason
+{
+	SYNC_DROP_INVALID = 0,
+	SYNC_DROP_RATE_LIMIT,
+	SYNC_DROP_COUNT
+};
+
+static const unsigned long g_ulSyncIntervalLimits[SYNC_PACKET_COUNT] = { 20, 20, 20 };
+static unsigned long g_ulLastSyncPacketTime[MAX_PLAYERS][SYNC_PACKET_COUNT] = { 0 };
+static unsigned int g_uiSyncDropCounters[SYNC_PACKET_COUNT][SYNC_DROP_COUNT] = { 0 };
+
+static const char * GetSyncPacketTypeName( eSyncPacketType syncPacketType )
+{
+	switch( syncPacketType )
+	{
+		case SYNC_PACKET_ONFOOT: return "onfoot";
+		case SYNC_PACKET_INVEHICLE: return "invehicle";
+		case SYNC_PACKET_PASSENGER: return "passenger";
+		default: return "unknown";
+	}
+}
+
+static const char * GetSyncDropReasonName( eSyncDropReason dropReason )
+{
+	switch( dropReason )
+	{
+		case SYNC_DROP_INVALID: return "invalid";
+		case SYNC_DROP_RATE_LIMIT: return "rate_limited";
+		default: return "unknown";
+	}
+}
+
+static void RegisterSyncDrop( eSyncPacketType syncPacketType, eSyncDropReason dropReason, EntityId playerId )
+{
+	unsigned int uiDroppedPackets = ++g_uiSyncDropCounters[syncPacketType][dropReason];
+
+	if( (uiDroppedPackets % 100) == 0 )
+	{
+		CLogFile::Printf( "[sync-guard] dropped %u %s %s packets (last player: %d)",
+			uiDroppedPackets,
+			GetSyncPacketTypeName( syncPacketType ),
+			GetSyncDropReasonName( dropReason ),
+			playerId );
+	}
+}
+
+static bool IsSyncRateLimited( EntityId playerId, eSyncPacketType syncPacketType )
+{
+	unsigned long ulCurrentTime = SharedUtility::GetTime();
+	unsigned long ulLastPacketTime = g_ulLastSyncPacketTime[playerId][syncPacketType];
+
+	if( ulLastPacketTime != 0 && (ulCurrentTime - ulLastPacketTime) < g_ulSyncIntervalLimits[syncPacketType] )
+		return true;
+
+	g_ulLastSyncPacketTime[playerId][syncPacketType] = ulCurrentTime;
+	return false;
+}
+
+static bool IsValidPassengerSyncPacket( const InPassengerSync &passengerSync )
+{
+	if( !Math::IsValidFloat( passengerSync.m_fHealth ) )
+		return false;
+
+	if( passengerSync.m_fHealth < 0.0f || passengerSync.m_fHealth > 1000.0f )
+		return false;
+
+	if( passengerSync.m_dwSelectedWeapon > 64 )
+		return false;
+
+	if( passengerSync.m_iSelectedWeaponBullet < 0 || passengerSync.m_iSelectedWeaponBullet > 50000 )
+		return false;
+
+	return true;
+}
+
 void InitialData( RakNet::BitStream * pBitStream, RakNet::Packet * pPacket )
 {
 	// Get the playerid
@@ -218,15 +308,36 @@ void PlayerSync( RakNet::BitStream * pBitStream, RakNet::Packet * pPacket )
 	// Get the player id
 	EntityId playerId = (EntityId)pPacket->guid.systemIndex;
 
+	// Is the player id invalid?
+	if( playerId >= MAX_PLAYERS )
+		return;
+
+	if( IsSyncRateLimited( playerId, SYNC_PACKET_ONFOOT ) )
+	{
+		RegisterSyncDrop( SYNC_PACKET_ONFOOT, SYNC_DROP_RATE_LIMIT, playerId );
+		return;
+	}
+
 	// Read the player sync data
 	OnFootSync onFootSync;
 	pBitStream->Read( (char *)&onFootSync, sizeof(OnFootSync) );
 
 	RakNet::RakString strAnimStyleName;
-	pBitStream->Read(strAnimStyleName);
-
 	RakNet::RakString strAnimStyleDirectory;
-	pBitStream->Read(strAnimStyleDirectory);
+	const bool bHasAnimStyleName = pBitStream->Read(strAnimStyleName);
+	const bool bHasAnimStyleDirectory = pBitStream->Read(strAnimStyleDirectory);
+
+	if( !Math::IsValidVector( onFootSync.m_vecPosition ) ||
+		!Math::IsValidVector( onFootSync.m_vecRotation ) ||
+		!Math::IsValidVector( onFootSync.m_vecDirection ) ||
+		!Math::IsValidVector( onFootSync.m_vecLookAt ) ||
+		!Math::IsValidFloat( onFootSync.m_fHealth ) ||
+		onFootSync.m_fHealth < 0.0f || onFootSync.m_fHealth > 1000.0f ||
+		IsSyncVectorOutOfRange( onFootSync.m_vecPosition ) )
+	{
+		RegisterSyncDrop( SYNC_PACKET_ONFOOT, SYNC_DROP_INVALID, playerId );
+		return;
+	}
 
 	// Get a pointer to the player
 	CNetworkPlayer * pNetworkPlayer = CCore::Instance()->GetPlayerManager()->Get( playerId );
@@ -234,7 +345,8 @@ void PlayerSync( RakNet::BitStream * pBitStream, RakNet::Packet * pPacket )
 	// Is the player pointer valid?
 	if( pNetworkPlayer )
 	{
-		pNetworkPlayer->SetAnimStyle(strAnimStyleDirectory, strAnimStyleName);
+		if( bHasAnimStyleName && bHasAnimStyleDirectory )
+			pNetworkPlayer->SetAnimStyleData(strAnimStyleDirectory.C_String(), strAnimStyleName.C_String());
 
 		// Store the sync data
 		pNetworkPlayer->StoreOnFootSync( onFootSync );
@@ -347,6 +459,16 @@ void VehicleSync( RakNet::BitStream * pBitStream, RakNet::Packet * pPacket )
 	// Get the player id
 	EntityId playerId = (EntityId)pPacket->guid.systemIndex;
 
+	// Is the player id invalid?
+	if( playerId >= MAX_PLAYERS )
+		return;
+
+	if( IsSyncRateLimited( playerId, SYNC_PACKET_INVEHICLE ) )
+	{
+		RegisterSyncDrop( SYNC_PACKET_INVEHICLE, SYNC_DROP_RATE_LIMIT, playerId );
+		return;
+	}
+
 	// Read the vehicle id
 	EntityId vehicleId;
 	pBitStream->ReadCompressed( vehicleId );
@@ -354,6 +476,15 @@ void VehicleSync( RakNet::BitStream * pBitStream, RakNet::Packet * pPacket )
 	// Read the sync packet
 	InVehicleSync vehicleSync;
 	pBitStream->Read( (char *)&vehicleSync, sizeof(InVehicleSync) );
+
+	if( !Math::IsValidVector( vehicleSync.m_vecPosition ) ||
+		!Math::IsValidVector( vehicleSync.m_vecRotation ) ||
+		!Math::IsValidVector( vehicleSync.m_vecVelocity ) ||
+		IsSyncVectorOutOfRange( vehicleSync.m_vecPosition ) )
+	{
+		RegisterSyncDrop( SYNC_PACKET_INVEHICLE, SYNC_DROP_INVALID, playerId );
+		return;
+	}
 
 	// Get a pointer to the player
 	CNetworkPlayer * pNetworkPlayer = CCore::Instance()->GetPlayerManager()->Get( playerId );
@@ -377,9 +508,25 @@ void PassengerSync( RakNet::BitStream * pBitStream, RakNet::Packet * pPacket )
 	// Get the player id
 	EntityId playerId = (EntityId)pPacket->guid.systemIndex;
 
+	// Is the player id invalid?
+	if( playerId >= MAX_PLAYERS )
+		return;
+
+	if( IsSyncRateLimited( playerId, SYNC_PACKET_PASSENGER ) )
+	{
+		RegisterSyncDrop( SYNC_PACKET_PASSENGER, SYNC_DROP_RATE_LIMIT, playerId );
+		return;
+	}
+
 	// Read the passenger sync data
 	InPassengerSync passengerSync;
 	pBitStream->Read( (char *)&passengerSync, sizeof(InPassengerSync) );
+
+	if( !IsValidPassengerSyncPacket( passengerSync ) )
+	{
+		RegisterSyncDrop( SYNC_PACKET_PASSENGER, SYNC_DROP_INVALID, playerId );
+		return;
+	}
 
 	// Get a pointer to the player
 	CNetworkPlayer * pNetworkPlayer = CCore::Instance()->GetPlayerManager()->Get( playerId );

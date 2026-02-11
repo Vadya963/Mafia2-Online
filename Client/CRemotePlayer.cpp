@@ -23,14 +23,34 @@
 #include "CSync.h"
 
 #include "SharedUtility.h"
+#include "CSettings.h"
 
 #include "CRemotePlayer.h"
 
 #include "CLogFile.h"
 
+static unsigned long GetRemoteOnFootSyncMinInterval( void )
+{
+	int iMinInterval = CVAR_GET_INTEGER( "remote-onfoot-sync-min-interval" );
+
+	if( iMinInterval <= 0 )
+		return 35;
+
+	if( iMinInterval < 5 )
+		return 5;
+
+	if( iMinInterval > 200 )
+		return 200;
+
+	return (unsigned long)iMinInterval;
+}
+
 CRemotePlayer::CRemotePlayer( void )
 	: CNetworkPlayer( false )
 	, m_onFootSync()
+	, m_pendingOnFootSync()
+	, m_bHasPendingOnFootSync(false)
+	, m_ulLastOnFootSyncProcessTime(0)
 {
 	DEBUG_LOG("CRemotePlayer::CRemotePlayer");
 }
@@ -43,6 +63,8 @@ CRemotePlayer::~CRemotePlayer( void )
 void CRemotePlayer::Pulse( void )
 {
 	DEBUG_LOG("CRemotePlayer::Pulse");
+
+	ProcessPendingOnFootSync();
 
 	// Are we spawned?
 	if ( IsSpawned() )
@@ -80,7 +102,30 @@ void CRemotePlayer::Pulse( void )
 
 void CRemotePlayer::StoreOnFootSync( const OnFootSync &onFootSync )
 {
-	DEBUG_LOG("CRemotePlayer::StoreOnFootSync");
+	m_pendingOnFootSync = onFootSync;
+	m_bHasPendingOnFootSync = true;
+
+	ProcessPendingOnFootSync();
+}
+
+void CRemotePlayer::ProcessPendingOnFootSync( void )
+{
+	if( !m_bHasPendingOnFootSync )
+		return;
+
+	unsigned long ulSyncInterval = GetRemoteOnFootSyncMinInterval();
+	unsigned long ulCurrentTime = SharedUtility::GetTime();
+	if( (ulCurrentTime - m_ulLastOnFootSyncProcessTime) < ulSyncInterval )
+		return;
+
+	m_bHasPendingOnFootSync = false;
+	m_ulLastOnFootSyncProcessTime = ulCurrentTime;
+	ProcessOnFootSync( m_pendingOnFootSync );
+}
+
+void CRemotePlayer::ProcessOnFootSync( const OnFootSync &onFootSync )
+{
+	DEBUG_LOG("CRemotePlayer::ProcessOnFootSync");
 
 	// Is the playerped instance invalid ?
 	if( !m_pPlayerPed )

@@ -63,6 +63,9 @@ void CSettings::LoadDefaults( void )
 	DEFAULT( "nick", "Player" );
 	DEFAULT( "timestamp", true );
 	DEFAULT( "auto-updates", true );
+	DEFAULT( "remote-onfoot-sync-min-interval", 35 );
+	DEFAULT( "vehicle-interpolation-min-delay", 50 );
+	DEFAULT( "vehicle-interpolation-max-delay", 200 );
 	DEFAULT( "multisample-anti-aliasing", 0 );
 	DEFAULT( "anisotropic-filtering", 0 );
 	DEFAULT( "ambient-occlusion", false );
@@ -78,6 +81,12 @@ void CSettings::LoadDefaults( void )
 	DEFAULT( "port", DEFAULT_PORT );
 	DEFAULT( "maxplayers", MAX_PLAYERS );
 	DEFAULT( "weburl", "www.mafia2-online.com" );
+	DEFAULT( "sync-interest-keyframe", true );
+	DEFAULT( "sync-onfoot-interest-range", 350.0f );
+	DEFAULT( "sync-vehicle-interest-range", 450.0f );
+	DEFAULT( "sync-passenger-interest-range", 350.0f );
+	DEFAULT( "sync-interest-hysteresis", 50.0f );
+	DEFAULT( "sync-interest-log-interval", 500 );
 	DEFAULT( "password", "" );
 	DEFAULT( "modules", "" );
 	DEFAULT( "resources", "" );

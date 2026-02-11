@@ -39,6 +39,7 @@
 #include "PacketPriority.h"
 
 #include "SharedUtility.h"
+#include "CSettings.h"
 
 #include "CPlayerManager.h"
 #include "CLocalPlayer.h"
@@ -58,6 +59,38 @@
 
 #include "CLogFile.h"
 
+static unsigned long GetVehicleInterpolationMinDelay( void )
+{
+	int iMinDelay = CVAR_GET_INTEGER( "vehicle-interpolation-min-delay" );
+
+	if( iMinDelay <= 0 )
+		return 50;
+
+	if( iMinDelay < 20 )
+		return 20;
+
+	if( iMinDelay > 500 )
+		return 500;
+
+	return (unsigned long)iMinDelay;
+}
+
+static unsigned long GetVehicleInterpolationMaxDelay( void )
+{
+	int iMaxDelay = CVAR_GET_INTEGER( "vehicle-interpolation-max-delay" );
+
+	if( iMaxDelay <= 0 )
+		return 200;
+
+	if( iMaxDelay < 50 )
+		return 50;
+
+	if( iMaxDelay > 800 )
+		return 800;
+
+	return (unsigned long)iMaxDelay;
+}
+
 CNetworkVehicle::CNetworkVehicle( void )
 {
 	DEBUG_LOG("CNetworkVehicle::CNetworkVehicle");
@@ -68,6 +101,8 @@ CNetworkVehicle::CNetworkVehicle( void )
 	m_pVehicleModelManager = nullptr;
 	m_bSpawned = false;
 	m_bProcessSyncOnSpawn = false;
+	m_ulLastSyncReceiveTime = 0;
+	m_ulInterpolationDelay = NETWORK_TICKRATE;
 	m_bSpawnProcessed = false;
 	m_pLastSyncer = nullptr;
 	m_ulSpawnTime = 0;
@@ -234,6 +269,24 @@ void CNetworkVehicle::HandleRespawn( void )
 void CNetworkVehicle::StoreVehicleSync( const InVehicleSync &vehicleSync, bool bInterpolate, bool bSpawn )
 {
 	DEBUG_LOG("CNetworkVehicle::StoreVehicleSync");
+
+	unsigned long ulMinInterpolationDelay = GetVehicleInterpolationMinDelay();
+	unsigned long ulMaxInterpolationDelay = GetVehicleInterpolationMaxDelay();
+	if( ulMaxInterpolationDelay < ulMinInterpolationDelay )
+		ulMaxInterpolationDelay = ulMinInterpolationDelay;
+
+	unsigned long ulCurrentTime = SharedUtility::GetTime();
+	if( m_ulLastSyncReceiveTime != 0 )
+	{
+		unsigned long ulPacketDelta = (ulCurrentTime - m_ulLastSyncReceiveTime);
+		m_ulInterpolationDelay = Math::Clamp<unsigned long>( ulMinInterpolationDelay, ulPacketDelta, ulMaxInterpolationDelay );
+	}
+	else
+	{
+		m_ulInterpolationDelay = Math::Clamp<unsigned long>( ulMinInterpolationDelay, NETWORK_TICKRATE, ulMaxInterpolationDelay );
+	}
+
+	m_ulLastSyncReceiveTime = ulCurrentTime;
 
 	m_lastSyncData = vehicleSync;
 
@@ -864,13 +917,14 @@ void CNetworkVehicle::SetTargetPosition( CVector3 vecPosition )
 	{
 		UpdateTargetPosition ();
 		unsigned long ulCurrentTime = SharedUtility::GetTime ();
+		float fInterpolationDelay = static_cast<float>(m_ulInterpolationDelay);
 		CVector3 vecCurrentPosition;
 		GetPosition ( &vecCurrentPosition );
 		m_Interpolation.position.vecTarget = vecPosition;
 		m_Interpolation.position.vecError = (vecPosition - vecCurrentPosition);
-		m_Interpolation.position.vecError *= Math::Lerp < const float > ( 0.25f, Math::UnlerpClamped ( 100, NETWORK_TICKRATE, 400 ), 1.0f );
+		m_Interpolation.position.vecError *= Math::Lerp < const float > ( 0.25f, Math::UnlerpClamped ( 100.0f, fInterpolationDelay, 400.0f ), 1.0f );
 		m_Interpolation.position.ulStartTime = ulCurrentTime;
-		m_Interpolation.position.ulFinishTime = (ulCurrentTime + NETWORK_TICKRATE);
+		m_Interpolation.position.ulFinishTime = (ulCurrentTime + m_ulInterpolationDelay);
 		m_Interpolation.position.fLastAlpha = 0.0f;
 	}
 }
@@ -907,13 +961,14 @@ void CNetworkVehicle::SetTargetRotation( CVector3 vecRotation )
 	{
 		UpdateTargetRotation ();
 		unsigned long ulCurrentTime = SharedUtility::GetTime ();
+		float fInterpolationDelay = static_cast<float>(m_ulInterpolationDelay);
 		CVector3 vecCurrentRotation;
 		GetRotation ( &vecCurrentRotation );
 		m_Interpolation.rotation.vecTarget = vecRotation;
 		m_Interpolation.rotation.vecError = Math::GetOffsetDegrees ( vecCurrentRotation, vecRotation );
-		m_Interpolation.rotation.vecError *= Math::Lerp < const float > ( 0.25f, Math::UnlerpClamped ( 100, NETWORK_TICKRATE, 400 ), 1.0f ); // 250ms -> 0.40f
+		m_Interpolation.rotation.vecError *= Math::Lerp < const float > ( 0.25f, Math::UnlerpClamped ( 100.0f, fInterpolationDelay, 400.0f ), 1.0f ); // 250ms -> 0.40f
 		m_Interpolation.rotation.ulStartTime = ulCurrentTime;
-		m_Interpolation.rotation.ulFinishTime = (ulCurrentTime + NETWORK_TICKRATE);
+		m_Interpolation.rotation.ulFinishTime = (ulCurrentTime + m_ulInterpolationDelay);
 		m_Interpolation.rotation.fLastAlpha = 0.0f;
 	}
 }
@@ -946,13 +1001,14 @@ void CNetworkVehicle::SetTargetSteer( float fSteer )
 	{
 		UpdateTargetSteer ();
 		unsigned long ulCurrentTime = SharedUtility::GetTime ();
+		float fInterpolationDelay = static_cast<float>(m_ulInterpolationDelay);
 		float fCurrentSteer = GetSteer ();
 
 		m_Interpolation.steer.fTarget = fSteer;
 		m_Interpolation.steer.fError = (fSteer - fCurrentSteer);
-		m_Interpolation.steer.fError *= Math::Lerp < const float > ( 0.25f, Math::UnlerpClamped ( 100, NETWORK_TICKRATE, 400 ), 1.0f );
+		m_Interpolation.steer.fError *= Math::Lerp < const float > ( 0.25f, Math::UnlerpClamped ( 100.0f, fInterpolationDelay, 400.0f ), 1.0f );
 		m_Interpolation.steer.ulStartTime = ulCurrentTime;
-		m_Interpolation.steer.ulFinishTime = (ulCurrentTime + NETWORK_TICKRATE);
+		m_Interpolation.steer.ulFinishTime = (ulCurrentTime + m_ulInterpolationDelay);
 		m_Interpolation.steer.fLastAlpha = 0.0f;
 	}
 }
@@ -981,14 +1037,15 @@ void CNetworkVehicle::SetTargetSpeed( CVector3 vecSpeed )
 	{
 		UpdateTargetSpeed ();
 		unsigned long ulCurrentTime = SharedUtility::GetTime ();
+		float fInterpolationDelay = static_cast<float>(m_ulInterpolationDelay);
 		CVector3 vecCurrentSpeed;
 		GetSpeedVec ( &vecCurrentSpeed );
 
 		m_Interpolation.speed.vecTarget = vecSpeed;
 		m_Interpolation.speed.vecError = (vecSpeed - vecCurrentSpeed);
-		m_Interpolation.speed.vecError *= Math::Lerp < const float > ( 0.25f, Math::UnlerpClamped ( 100, NETWORK_TICKRATE, 400 ), 1.0f );
+		m_Interpolation.speed.vecError *= Math::Lerp < const float > ( 0.25f, Math::UnlerpClamped ( 100.0f, fInterpolationDelay, 400.0f ), 1.0f );
 		m_Interpolation.speed.ulStartTime = ulCurrentTime;
-		m_Interpolation.speed.ulFinishTime = (ulCurrentTime + NETWORK_TICKRATE);
+		m_Interpolation.speed.ulFinishTime = (ulCurrentTime + m_ulInterpolationDelay);
 		m_Interpolation.speed.fLastAlpha = 0.0f;
 	}
 }

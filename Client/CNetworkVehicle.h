@@ -39,6 +39,8 @@ private:
 
 	InVehicleSync					m_lastSyncData;
 	bool							m_bProcessSyncOnSpawn;
+	unsigned long					m_ulLastSyncReceiveTime;
+	unsigned long					m_ulInterpolationDelay;
 
 	CVector3						m_vecLastGoodPosition;
 	CVector3						m_vecLastGoodRotation;

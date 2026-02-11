@@ -114,6 +114,7 @@ public:
 	void							SendInVehicleSync			( void );
 	void							SendPassengerSync			( void );
 	static void					DumpSyncInterestMetrics	( void );
+	static void					ResetSyncInterestMetrics	( void );
 
 	void							Pulse						( void );
 

@@ -376,6 +376,19 @@ void CNetworkPlayer::DumpSyncInterestMetrics( void )
 	}
 }
 
+void CNetworkPlayer::ResetSyncInterestMetrics( void )
+{
+	for( unsigned int syncType = 0; syncType < SYNC_BROADCAST_COUNT; ++syncType )
+	{
+		for( unsigned int metric = 0; metric < SYNC_INTEREST_METRIC_COUNT; ++metric )
+		{
+			g_uiSyncInterestMetrics[syncType][metric] = 0;
+		}
+	}
+
+	CLogFile::Printf( "[sync-interest] counters reset" );
+}
+
 CNetworkPlayer::CNetworkPlayer( void )
 {
 	// Reset variables

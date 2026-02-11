@@ -540,9 +540,6 @@ void CNetworkPlayer::StoreOnFootSync( const OnFootSync &onFootSync )
 
 	// Send the on foot sync
 	SendOnFootSync();
-
-	// Send a ping back to the player
-	Ping ();
 }
 
 void CNetworkPlayer::StoreInVehicleSync( const InVehicleSync &inVehicleSync )
@@ -552,9 +549,6 @@ void CNetworkPlayer::StoreInVehicleSync( const InVehicleSync &inVehicleSync )
 
 	// Send the vehicle sync
 	SendInVehicleSync();
-
-	// Send a ping back to the player
-	Ping ();
 }
 
 void CNetworkPlayer::StorePassengerSync( const InPassengerSync &passengerSync )
@@ -578,13 +572,6 @@ void CNetworkPlayer::StorePassengerSync( const InPassengerSync &passengerSync )
 
 	// Send the passenger sync
 	SendPassengerSync();
-
-	// Are we not driving?
-	if ( !m_pVehicle || m_iSeat != 0 )
-	{
-		// Send a ping back to the player
-		Ping ();
-	}
 }
 
 void CNetworkPlayer::SendOnFootSync( void )
@@ -600,6 +587,10 @@ void CNetworkPlayer::SendOnFootSync( void )
 
 	// Write the sync data
 	bitStream.Write( (char *)&m_onFootSync, sizeof(OnFootSync) );
+
+	// Write the current anim style data
+	bitStream.Write( RakNet::RakString( m_strAnimStyleName.Get() ) );
+	bitStream.Write( RakNet::RakString( m_strAnimStyleDirectory.Get() ) );
 
 	// Send it to other clients
 	CCore::Instance()->GetNetworkModule()->Call( RPC_PLAYER_SYNC, &bitStream, LOW_PRIORITY, UNRELIABLE_SEQUENCED, m_playerId, true );
@@ -970,6 +961,15 @@ void CNetworkPlayer::SetAnimStyle(const char *directory, const char *style)
 
 	// Send bitstream
 	CCore::Instance()->GetNetworkModule()->Call(RPC_SETANIMSTYLE, &pBitStream, HIGH_PRIORITY, RELIABLE, m_playerId, false);
+
+	// Cache values used by sync rebroadcast
+	SetAnimStyleData(directory, style);
+}
+
+void CNetworkPlayer::SetAnimStyleData(const char *directory, const char *style)
+{
+	m_strAnimStyleDirectory.Set(directory);
+	m_strAnimStyleName.Set(style);
 }
 
 void CNetworkPlayer::SetHandModel(int iHand, int iModel)

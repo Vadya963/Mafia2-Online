@@ -1030,7 +1030,11 @@ void CNetworkPlayer::RemoveFromVehicle( CNetworkVehicle * pVehicle )
 		m_pPlayerPed->GetInOutVehicle( pVehicle->GetVehicle()->GetVehicle(), m_seat, false, true );
 
 		// Handle with the vehicle
-		pVehicle->HandlePlayerExit ( this, m_seat );
+		EntityId seatId = 0;
+		if( m_seat != INVALID_ENTITY_ID && m_seat > 0 )
+			seatId = (m_seat - 1);
+
+		pVehicle->HandlePlayerExit ( this, seatId );
 
 		// Reset
 		SetVehicle ( NULL );

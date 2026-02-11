@@ -228,13 +228,21 @@ void PlayerSync( RakNet::BitStream * pBitStream, RakNet::Packet * pPacket )
 	RakNet::RakString strAnimStyleDirectory;
 	pBitStream->Read(strAnimStyleDirectory);
 
+	if( !Math::IsValidVector( onFootSync.m_vecPosition ) ||
+		!Math::IsValidVector( onFootSync.m_vecRotation ) ||
+		!Math::IsValidVector( onFootSync.m_vecDirection ) ||
+		!Math::IsValidVector( onFootSync.m_vecLookAt ) )
+	{
+		return;
+	}
+
 	// Get a pointer to the player
 	CNetworkPlayer * pNetworkPlayer = CCore::Instance()->GetPlayerManager()->Get( playerId );
 
 	// Is the player pointer valid?
 	if( pNetworkPlayer )
 	{
-		pNetworkPlayer->SetAnimStyle(strAnimStyleDirectory, strAnimStyleName);
+		pNetworkPlayer->SetAnimStyleData(strAnimStyleDirectory.C_String(), strAnimStyleName.C_String());
 
 		// Store the sync data
 		pNetworkPlayer->StoreOnFootSync( onFootSync );
@@ -354,6 +362,13 @@ void VehicleSync( RakNet::BitStream * pBitStream, RakNet::Packet * pPacket )
 	// Read the sync packet
 	InVehicleSync vehicleSync;
 	pBitStream->Read( (char *)&vehicleSync, sizeof(InVehicleSync) );
+
+	if( !Math::IsValidVector( vehicleSync.m_vecPosition ) ||
+		!Math::IsValidVector( vehicleSync.m_vecRotation ) ||
+		!Math::IsValidVector( vehicleSync.m_vecVelocity ) )
+	{
+		return;
+	}
 
 	// Get a pointer to the player
 	CNetworkPlayer * pNetworkPlayer = CCore::Instance()->GetPlayerManager()->Get( playerId );

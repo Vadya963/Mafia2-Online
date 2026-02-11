@@ -287,7 +287,7 @@ void CLocalPlayer::SendOnFootSync( void )
 	onFootSync.m_iHand = CCore::Instance()->GetPlayerManager()->GetLocalPlayer()->GetHandModelHand();
 
 	// Write the handModel
-	onFootSync.m_iHandModel = CCore::Instance()->GetPlayerManager()->GetLocalPlayer()->GetHandModelHand();
+	onFootSync.m_iHandModel = CCore::Instance()->GetPlayerManager()->GetLocalPlayer()->GetHandModel();
 
 	// Get the player money
 	onFootSync.m_iMoney = GetMoney();
@@ -329,7 +329,7 @@ void CLocalPlayer::SendInVehicleSync( void )
 	pBitStream.WriteCompressed( pVehicle->GetId() );
 
 	// Construct a new in vehicle sync data structure
-	InVehicleSync inVehicleSync;
+	InVehicleSync inVehicleSync = InVehicleSync();
 
 	// Get the vehicle position
 	pVehicle->GetPosition( &inVehicleSync.m_vecPosition );

@@ -226,10 +226,9 @@ void PlayerSync( RakNet::BitStream * pBitStream, RakNet::Packet * pPacket )
 	pBitStream->Read( (char *)&onFootSync, sizeof(OnFootSync) );
 
 	RakNet::RakString strAnimStyleName;
-	pBitStream->Read(strAnimStyleName);
-
 	RakNet::RakString strAnimStyleDirectory;
-	pBitStream->Read(strAnimStyleDirectory);
+	const bool bHasAnimStyleName = pBitStream->Read(strAnimStyleName);
+	const bool bHasAnimStyleDirectory = pBitStream->Read(strAnimStyleDirectory);
 
 	CPlayerManager *pPlayerManager = CCore::Instance()->GetPlayerManager();
 
@@ -246,7 +245,8 @@ void PlayerSync( RakNet::BitStream * pBitStream, RakNet::Packet * pPacket )
 	if (playerId == pPlayerManager->GetLocalPlayer()->GetId())
 		return;
 
-	if (pRemotePlayer->GetAnimStyleName() != strAnimStyleName || pRemotePlayer->GetAnimStyleDirectory() != strAnimStyleDirectory)
+	if (bHasAnimStyleName && bHasAnimStyleDirectory &&
+		(pRemotePlayer->GetAnimStyleName() != strAnimStyleName || pRemotePlayer->GetAnimStyleDirectory() != strAnimStyleDirectory))
 		pRemotePlayer->SetAnimStyle(strAnimStyleDirectory, strAnimStyleName);
 
 	pRemotePlayer->StoreOnFootSync( onFootSync );

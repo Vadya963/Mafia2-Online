@@ -589,8 +589,10 @@ void CNetworkPlayer::SendOnFootSync( void )
 	bitStream.Write( (char *)&m_onFootSync, sizeof(OnFootSync) );
 
 	// Write the current anim style data
-	bitStream.Write( RakNet::RakString( m_strAnimStyleName.Get() ) );
-	bitStream.Write( RakNet::RakString( m_strAnimStyleDirectory.Get() ) );
+	const char * szAnimStyleName = m_strAnimStyleName.Get();
+	const char * szAnimStyleDirectory = m_strAnimStyleDirectory.Get();
+	bitStream.Write( RakNet::RakString( szAnimStyleName ? szAnimStyleName : "" ) );
+	bitStream.Write( RakNet::RakString( szAnimStyleDirectory ? szAnimStyleDirectory : "" ) );
 
 	// Send it to other clients
 	CCore::Instance()->GetNetworkModule()->Call( RPC_PLAYER_SYNC, &bitStream, LOW_PRIORITY, UNRELIABLE_SEQUENCED, m_playerId, true );
@@ -968,8 +970,8 @@ void CNetworkPlayer::SetAnimStyle(const char *directory, const char *style)
 
 void CNetworkPlayer::SetAnimStyleData(const char *directory, const char *style)
 {
-	m_strAnimStyleDirectory.Set(directory);
-	m_strAnimStyleName.Set(style);
+	m_strAnimStyleDirectory.Set(directory ? directory : "");
+	m_strAnimStyleName.Set(style ? style : "");
 }
 
 void CNetworkPlayer::SetHandModel(int iHand, int iModel)

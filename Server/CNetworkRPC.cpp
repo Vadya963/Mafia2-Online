@@ -13,6 +13,13 @@
 bool	CNetworkRPC::m_bRegistered = false;
 RakNet::BitStream		bsReject;
 
+static bool IsSyncVectorOutOfRange( const CVector3 &vecPos )
+{
+	return ((vecPos.fX > 7000.0f || vecPos.fX < -7000.0f) ||
+		(vecPos.fY > 7000.0f || vecPos.fY < -7000.0f) ||
+		(vecPos.fZ > 7000.0f || vecPos.fZ < -7000.0f));
+}
+
 void InitialData( RakNet::BitStream * pBitStream, RakNet::Packet * pPacket )
 {
 	// Get the playerid
@@ -223,15 +230,15 @@ void PlayerSync( RakNet::BitStream * pBitStream, RakNet::Packet * pPacket )
 	pBitStream->Read( (char *)&onFootSync, sizeof(OnFootSync) );
 
 	RakNet::RakString strAnimStyleName;
-	pBitStream->Read(strAnimStyleName);
-
 	RakNet::RakString strAnimStyleDirectory;
-	pBitStream->Read(strAnimStyleDirectory);
+	const bool bHasAnimStyleName = pBitStream->Read(strAnimStyleName);
+	const bool bHasAnimStyleDirectory = pBitStream->Read(strAnimStyleDirectory);
 
 	if( !Math::IsValidVector( onFootSync.m_vecPosition ) ||
 		!Math::IsValidVector( onFootSync.m_vecRotation ) ||
 		!Math::IsValidVector( onFootSync.m_vecDirection ) ||
-		!Math::IsValidVector( onFootSync.m_vecLookAt ) )
+		!Math::IsValidVector( onFootSync.m_vecLookAt ) ||
+		IsSyncVectorOutOfRange( onFootSync.m_vecPosition ) )
 	{
 		return;
 	}
@@ -242,7 +249,8 @@ void PlayerSync( RakNet::BitStream * pBitStream, RakNet::Packet * pPacket )
 	// Is the player pointer valid?
 	if( pNetworkPlayer )
 	{
-		pNetworkPlayer->SetAnimStyleData(strAnimStyleDirectory.C_String(), strAnimStyleName.C_String());
+		if( bHasAnimStyleName && bHasAnimStyleDirectory )
+			pNetworkPlayer->SetAnimStyleData(strAnimStyleDirectory.C_String(), strAnimStyleName.C_String());
 
 		// Store the sync data
 		pNetworkPlayer->StoreOnFootSync( onFootSync );
@@ -365,7 +373,8 @@ void VehicleSync( RakNet::BitStream * pBitStream, RakNet::Packet * pPacket )
 
 	if( !Math::IsValidVector( vehicleSync.m_vecPosition ) ||
 		!Math::IsValidVector( vehicleSync.m_vecRotation ) ||
-		!Math::IsValidVector( vehicleSync.m_vecVelocity ) )
+		!Math::IsValidVector( vehicleSync.m_vecVelocity ) ||
+		IsSyncVectorOutOfRange( vehicleSync.m_vecPosition ) )
 	{
 		return;
 	}

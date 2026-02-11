@@ -155,6 +155,40 @@ unsigned int playerColors[] =
 	0x9F945CFF, 0xDCDE3DFF, 0x10C9C5FF, 0x70524DFF, 0x0BE472FF
 };
 
+static const float ONFOOT_SYNC_INTEREST_RANGE = 350.0f;
+static const float VEHICLE_SYNC_INTEREST_RANGE = 450.0f;
+static const float PASSENGER_SYNC_INTEREST_RANGE = 350.0f;
+
+static void SendSyncToNearbyPlayers( const char * szIdentifier, RakNet::BitStream * pBitStream, EntityId sourcePlayerId, float fInterestRange )
+{
+	CPlayerManager * pPlayerManager = CCore::Instance()->GetPlayerManager();
+	CNetworkPlayer * pSourcePlayer = pPlayerManager->Get( sourcePlayerId );
+
+	if( !pSourcePlayer )
+		return;
+
+	CVector3 vecSourcePosition;
+	pSourcePlayer->GetPosition( &vecSourcePosition );
+
+	for( EntityId playerId = 0; playerId < MAX_PLAYERS; ++playerId )
+	{
+		if( playerId == sourcePlayerId || !pPlayerManager->IsActive( playerId ) )
+			continue;
+
+		CNetworkPlayer * pTargetPlayer = pPlayerManager->Get( playerId );
+		if( !pTargetPlayer )
+			continue;
+
+		CVector3 vecTargetPosition;
+		pTargetPlayer->GetPosition( &vecTargetPosition );
+
+		if( Math::IsDistanceBetweenPointsLessThen( vecSourcePosition, vecTargetPosition, fInterestRange ) )
+		{
+			CCore::Instance()->GetNetworkModule()->Call( szIdentifier, pBitStream, LOW_PRIORITY, UNRELIABLE_SEQUENCED, playerId, false );
+		}
+	}
+}
+
 CNetworkPlayer::CNetworkPlayer( void )
 {
 	// Reset variables
@@ -594,8 +628,8 @@ void CNetworkPlayer::SendOnFootSync( void )
 	bitStream.Write( RakNet::RakString( szAnimStyleName ? szAnimStyleName : "" ) );
 	bitStream.Write( RakNet::RakString( szAnimStyleDirectory ? szAnimStyleDirectory : "" ) );
 
-	// Send it to other clients
-	CCore::Instance()->GetNetworkModule()->Call( RPC_PLAYER_SYNC, &bitStream, LOW_PRIORITY, UNRELIABLE_SEQUENCED, m_playerId, true );
+	// Send it to relevant clients
+	SendSyncToNearbyPlayers( RPC_PLAYER_SYNC, &bitStream, m_playerId, ONFOOT_SYNC_INTEREST_RANGE );
 }
 
 void CNetworkPlayer::SendInVehicleSync( void )
@@ -619,8 +653,8 @@ void CNetworkPlayer::SendInVehicleSync( void )
 	// Write the passenger sync structure
 	bitStream.Write( (char *)&m_inVehicleSync, sizeof(InVehicleSync) );
 
-	// Send it to other clients
-	CCore::Instance()->GetNetworkModule()->Call( RPC_VEHICLE_SYNC, &bitStream, LOW_PRIORITY, UNRELIABLE_SEQUENCED, m_playerId, true );
+	// Send it to relevant clients
+	SendSyncToNearbyPlayers( RPC_VEHICLE_SYNC, &bitStream, m_playerId, VEHICLE_SYNC_INTEREST_RANGE );
 }
 
 void CNetworkPlayer::SendPassengerSync( void )
@@ -637,8 +671,8 @@ void CNetworkPlayer::SendPassengerSync( void )
 	// Write the passenger sync structure
 	bitStream.Write( (char *)&m_passengerSync, sizeof(InPassengerSync) );
 
-	// Send it to other clients
-	CCore::Instance()->GetNetworkModule()->Call( RPC_PASSENGER_SYNC, &bitStream, LOW_PRIORITY, UNRELIABLE_SEQUENCED, m_playerId, true );
+	// Send it to relevant clients
+	SendSyncToNearbyPlayers( RPC_PASSENGER_SYNC, &bitStream, m_playerId, PASSENGER_SYNC_INTEREST_RANGE );
 }
 
 void CNetworkPlayer::Pulse( void )

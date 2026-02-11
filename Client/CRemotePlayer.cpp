@@ -23,12 +23,27 @@
 #include "CSync.h"
 
 #include "SharedUtility.h"
+#include "CSettings.h"
 
 #include "CRemotePlayer.h"
 
 #include "CLogFile.h"
 
-static const unsigned long REMOTE_ONFOOT_SYNC_MIN_INTERVAL = 35;
+static unsigned long GetRemoteOnFootSyncMinInterval( void )
+{
+	int iMinInterval = CVAR_GET_INTEGER( "remote-onfoot-sync-min-interval" );
+
+	if( iMinInterval <= 0 )
+		return 35;
+
+	if( iMinInterval < 5 )
+		return 5;
+
+	if( iMinInterval > 200 )
+		return 200;
+
+	return (unsigned long)iMinInterval;
+}
 
 CRemotePlayer::CRemotePlayer( void )
 	: CNetworkPlayer( false )
@@ -98,8 +113,9 @@ void CRemotePlayer::ProcessPendingOnFootSync( void )
 	if( !m_bHasPendingOnFootSync )
 		return;
 
+	unsigned long ulSyncInterval = GetRemoteOnFootSyncMinInterval();
 	unsigned long ulCurrentTime = SharedUtility::GetTime();
-	if( (ulCurrentTime - m_ulLastOnFootSyncProcessTime) < REMOTE_ONFOOT_SYNC_MIN_INTERVAL )
+	if( (ulCurrentTime - m_ulLastOnFootSyncProcessTime) < ulSyncInterval )
 		return;
 
 	m_bHasPendingOnFootSync = false;

@@ -155,37 +155,136 @@ unsigned int playerColors[] =
 	0x9F945CFF, 0xDCDE3DFF, 0x10C9C5FF, 0x70524DFF, 0x0BE472FF
 };
 
-static const float ONFOOT_SYNC_INTEREST_RANGE = 350.0f;
-static const float VEHICLE_SYNC_INTEREST_RANGE = 450.0f;
-static const float PASSENGER_SYNC_INTEREST_RANGE = 350.0f;
-
-static void SendSyncToNearbyPlayers( const char * szIdentifier, RakNet::BitStream * pBitStream, EntityId sourcePlayerId, float fInterestRange )
+enum eSyncBroadcastType
 {
-	CPlayerManager * pPlayerManager = CCore::Instance()->GetPlayerManager();
-	CNetworkPlayer * pSourcePlayer = pPlayerManager->Get( sourcePlayerId );
+	SYNC_BROADCAST_ONFOOT = 0,
+	SYNC_BROADCAST_INVEHICLE,
+	SYNC_BROADCAST_PASSENGER,
+	SYNC_BROADCAST_COUNT
+};
 
+static bool g_bSyncInterestState[SYNC_BROADCAST_COUNT][MAX_PLAYERS][MAX_PLAYERS] = { false };
+
+static const char * GetSyncBroadcastIdentifier( eSyncBroadcastType syncType )
+{
+	switch( syncType )
+	{
+		case SYNC_BROADCAST_ONFOOT: return RPC_PLAYER_SYNC;
+		case SYNC_BROADCAST_INVEHICLE: return RPC_VEHICLE_SYNC;
+		case SYNC_BROADCAST_PASSENGER: return RPC_PASSENGER_SYNC;
+		default: return NULL;
+	}
+}
+
+static float GetSyncInterestRange( eSyncBroadcastType syncType )
+{
+	float fInterestRange = 0.0f;
+
+	switch( syncType )
+	{
+		case SYNC_BROADCAST_ONFOOT:
+			fInterestRange = CVAR_GET_FLOAT( "sync-onfoot-interest-range" );
+			if( fInterestRange <= 0.0f )
+				fInterestRange = 350.0f;
+			break;
+
+		case SYNC_BROADCAST_INVEHICLE:
+			fInterestRange = CVAR_GET_FLOAT( "sync-vehicle-interest-range" );
+			if( fInterestRange <= 0.0f )
+				fInterestRange = 450.0f;
+			break;
+
+		case SYNC_BROADCAST_PASSENGER:
+			fInterestRange = CVAR_GET_FLOAT( "sync-passenger-interest-range" );
+			if( fInterestRange <= 0.0f )
+				fInterestRange = 350.0f;
+			break;
+
+		default:
+			fInterestRange = 350.0f;
+			break;
+	}
+
+	return fInterestRange;
+}
+
+static void ResetSyncInterestStateForPlayer( EntityId playerId )
+{
+	if( playerId >= MAX_PLAYERS )
+		return;
+
+	for( unsigned int syncType = 0; syncType < SYNC_BROADCAST_COUNT; ++syncType )
+	{
+		for( EntityId targetPlayerId = 0; targetPlayerId < MAX_PLAYERS; ++targetPlayerId )
+		{
+			g_bSyncInterestState[syncType][playerId][targetPlayerId] = false;
+			g_bSyncInterestState[syncType][targetPlayerId][playerId] = false;
+		}
+	}
+}
+
+static void SendSyncToNearbyPlayers( EntityId sourcePlayerId, RakNet::BitStream * pBitStream, eSyncBroadcastType syncType )
+{
+	if( sourcePlayerId >= MAX_PLAYERS || !pBitStream )
+		return;
+
+	CPlayerManager * pPlayerManager = CCore::Instance()->GetPlayerManager();
+	if( !pPlayerManager || !pPlayerManager->IsActive( sourcePlayerId ) )
+		return;
+
+	CNetworkPlayer * pSourcePlayer = pPlayerManager->Get( sourcePlayerId );
 	if( !pSourcePlayer )
 		return;
 
+	unsigned int uiBitStreamSize = pBitStream->GetNumberOfBytesUsed();
+	if( uiBitStreamSize == 0 )
+		return;
+
+	const char * szIdentifier = GetSyncBroadcastIdentifier( syncType );
+	if( !szIdentifier )
+		return;
+
+	bool bSendKeyframes = CVAR_GET_BOOL( "sync-interest-keyframe" );
+	float fInterestRange = GetSyncInterestRange( syncType );
+
 	CVector3 vecSourcePosition;
 	pSourcePlayer->GetPosition( &vecSourcePosition );
+	if( !Math::IsValidVector( vecSourcePosition ) )
+		return;
 
-	for( EntityId playerId = 0; playerId < MAX_PLAYERS; ++playerId )
+	for( EntityId targetPlayerId = 0; targetPlayerId < MAX_PLAYERS; ++targetPlayerId )
 	{
-		if( playerId == sourcePlayerId || !pPlayerManager->IsActive( playerId ) )
-			continue;
+		bool bShouldSync = false;
 
-		CNetworkPlayer * pTargetPlayer = pPlayerManager->Get( playerId );
-		if( !pTargetPlayer )
-			continue;
-
-		CVector3 vecTargetPosition;
-		pTargetPlayer->GetPosition( &vecTargetPosition );
-
-		if( Math::IsDistanceBetweenPointsLessThen( vecSourcePosition, vecTargetPosition, fInterestRange ) )
+		if( targetPlayerId != sourcePlayerId && pPlayerManager->IsActive( targetPlayerId ) )
 		{
-			CCore::Instance()->GetNetworkModule()->Call( szIdentifier, pBitStream, LOW_PRIORITY, UNRELIABLE_SEQUENCED, playerId, false );
+			CNetworkPlayer * pTargetPlayer = pPlayerManager->Get( targetPlayerId );
+			if( pTargetPlayer )
+			{
+				CVector3 vecTargetPosition;
+				pTargetPlayer->GetPosition( &vecTargetPosition );
+
+				if( Math::IsValidVector( vecTargetPosition ) && Math::IsDistanceBetweenPointsLessThen( vecSourcePosition, vecTargetPosition, fInterestRange ) )
+					bShouldSync = true;
+			}
 		}
+
+		bool bWasSyncing = g_bSyncInterestState[syncType][sourcePlayerId][targetPlayerId];
+		g_bSyncInterestState[syncType][sourcePlayerId][targetPlayerId] = bShouldSync;
+
+		if( !bShouldSync )
+			continue;
+
+		if( bSendKeyframes && !bWasSyncing )
+		{
+			RakNet::BitStream reliableBitStream;
+			reliableBitStream.Write( (char *)pBitStream->GetData(), uiBitStreamSize );
+			CCore::Instance()->GetNetworkModule()->Call( szIdentifier, &reliableBitStream, MEDIUM_PRIORITY, RELIABLE_ORDERED, targetPlayerId, false );
+		}
+
+		RakNet::BitStream syncBitStream;
+		syncBitStream.Write( (char *)pBitStream->GetData(), uiBitStreamSize );
+		CCore::Instance()->GetNetworkModule()->Call( szIdentifier, &syncBitStream, LOW_PRIORITY, UNRELIABLE_SEQUENCED, targetPlayerId, false );
 	}
 }
 
@@ -214,6 +313,7 @@ void CNetworkPlayer::SetId( EntityId playerId )
 {
 	// Set the player id
 	m_playerId = playerId;
+	ResetSyncInterestStateForPlayer( playerId );
 
 	// Set the new player colour
 	m_uiColour = playerColors[ playerId ];
@@ -629,7 +729,7 @@ void CNetworkPlayer::SendOnFootSync( void )
 	bitStream.Write( RakNet::RakString( szAnimStyleDirectory ? szAnimStyleDirectory : "" ) );
 
 	// Send it to relevant clients
-	SendSyncToNearbyPlayers( RPC_PLAYER_SYNC, &bitStream, m_playerId, ONFOOT_SYNC_INTEREST_RANGE );
+	SendSyncToNearbyPlayers( m_playerId, &bitStream, SYNC_BROADCAST_ONFOOT );
 }
 
 void CNetworkPlayer::SendInVehicleSync( void )
@@ -654,7 +754,7 @@ void CNetworkPlayer::SendInVehicleSync( void )
 	bitStream.Write( (char *)&m_inVehicleSync, sizeof(InVehicleSync) );
 
 	// Send it to relevant clients
-	SendSyncToNearbyPlayers( RPC_VEHICLE_SYNC, &bitStream, m_playerId, VEHICLE_SYNC_INTEREST_RANGE );
+	SendSyncToNearbyPlayers( m_playerId, &bitStream, SYNC_BROADCAST_INVEHICLE );
 }
 
 void CNetworkPlayer::SendPassengerSync( void )
@@ -672,7 +772,7 @@ void CNetworkPlayer::SendPassengerSync( void )
 	bitStream.Write( (char *)&m_passengerSync, sizeof(InPassengerSync) );
 
 	// Send it to relevant clients
-	SendSyncToNearbyPlayers( RPC_PASSENGER_SYNC, &bitStream, m_playerId, PASSENGER_SYNC_INTEREST_RANGE );
+	SendSyncToNearbyPlayers( m_playerId, &bitStream, SYNC_BROADCAST_PASSENGER );
 }
 
 void CNetworkPlayer::Pulse( void )

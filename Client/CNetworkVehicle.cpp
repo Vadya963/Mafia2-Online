@@ -39,6 +39,7 @@
 #include "PacketPriority.h"
 
 #include "SharedUtility.h"
+#include "CSettings.h"
 
 #include "CPlayerManager.h"
 #include "CLocalPlayer.h"
@@ -57,6 +58,38 @@
 #include "CNetworkVehicle.h"
 
 #include "CLogFile.h"
+
+static unsigned long GetVehicleInterpolationMinDelay( void )
+{
+	int iMinDelay = CVAR_GET_INTEGER( "vehicle-interpolation-min-delay" );
+
+	if( iMinDelay <= 0 )
+		return 50;
+
+	if( iMinDelay < 20 )
+		return 20;
+
+	if( iMinDelay > 500 )
+		return 500;
+
+	return (unsigned long)iMinDelay;
+}
+
+static unsigned long GetVehicleInterpolationMaxDelay( void )
+{
+	int iMaxDelay = CVAR_GET_INTEGER( "vehicle-interpolation-max-delay" );
+
+	if( iMaxDelay <= 0 )
+		return 200;
+
+	if( iMaxDelay < 50 )
+		return 50;
+
+	if( iMaxDelay > 800 )
+		return 800;
+
+	return (unsigned long)iMaxDelay;
+}
 
 CNetworkVehicle::CNetworkVehicle( void )
 {
@@ -237,15 +270,20 @@ void CNetworkVehicle::StoreVehicleSync( const InVehicleSync &vehicleSync, bool b
 {
 	DEBUG_LOG("CNetworkVehicle::StoreVehicleSync");
 
+	unsigned long ulMinInterpolationDelay = GetVehicleInterpolationMinDelay();
+	unsigned long ulMaxInterpolationDelay = GetVehicleInterpolationMaxDelay();
+	if( ulMaxInterpolationDelay < ulMinInterpolationDelay )
+		ulMaxInterpolationDelay = ulMinInterpolationDelay;
+
 	unsigned long ulCurrentTime = SharedUtility::GetTime();
 	if( m_ulLastSyncReceiveTime != 0 )
 	{
 		unsigned long ulPacketDelta = (ulCurrentTime - m_ulLastSyncReceiveTime);
-		m_ulInterpolationDelay = Math::Clamp<unsigned long>( 50UL, ulPacketDelta, 200UL );
+		m_ulInterpolationDelay = Math::Clamp<unsigned long>( ulMinInterpolationDelay, ulPacketDelta, ulMaxInterpolationDelay );
 	}
 	else
 	{
-		m_ulInterpolationDelay = NETWORK_TICKRATE;
+		m_ulInterpolationDelay = Math::Clamp<unsigned long>( ulMinInterpolationDelay, NETWORK_TICKRATE, ulMaxInterpolationDelay );
 	}
 
 	m_ulLastSyncReceiveTime = ulCurrentTime;

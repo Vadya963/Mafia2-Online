@@ -113,6 +113,7 @@ public:
 	void							SendOnFootSync				( void );
 	void							SendInVehicleSync			( void );
 	void							SendPassengerSync			( void );
+	static void					DumpSyncInterestMetrics	( void );
 
 	void							Pulse						( void );
 

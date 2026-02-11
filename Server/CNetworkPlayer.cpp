@@ -363,6 +363,19 @@ static void SendSyncToNearbyPlayers( EntityId sourcePlayerId, RakNet::BitStream 
 	}
 }
 
+void CNetworkPlayer::DumpSyncInterestMetrics( void )
+{
+	for( unsigned int syncType = 0; syncType < SYNC_BROADCAST_COUNT; ++syncType )
+	{
+		CLogFile::Printf( "[sync-interest] %s sent=%u keyframe=%u enter=%u exit=%u",
+			GetSyncBroadcastName( (eSyncBroadcastType)syncType ),
+			g_uiSyncInterestMetrics[syncType][SYNC_INTEREST_SENT],
+			g_uiSyncInterestMetrics[syncType][SYNC_INTEREST_KEYFRAME],
+			g_uiSyncInterestMetrics[syncType][SYNC_INTEREST_ENTER],
+			g_uiSyncInterestMetrics[syncType][SYNC_INTEREST_EXIT] );
+	}
+}
+
 CNetworkPlayer::CNetworkPlayer( void )
 {
 	// Reset variables

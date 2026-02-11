@@ -85,6 +85,8 @@ void CSettings::LoadDefaults( void )
 	DEFAULT( "sync-onfoot-interest-range", 350.0f );
 	DEFAULT( "sync-vehicle-interest-range", 450.0f );
 	DEFAULT( "sync-passenger-interest-range", 350.0f );
+	DEFAULT( "sync-interest-hysteresis", 50.0f );
+	DEFAULT( "sync-interest-log-interval", 500 );
 	DEFAULT( "password", "" );
 	DEFAULT( "modules", "" );
 	DEFAULT( "resources", "" );

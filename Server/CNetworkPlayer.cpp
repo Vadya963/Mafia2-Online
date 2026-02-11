@@ -163,7 +163,73 @@ enum eSyncBroadcastType
 	SYNC_BROADCAST_COUNT
 };
 
+enum eSyncInterestMetric
+{
+	SYNC_INTEREST_SENT = 0,
+	SYNC_INTEREST_KEYFRAME,
+	SYNC_INTEREST_ENTER,
+	SYNC_INTEREST_EXIT,
+	SYNC_INTEREST_METRIC_COUNT
+};
+
 static bool g_bSyncInterestState[SYNC_BROADCAST_COUNT][MAX_PLAYERS][MAX_PLAYERS] = { false };
+static unsigned int g_uiSyncInterestMetrics[SYNC_BROADCAST_COUNT][SYNC_INTEREST_METRIC_COUNT] = { 0 };
+
+static const char * GetSyncBroadcastName( eSyncBroadcastType syncType )
+{
+	switch( syncType )
+	{
+		case SYNC_BROADCAST_ONFOOT: return "onfoot";
+		case SYNC_BROADCAST_INVEHICLE: return "invehicle";
+		case SYNC_BROADCAST_PASSENGER: return "passenger";
+		default: return "unknown";
+	}
+}
+
+static float GetSyncInterestHysteresis( void )
+{
+	float fHysteresis = CVAR_GET_FLOAT( "sync-interest-hysteresis" );
+
+	if( fHysteresis < 0.0f )
+		fHysteresis = 0.0f;
+
+	if( fHysteresis > 2000.0f )
+		fHysteresis = 2000.0f;
+
+	return fHysteresis;
+}
+
+static int GetSyncInterestLogInterval( void )
+{
+	int iLogInterval = CVAR_GET_INTEGER( "sync-interest-log-interval" );
+
+	if( iLogInterval <= 0 )
+		return 500;
+
+	return Math::Clamp<int>( 50, iLogInterval, 1000000 );
+}
+
+static void RegisterSyncInterestMetric( eSyncBroadcastType syncType, eSyncInterestMetric metric )
+{
+	if( syncType >= SYNC_BROADCAST_COUNT || metric >= SYNC_INTEREST_METRIC_COUNT )
+		return;
+
+	unsigned int uiMetricValue = ++g_uiSyncInterestMetrics[syncType][metric];
+
+	if( metric != SYNC_INTEREST_SENT )
+		return;
+
+	int iLogInterval = GetSyncInterestLogInterval();
+	if( iLogInterval <= 0 || (uiMetricValue % (unsigned int)iLogInterval) != 0 )
+		return;
+
+	CLogFile::Printf( "[sync-interest] %s sent=%u keyframe=%u enter=%u exit=%u",
+		GetSyncBroadcastName( syncType ),
+		g_uiSyncInterestMetrics[syncType][SYNC_INTEREST_SENT],
+		g_uiSyncInterestMetrics[syncType][SYNC_INTEREST_KEYFRAME],
+		g_uiSyncInterestMetrics[syncType][SYNC_INTEREST_ENTER],
+		g_uiSyncInterestMetrics[syncType][SYNC_INTEREST_EXIT] );
+}
 
 static const char * GetSyncBroadcastIdentifier( eSyncBroadcastType syncType )
 {
@@ -246,6 +312,7 @@ static void SendSyncToNearbyPlayers( EntityId sourcePlayerId, RakNet::BitStream 
 
 	bool bSendKeyframes = CVAR_GET_BOOL( "sync-interest-keyframe" );
 	float fInterestRange = GetSyncInterestRange( syncType );
+	float fInterestHysteresis = GetSyncInterestHysteresis();
 
 	CVector3 vecSourcePosition;
 	pSourcePlayer->GetPosition( &vecSourcePosition );
@@ -254,7 +321,9 @@ static void SendSyncToNearbyPlayers( EntityId sourcePlayerId, RakNet::BitStream 
 
 	for( EntityId targetPlayerId = 0; targetPlayerId < MAX_PLAYERS; ++targetPlayerId )
 	{
+		bool bWasSyncing = g_bSyncInterestState[syncType][sourcePlayerId][targetPlayerId];
 		bool bShouldSync = false;
+		float fCurrentInterestRange = (bWasSyncing ? (fInterestRange + fInterestHysteresis) : fInterestRange);
 
 		if( targetPlayerId != sourcePlayerId && pPlayerManager->IsActive( targetPlayerId ) )
 		{
@@ -264,13 +333,17 @@ static void SendSyncToNearbyPlayers( EntityId sourcePlayerId, RakNet::BitStream 
 				CVector3 vecTargetPosition;
 				pTargetPlayer->GetPosition( &vecTargetPosition );
 
-				if( Math::IsValidVector( vecTargetPosition ) && Math::IsDistanceBetweenPointsLessThen( vecSourcePosition, vecTargetPosition, fInterestRange ) )
+				if( Math::IsValidVector( vecTargetPosition ) && Math::IsDistanceBetweenPointsLessThen( vecSourcePosition, vecTargetPosition, fCurrentInterestRange ) )
 					bShouldSync = true;
 			}
 		}
 
-		bool bWasSyncing = g_bSyncInterestState[syncType][sourcePlayerId][targetPlayerId];
 		g_bSyncInterestState[syncType][sourcePlayerId][targetPlayerId] = bShouldSync;
+
+		if( bShouldSync && !bWasSyncing )
+			RegisterSyncInterestMetric( syncType, SYNC_INTEREST_ENTER );
+		else if( !bShouldSync && bWasSyncing )
+			RegisterSyncInterestMetric( syncType, SYNC_INTEREST_EXIT );
 
 		if( !bShouldSync )
 			continue;
@@ -280,11 +353,13 @@ static void SendSyncToNearbyPlayers( EntityId sourcePlayerId, RakNet::BitStream 
 			RakNet::BitStream reliableBitStream;
 			reliableBitStream.Write( (char *)pBitStream->GetData(), uiBitStreamSize );
 			CCore::Instance()->GetNetworkModule()->Call( szIdentifier, &reliableBitStream, MEDIUM_PRIORITY, RELIABLE_ORDERED, targetPlayerId, false );
+			RegisterSyncInterestMetric( syncType, SYNC_INTEREST_KEYFRAME );
 		}
 
 		RakNet::BitStream syncBitStream;
 		syncBitStream.Write( (char *)pBitStream->GetData(), uiBitStreamSize );
 		CCore::Instance()->GetNetworkModule()->Call( szIdentifier, &syncBitStream, LOW_PRIORITY, UNRELIABLE_SEQUENCED, targetPlayerId, false );
+		RegisterSyncInterestMetric( syncType, SYNC_INTEREST_SENT );
 	}
 }
 
@@ -306,7 +381,7 @@ CNetworkPlayer::CNetworkPlayer( void )
 
 CNetworkPlayer::~CNetworkPlayer( void )
 {
-
+	ResetSyncInterestStateForPlayer( m_playerId );
 }
 
 void CNetworkPlayer::SetId( EntityId playerId )
@@ -1020,6 +1095,8 @@ bool CNetworkPlayer::IsSyncingVehicle( CNetworkVehicle * pNetworkVehicle )
 
 void CNetworkPlayer::HandlePlayerQuit( void )
 {
+	ResetSyncInterestStateForPlayer( m_playerId );
+
 	// Loop over all vehicles this player is syncing
 	for( std::list< CNetworkVehicle* >::iterator iter = m_syncingVehicles.begin(); iter != m_syncingVehicles.end(); iter++ )
 	{

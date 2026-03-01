@@ -120,6 +120,9 @@ SQInteger CPlayerNatives::getGUID(SQVM *pVM)
 		sq_pushinteger(pVM, controls);
 		return (true);
 	}
+
+	sq_pushbool(pVM, false);
+	return 1;
 }
 
 // getPlayerMoveState(playerid);

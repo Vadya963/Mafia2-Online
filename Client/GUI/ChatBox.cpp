@@ -39,10 +39,10 @@ const CColor ChatBox::ERROR_MESSAGE_COLOR(255, 0, 0);
 const float CHATBOX_PADDING = 5.0f;
 
 const float INPUTLINE_HEIGHT = 20.0f;
-const float CHATLINE_SPACING = 15.0f;
+const float CHATLINE_SPACING = 20.0f;
 
 const Vector2 CHATBOX_POS(10.0f, 30.0f);
-const Vector2 CHATBOX_SIZE(400.0f, MAX_CHAT_MESSAGES * CHATLINE_SPACING + CHATBOX_PADDING * 2.0f);
+const Vector2 CHATBOX_SIZE(900.0f, MAX_CHAT_MESSAGES * CHATLINE_SPACING + CHATBOX_PADDING * 2.0f);
 
 /** The '/q' command handler. */
 void QuitHandler(const char *const command, const std::vector<String> &params)
@@ -112,7 +112,7 @@ ChatBox::ChatBox(CGUI *const gui)
 	CGUI_Impl *const guiImpl = gui->GetCEGUI();
 	String fontPath;
 	fontPath.Format("%s%s", CCore::Instance()->GetModDirectory().Get(), "data/gui/fonts/tahoma-bold.ttf");
-	m_font = guiImpl->CreateFnt("Tahoma-Bold", fontPath, 8, 0, false);
+	m_font = guiImpl->CreateFnt("Tahoma-Bold", fontPath, 11, 0, false);
 
 	RegisterCommand("q", QuitHandler);
 	RegisterCommand("quit", QuitHandler);
@@ -142,7 +142,7 @@ void ChatBox::Draw(void)
 
 	Vector2 position(CHATBOX_POS);
 
-	graphics->DrawBox(position.fX, position.fY, CHATBOX_SIZE.fX, CHATBOX_SIZE.fY, 0xA0000000);
+	//graphics->DrawBox(position.fX, position.fY, CHATBOX_SIZE.fX, CHATBOX_SIZE.fY, 0xA0000000);
 
 	position.fX += CHATBOX_PADDING;
 	position.fY += CHATBOX_SIZE.fY - CHATLINE_SPACING - CHATBOX_PADDING;

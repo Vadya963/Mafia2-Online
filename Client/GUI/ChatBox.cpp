@@ -154,6 +154,12 @@ void ChatBox::Draw(void)
 				m_font->DrawColoredString(msg, position, CEGUI::TextFormatting::LeftAligned, line.color.ToUint(), 1.0f);
 			}
 			else {
+				position.fX += 1.0f;
+				position.fY += 1.0f;
+				m_font->DrawString(msg, position, CEGUI::TextFormatting::LeftAligned, D3DCOLOR_ARGB(255, 0, 0, 0), 1.0f);
+
+				position.fX -= 1.0f;
+				position.fY -= 1.0f;
 				m_font->DrawString(msg, position, CEGUI::TextFormatting::LeftAligned, line.color.ToUint(), 1.0f);
 			}
 		}

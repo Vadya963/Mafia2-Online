@@ -86,7 +86,7 @@ void SendPlayerMessage( RakNet::BitStream * pBitStream, RakNet::Packet * pPacket
 	pBitStream->ReadCompressed( blue );
 
 	// Output the message
-	ChatBox::Instance()->Output(CColor(red, green, blue, 255), strMessage.C_String());
+	ChatBox::Instance()->OutputColored(CColor(red, green, blue, 255), strMessage.C_String());
 }
 
 void SetPlayerHealth( RakNet::BitStream * pBitStream, RakNet::Packet * pPacket )

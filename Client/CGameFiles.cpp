@@ -41,9 +41,9 @@ gameFiles[] =
 	{ 0x7C95AB5E,	"edit\\tables\\StreamM2MP.bin",					false,		"",										false,	TYPE_GAME },
 	{ 0xE3DC0B73,	"edit\\sdsmpconf.bin",							false,		"",										false,	TYPE_GAME },
 	{ 0xC8136525,	"pc\\sds\\missionscript\\freeraid_m2mp.sds",	false,		"",										false,	TYPE_GAME },
+	{ 0x358175FF,	"pc\\sds\\mp\\tables.sds",						false,		"",										false,	TYPE_GAME },
 	{ 0xAE3CCEE2,	"data\\game\\0.m2o",							true,		"sds\\mp\\gui.sds",						true,	TYPE_MOD },
 	{ 0x0B551386,	"data\\game\\1.m2o",							true,		"sds\\mp\\gui-main.sds",				true,	TYPE_MOD },
-	//{ 0xE1E987D6,	"data\\game\\2.m2o",							true,		"sds\\mp\\tables.sds",					true,	TYPE_MOD },
 	{ 0x665303E5,	"data\\game\\3.m2o",							true,		"sds\\skies\\sky_m2mp.sds",				true,	TYPE_MOD }
 };
 

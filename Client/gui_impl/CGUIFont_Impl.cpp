@@ -180,6 +180,12 @@ void CGUIFont_Impl::DrawColoredString( const char * szText, const Vector2 &vecPo
 	for (size_t i = 0; ; i += advance) {
 		if (IsColorCode(szText + i)) {
 			if (! text.IsEmpty()) {
+				currentPosition.fX += 1.0f;
+				currentPosition.fY += 1.0f;
+				DrawString(text, currentPosition, format, D3DCOLOR_ARGB(255, 0, 0, 0), fScale);
+
+				currentPosition.fX -= 1.0f;
+				currentPosition.fY -= 1.0f;
 				DrawString(text, currentPosition, format, currentColor, fScale);
 				currentPosition.fX += m_pFont->getTextExtent((CEGUI::utf8*)text.Get(), fScale);
 
@@ -202,6 +208,12 @@ void CGUIFont_Impl::DrawColoredString( const char * szText, const Vector2 &vecPo
 	}
 
 	if (! text.IsEmpty()) {
+		currentPosition.fX += 1.0f;
+		currentPosition.fY += 1.0f;
+		DrawString(text, currentPosition, format, D3DCOLOR_ARGB(255, 0, 0, 0), fScale);
+
+		currentPosition.fX -= 1.0f;
+		currentPosition.fY -= 1.0f;
 		DrawString(text, currentPosition, format, currentColor, fScale);
 		currentPosition.fX += m_pFont->getTextExtent((CEGUI::utf8*)text.Get(), fScale);
 	}
